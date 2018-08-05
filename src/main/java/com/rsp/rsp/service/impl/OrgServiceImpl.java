@@ -75,7 +75,17 @@ public class OrgServiceImpl implements OrgService {
     @Override
     public void update(Org newOrg) {
         Org org = orgRepository.findById(newOrg.getId());
-        //org set value
+        org.setName(newOrg.getName());
+        org.setLimit(newOrg.getLimit());
+        org.setTerm(newOrg.getTerm());
+        org.setLogo(newOrg.getLogo());
+        org.setContacts(newOrg.getContacts());
+        org.setDesc(newOrg.getDesc());
+        org.setInterestRate(newOrg.getInterestRate());
+        org.setMaterial(newOrg.getMaterial());
+        org.setPhone(newOrg.getPhone());
+        org.setRequirements(newOrg.getRequirements());
+        org.setStrengths(newOrg.getStrengths());
         orgRepository.save(org);
     }
 

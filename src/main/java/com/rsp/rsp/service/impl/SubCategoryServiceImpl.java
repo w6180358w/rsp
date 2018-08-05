@@ -75,7 +75,9 @@ public class SubCategoryServiceImpl implements SubCategoryService {
     @Override
     public void update(SubCategory newSubCategory) {
         SubCategory subCategory = subCategoryRepository.findById(newSubCategory.getId());
-        //subCategory set value
+        subCategory.setCategoryId(newSubCategory.getCategoryId());
+        subCategory.setKey(newSubCategory.getKey());
+        subCategory.setName(newSubCategory.getName());
         subCategoryRepository.save(subCategory);
     }
 
