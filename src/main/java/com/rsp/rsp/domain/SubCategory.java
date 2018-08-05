@@ -7,8 +7,8 @@ import javax.persistence.*;
  * @author sjb
  */
 @Entity
-@Table(name = "t_sub_catagory", schema = "rsp", catalog = "")
-public class SubCatagory {
+@Table(name = "t_sub_category", schema = "rsp", catalog = "")
+public class SubCategory {
     private long id;
     /**名称*/
     private String name;
@@ -62,7 +62,7 @@ public class SubCatagory {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        SubCatagory that = (SubCatagory) o;
+        SubCategory that = (SubCategory) o;
 
         if (id != that.id) return false;
         if (categoryId != that.categoryId) return false;

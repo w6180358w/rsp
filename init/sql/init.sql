@@ -14,7 +14,7 @@ create table t_formula
 	id bigint auto_increment
 		primary key,
 	org_id bigint not null,
-	sub_catagory_id bigint not null,
+	sub_category_id bigint not null,
 	formula varchar(255) not null,
 	constraint t_formula_id_uindex
 		unique (id)
@@ -52,16 +52,16 @@ create table t_statistics
 )
 ;
 
-create table t_sub_catagory
+create table t_sub_category
 (
 	id bigint auto_increment
 		primary key,
 	name varchar(255) not null,
 	category_id bigint not null,
 	`key` varchar(255) not null,
-	constraint t_sub_catagory_id_uindex
+	constraint t_sub_category_id_uindex
 		unique (id),
-	constraint t_sub_catagory_key_uindex
+	constraint t_sub_category_key_uindex
 		unique (key)
 )
 ;

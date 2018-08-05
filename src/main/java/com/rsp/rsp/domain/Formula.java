@@ -13,7 +13,7 @@ public class Formula {
     /**机构id*/
     private long orgId;
     /**小类id*/
-    private long subCatagoryId;
+    private long subCategoryId;
     /**公式*/
     private String formula;
 
@@ -38,13 +38,13 @@ public class Formula {
     }
 
     @Basic
-    @Column(name = "sub_catagory_id")
-    public long getSubCatagoryId() {
-        return subCatagoryId;
+    @Column(name = "sub_category_id")
+    public long getSubCategoryId() {
+        return subCategoryId;
     }
 
-    public void setSubCatagoryId(long subCatagoryId) {
-        this.subCatagoryId = subCatagoryId;
+    public void setSubCategoryId(long subCategoryId) {
+        this.subCategoryId = subCategoryId;
     }
 
     @Basic
@@ -66,7 +66,7 @@ public class Formula {
 
         if (id != that.id) return false;
         if (orgId != that.orgId) return false;
-        if (subCatagoryId != that.subCatagoryId) return false;
+        if (subCategoryId != that.subCategoryId) return false;
         if (formula != null ? !formula.equals(that.formula) : that.formula != null) return false;
 
         return true;
@@ -76,7 +76,7 @@ public class Formula {
     public int hashCode() {
         int result = (int) (id ^ (id >>> 32));
         result = 31 * result + (int) (orgId ^ (orgId >>> 32));
-        result = 31 * result + (int) (subCatagoryId ^ (subCatagoryId >>> 32));
+        result = 31 * result + (int) (subCategoryId ^ (subCategoryId >>> 32));
         result = 31 * result + (formula != null ? formula.hashCode() : 0);
         return result;
     }
