@@ -16,5 +16,9 @@ public interface OrgRepository extends JpaRepository<Org,String>,JpaSpecificatio
      */
     Org findById(Long id);
 
+    /**
+     * 继承的deleteById参数是string,覆盖一下
+     * @param id
+     */
     void deleteById(Long id);
 }

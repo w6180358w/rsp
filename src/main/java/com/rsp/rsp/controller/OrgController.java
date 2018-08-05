@@ -1,11 +1,11 @@
 package com.rsp.rsp.controller;
 
+import com.rsp.rsp.domain.query.OrgQuery;
 import com.rsp.rsp.domain.Org;
 import com.rsp.rsp.service.OrgService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 /**
  * 机构
@@ -19,8 +19,10 @@ public class OrgController {
     private OrgService orgService;
 
     @RequestMapping("/queryAll")
-    public List<Org> queryAll(){
-        return orgService.findAll();
+    public Page<Org> queryAll(@RequestParam(value ="page",defaultValue ="0")Integer page,
+                              @RequestParam(value ="size",defaultValue ="10")Integer size,
+                              OrgQuery orgQuery){
+        return orgService.findOrgCriteria(page,size,orgQuery);
     }
 
     @PostMapping("/save")

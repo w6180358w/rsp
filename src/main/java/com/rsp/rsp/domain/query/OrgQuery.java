@@ -1,4 +1,4 @@
-package com.rsp.rsp.dao.query;
+package com.rsp.rsp.domain.query;
 
 /**
  * 机构查询条件
