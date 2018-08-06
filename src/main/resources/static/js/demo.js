@@ -130,8 +130,27 @@ $(document).ready(function() {
 	/* Data Tables */
 	
 	$(".mws-datatable").dataTable();
-	$(".mws-datatable-fn").dataTable({sPaginationType: "full_numbers"});
-	
+	$(".mws-datatable-fn").dataTable({
+		sPaginationType: "full_numbers",
+        sAjaxSource:"org/queryAll",
+        aoColumns:[
+            {
+                "id": "id",
+                "aTargets" : [ 0 ]
+            },
+            { "name": "name","aTargets" : [ 1 ] },
+            { "limit": "limit","aTargets" : [ 2 ] },
+            { "term": "term","aTargets" : [ 3 ] },
+            { "interestRate": "interestRate","aTargets" : [ 4 ] },
+            { "requirements": "requirements","aTargets" : [ 5 ] }
+        ],
+        sAjaxDataProp:"content",
+		"aoColumnDefs" : [ {
+            sDefaultContent : '',
+            aTargets : [ '_all' ]
+        } ]
+	});
+
 	$(".mws-crop-target").imgAreaSelect({
 		handles: true, 
 		x1: 32, y1: 32, x2: 133, y2: 133, 
