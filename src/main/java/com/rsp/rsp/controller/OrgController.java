@@ -23,19 +23,22 @@ public class OrgController {
     private OrgService orgService;
 
     @RequestMapping("/queryAll")
-    public R queryAll(@RequestParam(value ="start",defaultValue ="0")Integer page,
-                              @RequestParam(value ="length",defaultValue ="10")Integer size,
-                              OrgQuery orgQuery){
-//        return orgService.findOrgCriteria(page,size,orgQuery);
-        List<Org> orgList = orgService.findOrgNoCriteria(page,size).getContent();
-        Object[][] temp = new Object[orgList.size()][2];
+    public R queryAll(@RequestParam(value ="iDisplayStart",defaultValue ="0")Integer start,
+                              @RequestParam(value ="iDisplayLength",defaultValue ="10")Integer size,
+                              OrgQuery orgQuery,Integer draw){
+        Page<Org> pageInfo = orgService.findOrgCriteria(start,size,orgQuery);
+        List<Org> orgList = pageInfo.getContent();
+        Object[][] temp = new Object[orgList.size()][6];
         for (int i = 0;i<orgList.size();i++){
             temp[i][0] = orgList.get(i).getId();
-            temp[i][1] = orgList.get(i).getName();
+            temp[i][1] = orgList.get(i).getId();
+            temp[i][2] = orgList.get(i).getName();
+            temp[i][3] = orgList.get(i).getLimit();
+            temp[i][4] = orgList.get(i).getTerm();
+            temp[i][5] = orgList.get(i).getId();
         }
-//        return orgService.findOrgNoCriteria(page,size);
 
-        return new R(temp);
+        return new R(temp, (int) pageInfo.getTotalElements(), (int) pageInfo.getTotalElements(),draw,"");
     }
 
     @PostMapping("/save")

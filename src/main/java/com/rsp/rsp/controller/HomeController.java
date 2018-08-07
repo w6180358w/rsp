@@ -65,4 +65,12 @@ public class HomeController {
     public String icons(){
         return "icons.html";
     }
+    @RequestMapping("category.html")
+    public String category(){
+        return "category.html";
+    }
+    @RequestMapping("subCategory.html")
+    public String subCategory(){
+        return "subCategory.html";
+    }
 }

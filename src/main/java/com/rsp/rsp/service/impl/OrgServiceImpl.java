@@ -36,28 +36,28 @@ public class OrgServiceImpl implements OrgService {
 
     /**
      * 只有分页没有查询条件
-     * @param page
+     * @param start
      * @param size
      * @return
      */
     @Override
-    public Page<Org> findOrgNoCriteria(Integer page, Integer size) {
-        Pageable pageable = PageRequest.of(page, size, Sort.Direction.ASC, "id");
+    public Page<Org> findOrgNoCriteria(Integer start, Integer size) {
+        Pageable pageable = PageRequest.of(start/size, size, Sort.Direction.ASC, "id");
         return orgRepository.findAll(pageable);
     }
 
     /**
      * 有查询条件的分页
-     * @param page
+     * @param start
      * @param size
      * @param orgQuery
      * @return
      */
     @Override
-    public Page<Org> findOrgCriteria(Integer page, Integer size, OrgQuery orgQuery) {
-        Pageable pageable = PageRequest.of(page, size, Sort.Direction.ASC, "id");
+    public Page<Org> findOrgCriteria(Integer start, Integer size, OrgQuery orgQuery) {
+        Pageable pageable = PageRequest.of(start/size, size, Sort.Direction.ASC, "id");
         Page<Org> bookPage = orgRepository.findAll((Specification<Org>) (root, query, criteriaBuilder) -> {
-            Predicate p1 = criteriaBuilder.equal(root.get("name").as(String.class), orgQuery.getName());
+            Predicate p1 = criteriaBuilder.like(root.get("name").as(String.class), "%"+orgQuery.getsSearch()+"%");
 //            Predicate p2 = criteriaBuilder.equal(root.get("isbn").as(String.class), orgQuery.getIsbn());
 //            Predicate p3 = criteriaBuilder.equal(root.get("author").as(String.class), orgQuery.getAuthor());
 //            query.where(criteriaBuilder.and(p1,p2,p3));

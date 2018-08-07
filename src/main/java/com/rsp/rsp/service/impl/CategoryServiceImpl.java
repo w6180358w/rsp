@@ -30,16 +30,16 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Page<Category> findCategoryNoCriteria(Integer page, Integer size) {
-        Pageable pageable = PageRequest.of(page, size, Sort.Direction.ASC, "id");
+    public Page<Category> findCategoryNoCriteria(Integer start, Integer size) {
+        Pageable pageable = PageRequest.of(start/size, size, Sort.Direction.ASC, "id");
         return categoryRepository.findAll(pageable);
     }
 
     @Override
-    public Page<Category> findCategoryCriteria(Integer page, Integer size, CategoryQuery categoryQuery) {
-        Pageable pageable = PageRequest.of(page, size, Sort.Direction.ASC, "id");
+    public Page<Category> findCategoryCriteria(Integer start, Integer size, CategoryQuery categoryQuery) {
+        Pageable pageable = PageRequest.of(start/size, size, Sort.Direction.ASC, "id");
         Page<Category> bookPage = categoryRepository.findAll((Specification<Category>) (root, query, criteriaBuilder) -> {
-            Predicate p1 = criteriaBuilder.equal(root.get("name").as(String.class), categoryQuery.getName());
+            Predicate p1 = criteriaBuilder.like(root.get("name").as(String.class), "%"+categoryQuery.getsSearch()+"%");
 //            Predicate p2 = criteriaBuilder.equal(root.get("isbn").as(String.class), orgQuery.getIsbn());
 //            Predicate p3 = criteriaBuilder.equal(root.get("author").as(String.class), orgQuery.getAuthor());
 //            query.where(criteriaBuilder.and(p1,p2,p3));

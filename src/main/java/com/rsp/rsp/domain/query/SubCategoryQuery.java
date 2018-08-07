@@ -6,6 +6,7 @@ package com.rsp.rsp.domain.query;
  */
 public class SubCategoryQuery {
     private String name;
+    private String sSearch;
 
     public String getName() {
         return name;
@@ -13,5 +14,13 @@ public class SubCategoryQuery {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getsSearch() {
+        return sSearch;
+    }
+
+    public void setsSearch(String sSearch) {
+        this.sSearch = sSearch;
     }
 }

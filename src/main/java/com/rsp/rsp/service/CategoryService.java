@@ -22,22 +22,22 @@ public interface CategoryService {
 
     /**
      * 分页,不带查询条件
-     * @param page
+     * @param start
      * @param size
      * @return
      */
     @Transactional(propagation=Propagation.NOT_SUPPORTED,readOnly=true)
-    Page<Category> findCategoryNoCriteria(Integer page, Integer size);
+    Page<Category> findCategoryNoCriteria(Integer start, Integer size);
 
     /**
      * 分页,带查询条件
-     * @param page
+     * @param start
      * @param size
      * @param categoryQuery
      * @return
      */
     @Transactional(propagation=Propagation.NOT_SUPPORTED,readOnly=true)
-    Page<Category> findCategoryCriteria(Integer page,Integer size,CategoryQuery categoryQuery);
+    Page<Category> findCategoryCriteria(Integer start,Integer size,CategoryQuery categoryQuery);
 
     /**
      * @param category

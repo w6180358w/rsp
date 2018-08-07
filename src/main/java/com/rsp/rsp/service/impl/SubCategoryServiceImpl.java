@@ -36,28 +36,28 @@ public class SubCategoryServiceImpl implements SubCategoryService {
 
     /**
      * 只有分页没有查询条件
-     * @param page
+     * @param start
      * @param size
      * @return
      */
     @Override
-    public Page<SubCategory> findSubCategoryNoCriteria(Integer page, Integer size) {
-        Pageable pageable = PageRequest.of(page, size, Sort.Direction.ASC, "id");
+    public Page<SubCategory> findSubCategoryNoCriteria(Integer start, Integer size) {
+        Pageable pageable = PageRequest.of(start/size, size, Sort.Direction.ASC, "id");
         return subCategoryRepository.findAll(pageable);
     }
 
     /**
      * 有查询条件的分页
-     * @param page
+     * @param start
      * @param size
      * @param subCategoryQuery
      * @return
      */
     @Override
-    public Page<SubCategory> findSubCategoryCriteria(Integer page, Integer size, SubCategoryQuery subCategoryQuery) {
-        Pageable pageable = PageRequest.of(page, size, Sort.Direction.ASC, "id");
+    public Page<SubCategory> findSubCategoryCriteria(Integer start, Integer size, SubCategoryQuery subCategoryQuery) {
+        Pageable pageable = PageRequest.of(start/size, size, Sort.Direction.ASC, "id");
         Page<SubCategory> bookPage = subCategoryRepository.findAll((Specification<SubCategory>) (root, query, criteriaBuilder) -> {
-            Predicate p1 = criteriaBuilder.equal(root.get("name").as(String.class), subCategoryQuery.getName());
+            Predicate p1 = criteriaBuilder.like(root.get("name").as(String.class), "%"+subCategoryQuery.getsSearch()+"%");
 //            Predicate p2 = criteriaBuilder.equal(root.get("isbn").as(String.class), subCategoryQuery.getIsbn());
 //            Predicate p3 = criteriaBuilder.equal(root.get("author").as(String.class), subCategoryQuery.getAuthor());
 //            query.where(criteriaBuilder.and(p1,p2,p3));

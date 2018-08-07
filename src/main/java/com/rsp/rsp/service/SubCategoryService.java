@@ -23,22 +23,22 @@ public interface SubCategoryService {
 
     /**
      * 分页,不带查询条件
-     * @param page
+     * @param start
      * @param size
      * @return
      */
     @Transactional(propagation=Propagation.NOT_SUPPORTED,readOnly=true)
-    Page<SubCategory> findSubCategoryNoCriteria(Integer page, Integer size);
+    Page<SubCategory> findSubCategoryNoCriteria(Integer start, Integer size);
 
     /**
      * 分页,带查询条件
-     * @param page
+     * @param start
      * @param size
      * @param subCategoryQuery
      * @return
      */
     @Transactional(propagation=Propagation.NOT_SUPPORTED,readOnly=true)
-    Page<SubCategory> findSubCategoryCriteria(Integer page, Integer size, SubCategoryQuery subCategoryQuery);
+    Page<SubCategory> findSubCategoryCriteria(Integer start, Integer size, SubCategoryQuery subCategoryQuery);
 
     /**
      * @param subCategory

@@ -1,8 +1,8 @@
 $(function () {
-    console.log("dashboard")
+    console.log("subCategory")
     $(".mws-datatable-fn").dataTable({
         sPaginationType: "full_numbers",
-        sAjaxSource:"org/queryAll",
+        sAjaxSource:"subCategory/queryAll",
         bServerSide: true,
         aoColumns:[
             {
@@ -13,11 +13,9 @@ $(function () {
             },
             { "name": "name","sTitle" : "用户名","aTargets" : [ 1 ] },
             { "limit": "limit","aTargets" : [ 2 ] },
-            { "term": "term","aTargets" : [ 3 ] },
-            { "interestRate": "interestRate","aTargets" : [ 4 ] },
             {
                 "fnRender": function ( oObj ) {
-                    return "<span class=\"ui-icon ui-icon-pencil\" onclick='editOrg("+oObj.aData[0]+")'></span>";
+                    return "<span class=\"ui-icon ui-icon-pencil\" onclick='editSubCategory("+oObj.aData[0]+")'></span>";
                 },"aTargets" : [ 5 ]
             }
         ],
@@ -44,6 +42,6 @@ $(function () {
                yaxis: { min: 0, max: 200 }
              });
 });
-function editOrg(id) {
+function editSubCategory(id) {
     console.log(id)
 }

@@ -1,11 +1,14 @@
 package com.rsp.rsp.controller;
 
+import com.rsp.rsp.domain.R;
 import com.rsp.rsp.domain.SubCategory;
 import com.rsp.rsp.domain.query.SubCategoryQuery;
 import com.rsp.rsp.service.SubCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * 小类
@@ -18,10 +21,20 @@ public class SubCategoryController {
     private SubCategoryService subCategoryService;
 
     @RequestMapping("/queryAll")
-    public Page<SubCategory> queryAll(@RequestParam(value ="page",defaultValue ="0")Integer page,
-                                   @RequestParam(value ="size",defaultValue ="10")Integer size,
-                                   SubCategoryQuery subCategoryQuery){
-        return subCategoryService.findSubCategoryCriteria(page,size,subCategoryQuery);
+    public R queryAll(@RequestParam(value ="iDisplayStart",defaultValue ="0")Integer start,
+                                      @RequestParam(value ="iDisplayLength",defaultValue ="10")Integer size,
+                                      SubCategoryQuery subCategoryQuery,Integer draw){
+        Page<SubCategory> pageInfo = subCategoryService.findSubCategoryCriteria(start,size,subCategoryQuery);
+        List<SubCategory> orgList = pageInfo.getContent();
+        Object[][] temp = new Object[orgList.size()][6];
+        for (int i = 0;i<orgList.size();i++){
+            temp[i][0] = orgList.get(i).getId();
+            temp[i][1] = orgList.get(i).getId();
+            temp[i][2] = orgList.get(i).getName();
+            temp[i][5] = orgList.get(i).getId();
+        }
+
+        return new R(temp, (int) pageInfo.getTotalElements(), (int) pageInfo.getTotalElements(),draw,"");
     }
 
     @PostMapping("/save")

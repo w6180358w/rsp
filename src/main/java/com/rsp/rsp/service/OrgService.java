@@ -23,22 +23,22 @@ public interface OrgService {
 
     /**
      * 分页,不带查询条件
-     * @param page
-     * @param size
+     * @param start 0 10
+     * @param size 10
      * @return
      */
     @Transactional(propagation=Propagation.NOT_SUPPORTED,readOnly=true)
-    Page<Org> findOrgNoCriteria(Integer page, Integer size);
+    Page<Org> findOrgNoCriteria(Integer start, Integer size);
 
     /**
      * 分页,带查询条件
-     * @param page
+     * @param start
      * @param size
      * @param orgQuery
      * @return
      */
     @Transactional(propagation=Propagation.NOT_SUPPORTED,readOnly=true)
-    Page<Org> findOrgCriteria(Integer page,Integer size,OrgQuery orgQuery);
+    Page<Org> findOrgCriteria(Integer start,Integer size,OrgQuery orgQuery);
 
     /**
      * @param org

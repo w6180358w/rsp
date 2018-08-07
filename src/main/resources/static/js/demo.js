@@ -130,26 +130,33 @@ $(document).ready(function() {
 	/* Data Tables */
 	
 	$(".mws-datatable").dataTable();
-	$(".mws-datatable-fn").dataTable({
-		sPaginationType: "full_numbers",
-        sAjaxSource:"org/queryAll",
-        aoColumns:[
-            {
-                "id": "id",
-                "aTargets" : [ 0 ]
-            },
-            { "name": "name","aTargets" : [ 1 ] },
-            { "limit": "limit","aTargets" : [ 2 ] },
-            { "term": "term","aTargets" : [ 3 ] },
-            { "interestRate": "interestRate","aTargets" : [ 4 ] },
-            { "requirements": "requirements","aTargets" : [ 5 ] }
-        ],
-        sAjaxDataProp:"content",
-		"aoColumnDefs" : [ {
-            sDefaultContent : '',
-            aTargets : [ '_all' ]
-        } ]
-	});
+    // $(".mws-datatable-fn").dataTable({
+    //     sPaginationType: "full_numbers",
+    //     sAjaxSource:"org/queryAll",
+    //     bServerSide: true,
+    //     aoColumns:[
+    //         {
+    //             "fnRender": function ( oObj ) {
+    //                 return "<input type=\"checkbox\" value="+oObj.aData[0]+"/>";
+    //             },
+    //             "aTargets" : [ 0 ]
+    //         },
+    //         { "name": "name","sTitle" : "用户名","aTargets" : [ 1 ] },
+    //         { "limit": "limit","aTargets" : [ 2 ] },
+    //         { "term": "term","aTargets" : [ 3 ] },
+    //         { "interestRate": "interestRate","aTargets" : [ 4 ] },
+    //         {
+    //             "fnRender": function ( oObj ) {
+    //                 return "<span class=\"ui-icon ui-icon-pencil\" onclick='editOrg("+oObj.aData[0]+")'></span>";
+    //             },"aTargets" : [ 5 ]
+    //         }
+    //     ],
+    //     sAjaxDataProp:"content",
+    //     "aoColumnDefs" : [ {
+    //         sDefaultContent : '',
+    //         aTargets : [ '_all' ]
+    //     } ]
+    // });
 
 	$(".mws-crop-target").imgAreaSelect({
 		handles: true, 
