@@ -28,14 +28,22 @@ public class OrgController {
                               OrgQuery orgQuery,Integer draw){
         Page<Org> pageInfo = orgService.findOrgCriteria(start,size,orgQuery);
         List<Org> orgList = pageInfo.getContent();
-        Object[][] temp = new Object[orgList.size()][6];
+        Object[][] temp = new Object[orgList.size()][14];
         for (int i = 0;i<orgList.size();i++){
             temp[i][0] = orgList.get(i).getId();
             temp[i][1] = orgList.get(i).getId();
             temp[i][2] = orgList.get(i).getName();
             temp[i][3] = orgList.get(i).getLimit();
             temp[i][4] = orgList.get(i).getTerm();
-            temp[i][5] = orgList.get(i).getId();
+            temp[i][5] = orgList.get(i).getInterestRate();
+            temp[i][6] = orgList.get(i).getRequirements();
+            temp[i][7] = orgList.get(i).getMaterial();
+            temp[i][8] = orgList.get(i).getLogo();
+            temp[i][9] = orgList.get(i).getDesc();
+            temp[i][10] = orgList.get(i).getContacts();
+            temp[i][11] = orgList.get(i).getPhone();
+            temp[i][12] = orgList.get(i).getStrengths();
+            temp[i][13] = orgList.get(i).getId();
         }
 
         return new R(temp, (int) pageInfo.getTotalElements(), (int) pageInfo.getTotalElements(),draw,"");

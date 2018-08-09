@@ -3,6 +3,10 @@ package com.rsp.rsp.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+/**
+ * 入口
+ * @author sjb
+ */
 @Controller
 @RequestMapping()
 public class HomeController {
@@ -72,5 +76,18 @@ public class HomeController {
     @RequestMapping("subCategory.html")
     public String subCategory(){
         return "subCategory.html";
+    }
+
+    @RequestMapping("addOrg.html")
+    public String addOrg(){
+        return "addOrg.html";
+    }
+    @RequestMapping("addCategory.html")
+    public String addCategory(){
+        return "addCategory.html";
+    }
+    @RequestMapping("addSubCategory.html")
+    public String addSubCategory(){
+        return "addSubCategory.html";
     }
 }

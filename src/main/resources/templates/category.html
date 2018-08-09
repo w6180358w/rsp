@@ -52,6 +52,7 @@
 <script type="text/javascript" src="plugins/jquery.validate.js"></script>
 <script type="text/javascript" src="plugins/jquery.mousewheel.js"></script>
 <script type="text/javascript" src="plugins/spinner/ui.spinner.js"></script>
+    <script type="text/javascript" src="plugins/layer-v3.1.1/layer/layer.js"></script>
 <script type="text/javascript" src="js/jquery-ui.js"></script>
 
 <script type="text/javascript" src="js/mws.js"></script>
@@ -118,7 +119,7 @@
         <!-- User Area Wrapper -->
         <div id="mws-user-tools" class="clearfix">
             <!-- User Functions -->
-            <div id="mws-user-info" class="mws-inset">
+            <div id="mws-user-info" class="mws-inset" style="display: none;">
             	<div id="mws-user-photo">
                 	<img src="example/profile.jpg" alt="User Photo" />
                 </div>
@@ -152,6 +153,11 @@
                 	<li><a href="dashboard.html" class="mws-i-24 i-home">贷款机构列表</a></li>
                 	<li class="active"><a href="category.html" class="mws-i-24 i-chart">大类</a></li>
                 	<li><a href="subCategory.html" class="mws-i-24 i-table-1">小类</a></li>
+                    <li class="active">
+                        <a href="icons.html" class="mws-i-24 i-pacman">
+                            Icons <span class="mws-nav-tooltip">2000+</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
             <!-- End Navigation -->
@@ -166,21 +172,32 @@
             <div class="container">
                 <div class="mws-panel grid_8">
                     <div class="mws-panel-header">
-                        <span class="mws-i-24 i-table-1">贷款机构列表</span>
+                        <span class="mws-i-24 i-table-1">大类列表</span>
                     </div>
                     <div class="mws-panel-body">
+                        <div class="mws-panel-toolbar top clearfix">
+                            <ul>
+                                <li><a href="javascript:void(0);" onclick="addCategory();" class="mws-ic-16 ic-add">添加</a></li>
+                                <li><a href="javascript:void(0);" class="mws-ic-16 ic-cross">删除</a></li>
+                                <!--<li><a href="#" class="mws-ic-16 ic-printer">Print</a></li>-->
+                                <li><a href="javascript:void(0);" class="mws-ic-16 ic-arrow-refresh">刷新</a></li>
+                                <!--<li><a href="#" class="mws-ic-16 ic-edit">Update</a></li>-->
+                            </ul>
+                        </div>
                         <table class="mws-datatable-fn mws-table">
                             <thead>
                             <tr>
                                 <th><input type="checkbox" /></th>
                                 <th>id</th>
-                                <th>name</th>
+                                <th>名称</th>
+                                <th>类型</th>
                                 <th>操作</th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr class="gradeX">
                                 <td><input type="checkbox" /></td>
+                                <td>Trident</td>
                                 <td>Trident</td>
                                 <td>Internet
                                     Explorer 4.0</td>

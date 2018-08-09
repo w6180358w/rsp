@@ -31,6 +31,8 @@ public class SubCategoryController {
             temp[i][0] = orgList.get(i).getId();
             temp[i][1] = orgList.get(i).getId();
             temp[i][2] = orgList.get(i).getName();
+            temp[i][3] = orgList.get(i).getCategoryId();
+            temp[i][4] = orgList.get(i).getKey();
             temp[i][5] = orgList.get(i).getId();
         }
 

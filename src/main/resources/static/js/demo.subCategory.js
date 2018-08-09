@@ -3,16 +3,21 @@ $(function () {
     $(".mws-datatable-fn").dataTable({
         sPaginationType: "full_numbers",
         sAjaxSource:"subCategory/queryAll",
+        // 是否允许排序
+        sOrdering: false,
+        bSort:false,
         bServerSide: true,
         aoColumns:[
             {
                 "fnRender": function ( oObj ) {
                     return "<input type=\"checkbox\" value="+oObj.aData[0]+"/>";
                 },
-                "aTargets" : [ 0 ]
+                "aTargets" : [ 0 ],"bSortable": false
             },
-            { "name": "name","sTitle" : "用户名","aTargets" : [ 1 ] },
-            { "limit": "limit","aTargets" : [ 2 ] },
+            { "id": "id","sTitle" : "ID","aTargets" : [ 1 ] },
+            { "name": "name","sTitle" : "名称","aTargets" : [ 2 ] },
+            { "categoryId": "categoryId","sTitle" : "大类ID","aTargets" : [ 3 ] },
+            { "key": "key","sTitle" : "key","aTargets" : [ 4 ] },
             {
                 "fnRender": function ( oObj ) {
                     return "<span class=\"ui-icon ui-icon-pencil\" onclick='editSubCategory("+oObj.aData[0]+")'></span>";
@@ -44,4 +49,15 @@ $(function () {
 });
 function editSubCategory(id) {
     console.log(id)
+}
+function addSubCategory() {
+    layer.open({
+        type: 2,
+        title: '添加小类',
+        // title:false,
+        maxmin: true,
+        shadeClose: false, //点击遮罩关闭层
+        area : ['800px' , '600px'],
+        content: 'addSubCategory.html'
+    });
 }

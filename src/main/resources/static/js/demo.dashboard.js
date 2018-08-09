@@ -3,22 +3,33 @@ $(function () {
     $(".mws-datatable-fn").dataTable({
         sPaginationType: "full_numbers",
         sAjaxSource:"org/queryAll",
+        // 是否允许排序
+        sOrdering: false,
+        bSort:false,
         bServerSide: true,
         aoColumns:[
             {
                 "fnRender": function ( oObj ) {
                     return "<input type=\"checkbox\" value="+oObj.aData[0]+"/>";
                 },
-                "aTargets" : [ 0 ]
+                "aTargets" : [ 0 ],"bSortable": false
             },
-            { "name": "name","sTitle" : "用户名","aTargets" : [ 1 ] },
-            { "limit": "limit","aTargets" : [ 2 ] },
-            { "term": "term","aTargets" : [ 3 ] },
-            { "interestRate": "interestRate","aTargets" : [ 4 ] },
+            { "id": "id","sTitle" : "ID","aTargets" : [ 1 ] },
+            { "name": "name","sTitle" : "名称","aTargets" : [ 2 ] },
+            { "limit": "limit","sTitle" : "额度","aTargets" : [ 3 ] },
+            { "term": "term","sTitle" : "期限","aTargets" : [ 4 ] },
+            { "interestRate": "interestRate","sTitle" : "利率","aTargets" : [ 5 ] },
+            { "requirements": "requirements","sTitle" : "申请条件","aTargets" : [ 6 ] },
+            { "material": "material","sTitle" : "申请材料","aTargets" : [ 7 ] },
+            { "logo": "logo","sTitle" : "logo","aTargets" : [ 8 ] },
+            { "desc": "desc","sTitle" : "描述","aTargets" : [ 9 ] },
+            { "contacts": "contacts","sTitle" : "联系人","aTargets" : [ 10 ] },
+            { "phone": "phone","sTitle" : "联系电话","aTargets" : [ 11 ] },
+            { "strengths": "strengths","sTitle" : "优势","aTargets" : [ 12 ] },
             {
                 "fnRender": function ( oObj ) {
                     return "<span class=\"ui-icon ui-icon-pencil\" onclick='editOrg("+oObj.aData[0]+")'></span>";
-                },"aTargets" : [ 5 ]
+                },"aTargets" : [ 13 ]
             }
         ],
         sAjaxDataProp:"content",
@@ -46,4 +57,15 @@ $(function () {
 });
 function editOrg(id) {
     console.log(id)
+}
+function addOrg() {
+    layer.open({
+        type: 2,
+        title: '添加机构',
+        // title:false,
+        maxmin: true,
+        shadeClose: false, //点击遮罩关闭层
+        area : ['800px' , '600px'],
+        content: 'addOrg.html'
+    });
 }
