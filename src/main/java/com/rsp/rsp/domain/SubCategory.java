@@ -13,9 +13,9 @@ public class SubCategory {
     /**名称*/
     private String name;
     /**大类id*/
-    private long categoryId;
-    /**小类的公式参数ke'y，唯一*/
-    private String key;
+    private Long categoryId;
+    /**小类的公式参数key，唯一*/
+    private String paramKey;
 
     @Id
     @Column(name = "id")
@@ -48,14 +48,14 @@ public class SubCategory {
     }
 
     @Basic
-    @Column(name = "key")
-    public String getKey() {
-        return key;
-    }
+    @Column(name = "param_key")
+    public String getParamKey() {
+		return paramKey;
+	}
 
-    public void setKey(String key) {
-        this.key = key;
-    }
+	public void setParamKey(String paramKey) {
+		this.paramKey = paramKey;
+	}
 
     @Override
     public boolean equals(Object o) {
@@ -67,17 +67,17 @@ public class SubCategory {
         if (id != that.id) return false;
         if (categoryId != that.categoryId) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
-        if (key != null ? !key.equals(that.key) : that.key != null) return false;
+        if (paramKey != null ? !paramKey.equals(that.paramKey) : that.paramKey != null) return false;
 
         return true;
     }
 
-    @Override
+	@Override
     public int hashCode() {
         int result = (int) (id ^ (id >>> 32));
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (int) (categoryId ^ (categoryId >>> 32));
-        result = 31 * result + (key != null ? key.hashCode() : 0);
+        result = 31 * result + (paramKey != null ? paramKey.hashCode() : 0);
         return result;
     }
 }
