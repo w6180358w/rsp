@@ -1,5 +1,7 @@
 package com.rsp.rsp.domain;
 
+import java.util.List;
+
 public class R {
     /**数据*/
     private Object[] content;
@@ -11,6 +13,8 @@ public class R {
     private Integer draw;
 
     private String error;
+    
+    private List<?> data;
 
     public R(Object[] content, int iTotalRecords, int iTotalDisplayRecords, Integer draw, String error) {
         this.content = content;
@@ -20,6 +24,14 @@ public class R {
         this.error = error;
     }
 
+    public R(List<?> data, int iTotalRecords, int iTotalDisplayRecords, Integer draw, String error) {
+        this.data = data;
+        this.iTotalRecords = iTotalRecords;
+        this.iTotalDisplayRecords = iTotalDisplayRecords;
+        this.draw = draw;
+        this.error = error;
+    }
+    
     public Object[] getContent() {
         return content;
     }
@@ -59,4 +71,12 @@ public class R {
     public void setiTotalDisplayRecords(int iTotalDisplayRecords) {
         this.iTotalDisplayRecords = iTotalDisplayRecords;
     }
+
+	public List<?> getData() {
+		return data;
+	}
+
+	public void setData(List<?> data) {
+		this.data = data;
+	}
 }

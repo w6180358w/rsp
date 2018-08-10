@@ -21,8 +21,9 @@ public class CategoryController {
     private CategoryService categoryService;
 
     @RequestMapping("/queryAll")
-    public R queryAll(@RequestParam(value ="iDisplayStart",defaultValue ="0")Integer start,
-                                   @RequestParam(value ="iDisplayLength",defaultValue ="10")Integer size,
+    @ResponseBody
+    public R queryAll(@RequestParam(value ="start",defaultValue ="0")Integer start,
+                                   @RequestParam(value ="pageSize",defaultValue ="10")Integer size,
                                    CategoryQuery categoryQuery,Integer draw){
         Page<Category> pageInfo = categoryService.findCategoryCriteria(start,size,categoryQuery);
         List<Category> orgList = pageInfo.getContent();
@@ -35,7 +36,7 @@ public class CategoryController {
             temp[i][4] = orgList.get(i).getId();
         }
 
-        return new R(temp, (int) pageInfo.getTotalElements(), (int) pageInfo.getTotalElements(),draw,"");
+        return new R(orgList, (int) pageInfo.getTotalElements(), (int) pageInfo.getTotalElements(),draw,"");
     }
 
     @PostMapping("/save")
