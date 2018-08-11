@@ -27,9 +27,11 @@ function submitCategoryForm() {
     var id = $("#id").val();
     var url ="save";
     var msg = "添加成功"
+    var errMsg = "添加失败"
     if(id!=="0"){
         url = "update";
         msg = "更新成功";
+        errMsg = "更新失败"
     }
     $.ajax({
         type: "POST",
@@ -44,6 +46,11 @@ function submitCategoryForm() {
                     time: 1500 //1.5秒关闭（如果不配置，默认是3秒）
                 }, function(){
                     parent.layer.close(index)
+                });
+            }else{
+                layer.msg(errMsg,{
+                    anim: -1,
+                    time: 1500 //1.5秒关闭（如果不配置，默认是3秒）
                 });
             }
         },
