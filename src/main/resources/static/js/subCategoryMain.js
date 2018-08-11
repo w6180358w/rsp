@@ -62,7 +62,7 @@ function loadSubCategory() {
             }
         },
         "columns": [
-            { "data": "id","orderable": false,"title":"ID","width":"40%"},
+            // { "data": "id","orderable": false,"title":"ID","width":"40%"},
             { "data": "name","orderable": false,"title":"名称","width":"40%"},
             { "data": "categoryId","orderable": false,"title":"大类ID","width":"40%"},
             { "data": "paramKey","orderable": false,"title":"paramKey","width":"40%"},
@@ -104,7 +104,7 @@ function editSubCategory(id) {
         maxmin: true,
         shadeClose: false, //点击遮罩关闭层
         area : ['800px' , '600px'],
-        content: 'subCategory/add',
+        content: 'subCategory/add?id='+id,
         end: function(){
             //关闭回调
             $(".mws-datatable-fn").DataTable().ajax.reload();

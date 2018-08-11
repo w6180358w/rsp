@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.persistence.criteria.Predicate;
 import java.util.List;
@@ -40,10 +41,8 @@ public class CategoryServiceImpl implements CategoryService {
         Pageable pageable = PageRequest.of(start/size, size, Sort.Direction.ASC, "id");
         Page<Category> bookPage = categoryRepository.findAll((Specification<Category>) (root, query, criteriaBuilder) -> {
             Predicate p1 = criteriaBuilder.like(root.get("name").as(String.class), "%"+categoryQuery.getsSearch()+"%");
-//            Predicate p2 = criteriaBuilder.equal(root.get("isbn").as(String.class), orgQuery.getIsbn());
-//            Predicate p3 = criteriaBuilder.equal(root.get("author").as(String.class), orgQuery.getAuthor());
-//            query.where(criteriaBuilder.and(p1,p2,p3));
-            query.where(criteriaBuilder.and(p1));
+//            Predicate p2 = criteriaBuilder.equal(root.get("id").as(String.class), categoryQuery.getsSearch());
+            query.where(criteriaBuilder.or(p1));
             return query.getRestriction();
         },pageable);
         return bookPage;

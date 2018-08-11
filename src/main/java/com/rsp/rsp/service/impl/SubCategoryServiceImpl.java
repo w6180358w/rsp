@@ -58,10 +58,9 @@ public class SubCategoryServiceImpl implements SubCategoryService {
         Pageable pageable = PageRequest.of(start/size, size, Sort.Direction.ASC, "id");
         Page<SubCategory> bookPage = subCategoryRepository.findAll((Specification<SubCategory>) (root, query, criteriaBuilder) -> {
             Predicate p1 = criteriaBuilder.like(root.get("name").as(String.class), "%"+subCategoryQuery.getsSearch()+"%");
-//            Predicate p2 = criteriaBuilder.equal(root.get("isbn").as(String.class), subCategoryQuery.getIsbn());
-//            Predicate p3 = criteriaBuilder.equal(root.get("author").as(String.class), subCategoryQuery.getAuthor());
-//            query.where(criteriaBuilder.and(p1,p2,p3));
-            query.where(criteriaBuilder.and(p1));
+            Predicate p4 = criteriaBuilder.equal(root.get("categoryId").as(String.class), subCategoryQuery.getsSearch());
+//            Predicate p2 = criteriaBuilder.equal(root.get("id").as(String.class), subCategoryQuery.getsSearch());
+            query.where(criteriaBuilder.or(p1,p4));
             return query.getRestriction();
         },pageable);
         return bookPage;

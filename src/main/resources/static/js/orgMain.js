@@ -62,7 +62,7 @@ function loadOrg() {
             }
         },
         "columns": [
-            { "data": "id","orderable": false,"title":"ID","width":"40%"},
+            // { "data": "id","orderable": false,"title":"ID","width":"40%"},
             { "data": "name","orderable": false,"title":"名称","width":"40%"},
             { "data": "limit","orderable": false,"title":"额度","width":"40%"},
             { "data": "term","orderable": false,"title":"期限","width":"40%"},
@@ -111,7 +111,7 @@ function editOrg(id) {
         maxmin: true,
         shadeClose: false, //点击遮罩关闭层
         area : ['800px' , '100%'],
-        content: 'org/add',
+        content: 'org/add?id='+id,
         end: function(){
             //关闭回调
             $(".mws-datatable-fn").DataTable().ajax.reload();

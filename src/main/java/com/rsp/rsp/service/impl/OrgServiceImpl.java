@@ -58,10 +58,8 @@ public class OrgServiceImpl implements OrgService {
         Pageable pageable = PageRequest.of(start/size, size, Sort.Direction.ASC, "id");
         Page<Org> bookPage = orgRepository.findAll((Specification<Org>) (root, query, criteriaBuilder) -> {
             Predicate p1 = criteriaBuilder.like(root.get("name").as(String.class), "%"+orgQuery.getsSearch()+"%");
-//            Predicate p2 = criteriaBuilder.equal(root.get("isbn").as(String.class), orgQuery.getIsbn());
-//            Predicate p3 = criteriaBuilder.equal(root.get("author").as(String.class), orgQuery.getAuthor());
-//            query.where(criteriaBuilder.and(p1,p2,p3));
-            query.where(criteriaBuilder.and(p1));
+//            Predicate p2 = criteriaBuilder.equal(root.get("id").as(String.class), orgQuery.getsSearch());
+            query.where(criteriaBuilder.or(p1));
             return query.getRestriction();
         },pageable);
         return bookPage;

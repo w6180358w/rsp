@@ -39,13 +39,13 @@
 							<div class="mws-form-row">
 								<label>名称</label>
 								<div class="mws-form-item large">
-									<input type="text" name="name" class="mws-textinput" />
+									<input type="text" name="name" class="mws-textinput" th:value="${category.name}" />
 								</div>
 							</div>
 							<div class="mws-form-row">
 								<label>类型</label>
 								<div class="mws-form-item large">
-									<input type="text" name="type" class="mws-textinput" />
+									<input type="text" name="type" class="mws-textinput" th:value="${category.type}"/>
 								</div>
 							</div>
 						</div>
