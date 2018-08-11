@@ -86,7 +86,7 @@ function editCategory(id) {
         // title:false,
         maxmin: true,
         shadeClose: false, //点击遮罩关闭层
-        area : ['800px' , '400px'],
+        area : ['600px' , '380px'],
         content: 'category/add?id='+id,
         end: function(){
             //关闭回调
