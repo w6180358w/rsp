@@ -3,7 +3,8 @@ $(function () {
     $("#subCategoryForm").validate({
         rules : {
             paramKey : {
-                required : true
+                required : true,
+                xyz:true
             },
             categoryId:{
                 categoryId:true
@@ -14,7 +15,8 @@ $(function () {
         },
         messages : {
             paramKey : {
-                required : icon + "请输入Key"
+                required : icon + "请输入Key",
+                xyz:icon + "key的值不能为【x】【y】【z】,不区分大小写"
             },
             categoryId : {
                 categoryId : icon + "请选择大类"
@@ -28,6 +30,13 @@ $(function () {
         var returnVal = false;
         var intValue = parseInt(value);
         if(intValue>0){
+            returnVal = true;
+        }
+        return returnVal;
+    });
+    jQuery.validator.addMethod("xyz",function (value, element) {
+        var returnVal = false;
+        if(value.toUpperCase()!=="X" && value.toUpperCase()!=="Y" && value.toUpperCase()!=="Z"){
             returnVal = true;
         }
         return returnVal;
