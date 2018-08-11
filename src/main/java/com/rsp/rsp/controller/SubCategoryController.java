@@ -3,6 +3,7 @@ package com.rsp.rsp.controller;
 import com.rsp.rsp.domain.R;
 import com.rsp.rsp.domain.SubCategory;
 import com.rsp.rsp.domain.query.SubCategoryQuery;
+import com.rsp.rsp.service.CategoryService;
 import com.rsp.rsp.service.SubCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,6 +22,8 @@ import java.util.List;
 public class SubCategoryController {
     @Autowired
     private SubCategoryService subCategoryService;
+    @Autowired
+    private CategoryService categoryService;
 
     @RequestMapping()
     public ModelAndView subCategory(){
@@ -43,8 +46,11 @@ public class SubCategoryController {
         }else{
             subCategory = new SubCategory();
             subCategory.setId(0);
+            subCategory.setCategoryId(0);
         }
         model.addAttribute("subCategory",subCategory);
+        //查询大类
+        model.addAttribute("categories",categoryService.findAll());
         return new ModelAndView("addSubCategory.html");
     }
 

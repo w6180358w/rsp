@@ -1,8 +1,29 @@
 $(function () {
-
+    var icon = "<i class='fa fa-times-circle'></i> ";
+    $("#categoryForm").validate({
+        rules : {
+            type : {
+                required : true
+            },
+            name:{
+                required : true
+            }
+        },
+        messages : {
+            type : {
+                required : icon + "请输入类型"
+            },
+            name : {
+                required : icon + "请输入名称"
+            }
+        },
+    });
 })
 
 function submitCategoryForm() {
+    if (! $("#categoryForm").valid()) {
+        return;
+    }
     var id = $("#id").val();
     var url ="save";
     var msg = "添加成功"

@@ -26,7 +26,6 @@ function loadSubCategory() {
             "url": "subCategory/queryAll",
             "type": "post",
             "data": function(data){
-                console.log(data);
                 startNum = data.start;
                 return {
                     "start":data.start,

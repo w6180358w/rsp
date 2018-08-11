@@ -1,8 +1,43 @@
 $(function () {
-    console.log("subCategory edit")
+    var icon = "<i class='fa fa-times-circle'></i> ";
+    $("#subCategoryForm").validate({
+        rules : {
+            paramKey : {
+                required : true
+            },
+            categoryId:{
+                categoryId:true
+            },
+            name:{
+                required : true
+            }
+        },
+        messages : {
+            paramKey : {
+                required : icon + "请输入Key"
+            },
+            categoryId : {
+                categoryId : icon + "请选择大类"
+            },
+            name : {
+                required : icon + "请输入名称"
+            }
+        },
+    });
+    jQuery.validator.addMethod("categoryId",function (value, element) {
+        var returnVal = false;
+        var intValue = parseInt(value);
+        if(intValue>0){
+            returnVal = true;
+        }
+        return returnVal;
+    });
 })
 
 function submitSubCategoryForm() {
+    if (! $("#subCategoryForm").valid()) {
+        return;
+    }
     var id = $("#id").val();
     var url ="save";
     var msg = "添加成功"

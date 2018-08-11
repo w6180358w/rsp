@@ -17,6 +17,7 @@
 	<script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script>
 	<script type="text/javascript" src="../js/jquery-ui.js"></script>
 	<script type="text/javascript" src="../plugins/layer-v3.1.1/layer/layer.js"></script>
+	<script type="text/javascript" src="../plugins/jquery.validate.js"></script>
 
 	<script type="text/javascript" src="../js/orgEdit.js"></script>
 
@@ -37,19 +38,19 @@
 						<div class="mws-form-inline">
 							<input type="hidden" name="id" id="id" th:value="${org.id}"/>
 							<div class="mws-form-row">
-								<label>名称</label>
+								<label>名称 <span style="color: #b90a0f">*</span></label>
 								<div class="mws-form-item large">
 									<input type="text" name="name" class="mws-textinput" th:value="${org.name}"/>
 								</div>
 							</div>
 							<div class="mws-form-row">
-								<label>额度</label>
+								<label>额度 <span style="color: #b90a0f">*</span></label>
 								<div class="mws-form-item large">
 									<input type="text" name="limit" class="mws-textinput" th:value="${org.limit}"/>
 								</div>
 							</div>
 							<div class="mws-form-row">
-								<label>期限</label>
+								<label>期限 <span style="color: #b90a0f">*</span></label>
 								<div class="mws-form-item large">
 									<input type="text" name="term" class="mws-textinput" th:value="${org.term}"/>
 								</div>

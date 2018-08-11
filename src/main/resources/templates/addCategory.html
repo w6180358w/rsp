@@ -17,6 +17,7 @@
 <script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script>
 <script type="text/javascript" src="../js/jquery-ui.js"></script>
 <script type="text/javascript" src="../plugins/layer-v3.1.1/layer/layer.js"></script>
+<script type="text/javascript" src="../plugins/jquery.validate.js"></script>
 
 <script type="text/javascript" src="../js/categoryEdit.js"></script>
 
@@ -37,15 +38,16 @@
 						<div class="mws-form-inline">
 							<input type="hidden" name="id" id="id" th:value="${category.id}"/>
 							<div class="mws-form-row">
-								<label>名称</label>
+								<label>名称 <span style="color: #b90a0f">*</span></label>
 								<div class="mws-form-item large">
-									<input type="text" name="name" class="mws-textinput" th:value="${category.name}" />
+									<input type="text" id="name" name="name" class="mws-textinput"
+										   th:value="${category.name}" required />
 								</div>
 							</div>
 							<div class="mws-form-row">
-								<label>类型</label>
+								<label>类型 <span style="color: #b90a0f">*</span></label>
 								<div class="mws-form-item large">
-									<input type="text" name="type" class="mws-textinput" th:value="${category.type}"/>
+									<input type="text" id="type" name="type" class="mws-textinput" th:value="${category.type}" required/>
 								</div>
 							</div>
 						</div>

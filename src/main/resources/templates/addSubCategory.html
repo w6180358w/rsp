@@ -17,6 +17,7 @@
 	<script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script>
 	<script type="text/javascript" src="../js/jquery-ui.js"></script>
 	<script type="text/javascript" src="../plugins/layer-v3.1.1/layer/layer.js"></script>
+	<script type="text/javascript" src="../plugins/jquery.validate.js"></script>
 
 	<script type="text/javascript" src="../js/subCategoryEdit.js"></script>
 
@@ -37,25 +38,24 @@
 						<div class="mws-form-inline">
 							<input type="hidden" name="id" id="id" th:value="${subCategory.id}"/>
 							<div class="mws-form-row">
-								<label>名称</label>
+								<label>名称 <span style="color: #b90a0f">*</span></label>
 								<div class="mws-form-item large">
 									<input type="text" name="name" class="mws-textinput"
 									th:value="${subCategory.name}"/>
 								</div>
 							</div>
 							<div class="mws-form-row">
-								<label>Dropdown List</label>
+								<label>大类 <span style="color: #b90a0f">*</span></label>
 								<div class="mws-form-item small">
-									<select name="categoryId">
-										<option value="0">Option 1</option>
-										<option value="1">Option 3</option>
-										<option value="2">Option 4</option>
-										<option value="3">Option 5</option>
+									<select name="categoryId" th:field="*{subCategory.categoryId}">
+										<option value="0">--</option>
+										<option th:each="category:${categories}" th:value="${category.id}"
+												th:text="${category.name}"></option>
 									</select>
 								</div>
 							</div>
 							<div class="mws-form-row">
-								<label>param key</label>
+								<label>param key <span style="color: #b90a0f">*</span></label>
 								<div class="mws-form-item large">
 									<input type="text" name="paramKey" class="mws-textinput"
 									th:value="${subCategory.paramKey}"/>

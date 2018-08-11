@@ -15,9 +15,9 @@ public class Org {
     /**机构名称*/
     private String name;
     /**额度*/
-    private long limit;
+    private Long limit;
     /**期限*/
-    private long term;
+    private Long term;
     /**利率*/
     private String interestRate;
     /**申请条件*/
@@ -58,21 +58,21 @@ public class Org {
 
     @Basic
     @Column(name = "loan_limit")
-    public long getLimit() {
+    public Long getLimit() {
         return limit;
     }
 
-    public void setLimit(long limit) {
+    public void setLimit(Long limit) {
         this.limit = limit;
     }
 
     @Basic
     @Column(name = "term")
-    public long getTerm() {
+    public Long getTerm() {
         return term;
     }
 
-    public void setTerm(long term) {
+    public void setTerm(Long term) {
         this.term = term;
     }
 
