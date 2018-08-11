@@ -58,11 +58,11 @@ create table t_sub_category
 		primary key,
 	name varchar(255) not null,
 	category_id bigint not null,
-	`key` varchar(255) not null,
+	`param_key` varchar(255) not null,
 	constraint t_sub_category_id_uindex
 		unique (id),
-	constraint t_sub_category_key_uindex
-		unique (key)
+	constraint t_sub_category_param_key_uindex
+		unique (param_key)
 )
 ;
 
