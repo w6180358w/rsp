@@ -54,4 +54,11 @@ public interface OrgService {
      * @param id
      */
     void delete(Long id);
+
+    /**
+     *
+     * @param id
+     * @return
+     */
+    Org findById(Long id);
 }

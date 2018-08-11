@@ -54,4 +54,11 @@ public interface SubCategoryService {
      * @param id
      */
     void delete(Long id);
+
+    /**
+     *
+     * @param id
+     * @return
+     */
+    SubCategory findById(Long id);
 }

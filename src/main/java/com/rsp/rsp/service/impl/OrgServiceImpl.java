@@ -93,4 +93,9 @@ public class OrgServiceImpl implements OrgService {
     public void delete(Long id) {
         orgRepository.deleteById(id);
     }
+
+    @Override
+    public Org findById(Long id) {
+        return orgRepository.findById(id);
+    }
 }

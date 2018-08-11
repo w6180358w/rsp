@@ -1,5 +1,6 @@
 $(function () {
-    loadSubCategory();
+    loadOrg();
+
     var PageViews = [], Sales = [];
     for (var i = 0; i <= 31; i++) {
         PageViews.push([i, 100+ Math.floor((Math.random() < 0.5? -1 : 1) * Math.random() * 25)]);
@@ -17,13 +18,12 @@ $(function () {
                yaxis: { min: 0, max: 200 }
              });
 });
-
-function loadSubCategory() {
+function loadOrg() {
     $(".mws-datatable-fn").DataTable({
         "serverSide": true,
         "orderMulti": false,
         "ajax": {
-            "url": "subCategory/queryAll",
+            "url": "org/queryAll",
             "type": "post",
             "data": function(data){
                 console.log(data);
@@ -64,23 +64,30 @@ function loadSubCategory() {
         "columns": [
             { "data": "id","orderable": false,"title":"ID","width":"40%"},
             { "data": "name","orderable": false,"title":"名称","width":"40%"},
-            { "data": "categoryId","orderable": false,"title":"大类ID","width":"40%"},
-            { "data": "paramKey","orderable": false,"title":"paramKey","width":"40%"},
+            { "data": "limit","orderable": false,"title":"额度","width":"40%"},
+            { "data": "term","orderable": false,"title":"期限","width":"40%"},
+            { "data": "interestRate","orderable": false,"title":"利率","width":"40%"},
+            { "data": "requirements","orderable": false,"title":"申请条件","width":"40%"},
+            { "data": "material","orderable": false,"title":"申请材料","width":"40%"},
+            { "data": "logo","orderable": false,"title":"logo","width":"40%"},
+            { "data": "desc","orderable": false,"title":"描述","width":"40%"},
+            { "data": "contacts","orderable": false,"title":"联系人","width":"40%"},
+            { "data": "phone","orderable": false,"title":"联系电话","width":"40%"},
+            { "data": "strengths","orderable": false,"title":"优势","width":"40%"},
             { "data": "id","orderable": false,"title":"操作","width":"20%",
                 "render": function(data, type, record,index) {
-                    return "<button onclick='editSubCategory("+data+")'>修改</button>" +
-                        "<button onclick='deleteSubCategory("+data+")'>删除</button>";
+                    return "<button onclick='editOrg("+data+")'>修改</button>" +
+                        "<button onclick='deleteOrg("+data+")'>删除</button>";
                 } }
         ]
     });
 }
-
-function deleteSubCategory(id) {
+function deleteOrg(id) {
     layer.confirm('确定要删除选中的记录？', {
         btn : [ '确定', '取消' ]
     }, function() {
         $.ajax({
-            url : "subCategory/delete",
+            url : "org/delete",
             type : "post",
             data : {
                 'id' : id
@@ -96,45 +103,37 @@ function deleteSubCategory(id) {
         });
     })
 }
-function editSubCategory(id) {
-    console.log(id)
-}
-function addSubCategory() {
+function editOrg(id) {
     layer.open({
         type: 2,
-        title: '添加小类',
+        title: '修改机构',
         // title:false,
         maxmin: true,
         shadeClose: false, //点击遮罩关闭层
-        area : ['800px' , '600px'],
-        content: 'addSubCategory.html',
+        area : ['800px' , '100%'],
+        content: 'org/add',
         end: function(){
             //关闭回调
             $(".mws-datatable-fn").DataTable().ajax.reload();
+        },
+        success:function () {
+            //加载完成的回调
+            $("#id").val(id)
         }
     });
 }
-
-
-function submitSubCategoryForm() {
-    $.ajax({
-        type: "POST",
-        dataType: "html",
-        url: "subCategory/save",
-        data: $('#subCategoryForm').serialize(),
-        success: function (data) {
-            if(data==="success"){
-                var index = parent.layer.getFrameIndex(window.name);
-                layer.msg('添加成功',{
-                    anim: -1,
-                    time: 1500 //1.5秒关闭（如果不配置，默认是3秒）
-                }, function(){
-                    parent.layer.close(index)
-                });
-            }
-        },
-        error: function(data) {
-            alert("error:"+data.responseText);
+function addOrg() {
+    layer.open({
+        type: 2,
+        title: '添加机构',
+        // title:false,
+        maxmin: true,
+        shadeClose: false, //点击遮罩关闭层
+        area : ['800px' , '100%'],
+        content: 'org/add',
+        end: function(){
+            //关闭回调
+            $(".mws-datatable-fn").DataTable().ajax.reload();
         }
     });
 }

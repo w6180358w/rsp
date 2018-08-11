@@ -53,4 +53,10 @@ public interface CategoryService {
      * @param id
      */
     void delete(Long id);
+
+    /**
+     *
+     * @return
+     */
+    Category findById(Long id);
 }

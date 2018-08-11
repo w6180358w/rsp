@@ -6,9 +6,9 @@ import com.rsp.rsp.domain.Category;
 import com.rsp.rsp.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * 大类
@@ -28,6 +28,18 @@ public class CategoryController {
         return new R(pageInfo.getContent(), (int) pageInfo.getTotalElements(), (int) pageInfo.getTotalElements(),draw,"");
     }
 
+    @RequestMapping("add")
+    public ModelAndView add(Long id, Model model){
+        Category category;
+        if(null!=id){
+            category = categoryService.findById(id);
+        }else{
+            category = new Category();
+            category.setId(0);
+        }
+        model.addAttribute("category",category);
+        return new ModelAndView("addCategory.html");
+    }
     @PostMapping("/save")
     public String save(Category category){
         try {

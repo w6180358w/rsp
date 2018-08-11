@@ -6,9 +6,9 @@ import com.rsp.rsp.domain.Org;
 import com.rsp.rsp.service.OrgService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.servlet.ModelAndView;
 
 
 /**
@@ -28,6 +28,19 @@ public class OrgController {
                               OrgQuery orgQuery,Integer draw){
         Page<Org> pageInfo = orgService.findOrgCriteria(start,size,orgQuery);
         return new R(pageInfo.getContent(), (int) pageInfo.getTotalElements(), (int) pageInfo.getTotalElements(),draw,"");
+    }
+
+    @RequestMapping("add")
+    public ModelAndView addOrg(Long id, Model model){
+        Org org;
+        if(null!=id){
+            org = orgService.findById(id);
+        }else{
+            org = new Org();
+            org.setId(0);
+        }
+        model.addAttribute("org",org);
+        return new ModelAndView("addOrg.html");
     }
 
     @PostMapping("/save")

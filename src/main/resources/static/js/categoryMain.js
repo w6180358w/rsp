@@ -95,7 +95,19 @@ function deleteCategory(id) {
     })
 }
 function editCategory(id) {
-    console.log(id)
+    layer.open({
+        type: 2,
+        title: '修改大类',
+        // title:false,
+        maxmin: true,
+        shadeClose: false, //点击遮罩关闭层
+        area : ['800px' , '400px'],
+        content: 'category/add?id='+id,
+        end: function(){
+            //关闭回调
+            $(".mws-datatable-fn").DataTable().ajax.reload();
+        }
+    });
 }
 function addCategory() {
     layer.open({
@@ -105,33 +117,10 @@ function addCategory() {
         maxmin: true,
         shadeClose: false, //点击遮罩关闭层
         area : ['800px' , '400px'],
-        content: 'addCategory.html',
+        content: 'category/add',
         end: function(){
             //关闭回调
             $(".mws-datatable-fn").DataTable().ajax.reload();
-        }
-    });
-}
-
-function submitCategoryForm() {
-    $.ajax({
-        type: "POST",
-        dataType: "html",
-        url: "category/save",
-        data: $('#categoryForm').serialize(),
-        success: function (data) {
-            if(data==="success"){
-                var index = parent.layer.getFrameIndex(window.name);
-                layer.msg('添加成功',{
-                    anim: -1,
-                    time: 1500 //1.5秒关闭（如果不配置，默认是3秒）
-                }, function(){
-                    parent.layer.close(index)
-                });
-            }
-        },
-        error: function(data) {
-            alert("error:"+data.responseText);
         }
     });
 }

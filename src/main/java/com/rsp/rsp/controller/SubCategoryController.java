@@ -6,7 +6,9 @@ import com.rsp.rsp.domain.query.SubCategoryQuery;
 import com.rsp.rsp.service.SubCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -28,9 +30,23 @@ public class SubCategoryController {
         return new R(pageInfo.getContent(), (int) pageInfo.getTotalElements(), (int) pageInfo.getTotalElements(),draw,"");
     }
 
+    @RequestMapping("add")
+    public ModelAndView addSubCategory(Long id, Model model){
+        SubCategory subCategory;
+        if(null!=id){
+            subCategory = subCategoryService.findById(id);
+        }else{
+            subCategory = new SubCategory();
+            subCategory.setId(0);
+        }
+        model.addAttribute("subCategory",subCategory);
+        return new ModelAndView("addSubCategory.html");
+    }
+
     @PostMapping("/save")
     public String save(SubCategory subCategory){
         try {
+            //添加失败传提示信息
             subCategoryService.save(subCategory);
             return "success";
         }catch (Exception e){
