@@ -23,8 +23,8 @@ public class OrgController {
     private OrgService orgService;
 
     @RequestMapping("/queryAll")
-    public R queryAll(@RequestParam(value ="iDisplayStart",defaultValue ="0")Integer start,
-                              @RequestParam(value ="iDisplayLength",defaultValue ="10")Integer size,
+    public R queryAll(@RequestParam(value ="start",defaultValue ="0")Integer start,
+                              @RequestParam(value ="pageSize",defaultValue ="10")Integer size,
                               OrgQuery orgQuery,Integer draw){
         Page<Org> pageInfo = orgService.findOrgCriteria(start,size,orgQuery);
         return new R(pageInfo.getContent(), (int) pageInfo.getTotalElements(), (int) pageInfo.getTotalElements(),draw,"");

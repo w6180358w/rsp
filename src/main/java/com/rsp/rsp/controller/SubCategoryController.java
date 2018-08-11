@@ -21,8 +21,8 @@ public class SubCategoryController {
     private SubCategoryService subCategoryService;
 
     @RequestMapping("/queryAll")
-    public R queryAll(@RequestParam(value ="iDisplayStart",defaultValue ="0")Integer start,
-                                      @RequestParam(value ="iDisplayLength",defaultValue ="10")Integer size,
+    public R queryAll(@RequestParam(value ="start",defaultValue ="0")Integer start,
+                                      @RequestParam(value ="pageSize",defaultValue ="10")Integer size,
                                       SubCategoryQuery subCategoryQuery,Integer draw){
         Page<SubCategory> pageInfo = subCategoryService.findSubCategoryCriteria(start,size,subCategoryQuery);
         return new R(pageInfo.getContent(), (int) pageInfo.getTotalElements(), (int) pageInfo.getTotalElements(),draw,"");

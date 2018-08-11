@@ -54,7 +54,7 @@ public class Org {
     }
 
     @Basic
-    @Column(name = "limit")
+    @Column(name = "loan_limit")
     public long getLimit() {
         return limit;
     }
@@ -114,7 +114,7 @@ public class Org {
     }
 
     @Basic
-    @Column(name = "desc")
+    @Column(name = "description")
     public String getDesc() {
         return desc;
     }

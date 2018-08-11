@@ -1,4 +1,24 @@
 $(function () {
+    loadOrg();
+
+    var PageViews = [], Sales = [];
+    for (var i = 0; i <= 31; i++) {
+        PageViews.push([i, 100+ Math.floor((Math.random() < 0.5? -1 : 1) * Math.random() * 25)]);
+        Sales.push([i, 60 + Math.floor((Math.random() < 0.5? -1 : 1) * Math.random() * 40)]);
+    }
+
+    var plot = $.plot($("#mws-dashboard-chart"),
+           [ { data: PageViews, label: "Page Views", color: "#c75d7b"}, { data: Sales, label: "Sales", color: "#c5d52b" } ], {
+               series: {
+                   lines: { show: true },
+                   points: { show: true }
+               },
+               grid: { hoverable: true, clickable: true },
+               xaxis: { min: 1, max: 31 },
+               yaxis: { min: 0, max: 200 }
+             });
+});
+function loadOrg() {
     $(".mws-datatable-fn").DataTable({
         "serverSide": true,
         "orderMulti": false,
@@ -60,23 +80,7 @@ $(function () {
                 } }
         ]
     });
-    var PageViews = [], Sales = [];
-    for (var i = 0; i <= 31; i++) {
-        PageViews.push([i, 100+ Math.floor((Math.random() < 0.5? -1 : 1) * Math.random() * 25)]);
-        Sales.push([i, 60 + Math.floor((Math.random() < 0.5? -1 : 1) * Math.random() * 40)]);
-    }
-
-    var plot = $.plot($("#mws-dashboard-chart"),
-           [ { data: PageViews, label: "Page Views", color: "#c75d7b"}, { data: Sales, label: "Sales", color: "#c5d52b" } ], {
-               series: {
-                   lines: { show: true },
-                   points: { show: true }
-               },
-               grid: { hoverable: true, clickable: true },
-               xaxis: { min: 1, max: 31 },
-               yaxis: { min: 0, max: 200 }
-             });
-});
+}
 function editOrg(id) {
     console.log(id)
 }
@@ -87,7 +91,34 @@ function addOrg() {
         // title:false,
         maxmin: true,
         shadeClose: false, //点击遮罩关闭层
-        area : ['800px' , '600px'],
-        content: 'addOrg.html'
+        area : ['800px' , '100%'],
+        content: 'addOrg.html',
+        end: function(){
+            //关闭回调
+            $(".mws-datatable-fn").DataTable().ajax.reload();
+        }
+    });
+}
+
+function submitOrgForm() {
+    $.ajax({
+        type: "POST",
+        dataType: "html",
+        url: "org/save",
+        data: $('#orgForm').serialize(),
+        success: function (data) {
+            if(data==="success"){
+                var index = parent.layer.getFrameIndex(window.name);
+                layer.msg('添加成功',{
+                    anim: -1,
+                    time: 1500 //1.5秒关闭（如果不配置，默认是3秒）
+                }, function(){
+                    parent.layer.close(index)
+                });
+            }
+        },
+        error: function(data) {
+            alert("error:"+data.responseText);
+        }
     });
 }
