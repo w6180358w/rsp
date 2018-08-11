@@ -1,7 +1,6 @@
 package com.rsp.rsp.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -79,4 +78,20 @@ public class HomeController {
         return "subCategory.html";
     }
 
+    @RequestMapping("addOrg.html")
+    public String addOrg(){
+        return "addOrg.html";
+    }
+    @RequestMapping("addCategory.html")
+    public String addCategory(){
+        return "addCategory.html";
+    }
+    @RequestMapping("addSubCategory.html")
+    public String addSubCategory(){
+        return "addSubCategory.html";
+    }
+    @RequestMapping("formula.html")
+    public String formula(){
+        return "formula.html";
+    }
 }

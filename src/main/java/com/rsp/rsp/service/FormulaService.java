@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.rsp.rsp.domain.Formula;
 import com.rsp.rsp.domain.Org;
+import com.rsp.rsp.domain.bean.CategoryBean;
 import com.rsp.rsp.domain.bean.FormulaBean;
 
 import net.sf.json.JSONObject;
@@ -37,4 +38,7 @@ public interface FormulaService {
     List<Org> filter(FormulaBean bean) throws Exception;
     
     List<JSONObject> tableFilter(FormulaBean bean) throws Exception;
+    
+    List<CategoryBean> columns(String type) throws Exception;
+    
 }

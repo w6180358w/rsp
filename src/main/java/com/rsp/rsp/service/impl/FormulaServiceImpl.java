@@ -1,18 +1,28 @@
 package com.rsp.rsp.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
+import javax.persistence.criteria.CriteriaBuilder.In;
+import javax.persistence.criteria.Predicate;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import com.rsp.rsp.dao.CategoryRepository;
 import com.rsp.rsp.dao.FormulaRepository;
 import com.rsp.rsp.dao.OrgRepository;
+import com.rsp.rsp.dao.SubCategoryRepository;
+import com.rsp.rsp.domain.Category;
 import com.rsp.rsp.domain.Formula;
 import com.rsp.rsp.domain.Org;
+import com.rsp.rsp.domain.SubCategory;
+import com.rsp.rsp.domain.bean.CategoryBean;
 import com.rsp.rsp.domain.bean.FormulaBean;
 import com.rsp.rsp.domain.bean.ParamsBean;
 import com.rsp.rsp.service.FormulaService;
@@ -35,6 +45,10 @@ public class FormulaServiceImpl implements FormulaService {
     private FormulaRepository FormulaRepository;
     @Autowired
     private OrgRepository orgRepository;
+    @Autowired
+    private CategoryRepository categoryRepository;
+    @Autowired
+    private SubCategoryRepository subCategoryRepository;
 
     @Override
     public List<Formula> findAll() {
@@ -136,7 +150,17 @@ public class FormulaServiceImpl implements FormulaService {
 		
 		Map<Long,JSONObject> orgMap = orgList.stream().collect(Collectors.toMap(Org::getId, Org::toJSON));
 		//所有公式
-		List<Formula> forList = this.FormulaRepository.findAll();
+		List<Formula> forList = this.FormulaRepository.findAll((Specification<Formula>) (root, query, criteriaBuilder) -> {
+			In<Object> in = criteriaBuilder.in(root.get("subCategoryKey"));
+			List<Predicate> list = new ArrayList<>();
+        	for (String key : bean.getKeys()) {
+				in.value(key);
+				list.add(in);
+			}
+        	Predicate[] p = new Predicate[list.size()];
+        	query.where(criteriaBuilder.and(list.toArray(p)));
+        	return query.getRestriction();
+      	});
 		for (Formula formula : forList) {
 			//如果orgMap中机构不存在（数据不全或已经被筛除）  跳过
 			JSONObject org = orgMap.get(formula.getOrgId());
@@ -176,5 +200,35 @@ public class FormulaServiceImpl implements FormulaService {
 		}
 		base.append(")=");
 		return base.toString();
+	}
+
+	@Override
+	public List<CategoryBean> columns(String type) throws Exception {
+		List<CategoryBean> result = new ArrayList<>();
+		List<SubCategory> subList = this.subCategoryRepository.findAll();
+		//组装大类ID和小类的映射
+		Map<Long,List<SubCategory>> subMap = new HashMap<>();
+		for (SubCategory sub : subList) {
+			List<SubCategory> list = subMap.get(sub.getCategoryId());
+			if(list==null)list = new ArrayList<>();
+			list.add(sub);
+			subMap.put(sub.getCategoryId(),list);
+		}
+		//组装对象
+		List<Category> cateList = this.categoryRepository.findAll((Specification<Category>) (root, query, criteriaBuilder) -> {
+            	Predicate p1 = criteriaBuilder.equal(root.get("type").as(String.class), type);
+            	query.where(criteriaBuilder.and(p1));
+            	return query.getRestriction();
+	      	});
+		for (Category category : cateList) {
+			List<SubCategory> list = subMap.get(category.getId());
+			if(list==null || list.isEmpty()) {
+				continue;
+			}
+			CategoryBean bean = (CategoryBean) JSONObject.toBean(JSONObject.fromObject(category),CategoryBean.class);
+			bean.setSubList(subMap.get(bean.getId()));
+			result.add(bean);
+		}
+		return result;
 	}
 }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.rsp.rsp.domain.Formula;
 import com.rsp.rsp.domain.Org;
 import com.rsp.rsp.domain.R;
+import com.rsp.rsp.domain.bean.CategoryBean;
 import com.rsp.rsp.domain.bean.FormulaBean;
 import com.rsp.rsp.service.FormulaService;
 
@@ -75,6 +76,12 @@ public class FormulaController {
     @PostMapping("/tableFilter")
     public R tableFilter(@RequestBody FormulaBean bean) throws Exception{
     	List<JSONObject> orgList = this.formulaService.tableFilter(bean);
-        return new R(orgList);
+        return new R(orgList, orgList.size(), orgList.size(),1,null);
+    }
+    
+    @GetMapping("/columns/{type}")
+    public R columns(@PathVariable("type")String type) throws Exception{
+    	List<CategoryBean> list = this.formulaService.columns(type);
+        return new R(list);
     }
 }

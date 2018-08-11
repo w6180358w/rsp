@@ -15,6 +15,8 @@ public class R {
     private String error;
     
     private List<?> data;
+    
+    private boolean success;
 
     public R(Object[] content, int iTotalRecords, int iTotalDisplayRecords, Integer draw, String error) {
         this.content = content;
@@ -34,6 +36,8 @@ public class R {
     
     public R(List<?> data) {
         this.data = data;
+        this.success = true;
+        this.error = null;
     }
     
     public Object[] getContent() {
@@ -83,4 +87,13 @@ public class R {
 	public void setData(List<?> data) {
 		this.data = data;
 	}
+
+	public boolean isSuccess() {
+		return success;
+	}
+
+	public void setSuccess(boolean success) {
+		this.success = success;
+	}
+	
 }
