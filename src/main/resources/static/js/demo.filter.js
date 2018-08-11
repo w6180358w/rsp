@@ -1,7 +1,7 @@
 $(function () {
-	var form = $("#searchForm").validate();
-	$("#searchForm").find("select[name=type]").on("change",function (el){
-		console.log(el)
+	var form = $("#searchForm");
+	form.validate();
+	form.find("select[name=type]").on("change",function (el){
 		if(table!=null){
 			table.clear(); 
 			table.destroy(); 	   //销毁datatable
@@ -12,13 +12,10 @@ $(function () {
 			loadFormula(val);
 		}
 	});
-	$("#searchForm").find("button[name=search]").on("click",function (){
-		console.log(form.valid());
-		if($("#searchForm").valid()){
+	form.find("button[name=search]").on("click",function (){
+		if(form.valid()){
 			if(table!=null){
-				table.ajax.reload(function(json){
-					console.log(json);
-				});
+				table.ajax.reload();
 			}
 		}
 		
@@ -63,14 +60,12 @@ $(function () {
 	        "serverSide": true,
 	        "scrollX": true,
 	        "paging": false, // 禁止分页
-	        "sDom" : "t<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
 	        "ajax": {
 	            "url": "filter/tableFilter",
 	            "type": "post",
 	            "contentType":"application/json;charset=utf-8",//data.data.unshift(firstCol)
 	            data:function(data){
 	            	var param = getColParams();
-	            	console.log(param);
 	            	var result = {
 	                		"keys":keys,
 	                		"param":param,
@@ -79,19 +74,6 @@ $(function () {
 	            	return JSON.stringify(result);
 	            }
 	        },
-	        "columns": columns
-	    });
-	}
-	function initDataTable(columns,keys,firstCol){
-		table = $("#listTable").DataTable({
-	        select: {
-	            style: 'single'
-	        },
-	        "scrollX": true,
-	        "data":[firstCol,firstCol],
-	        "paging": false, // 禁止分页
-	        "rowCallback":bindEditor,
-	        "oLanguage":oLanguage,
 	        "columns": columns
 	    });
 	}
@@ -118,6 +100,14 @@ $(function () {
 	}
 	function getColParams(){
 		var result = [];
+		
+		var x = form.find("input[name=sqed]").val();
+		var y = form.find("input[name=wdyhk]").val();
+		var z = form.find("input[name=xykfz]").val();
+		result.push({key:"x",value:(x==null || x=="")?0:parseInt(x)});
+		result.push({key:"y",value:(y==null || y=="")?0:parseInt(y)});
+		result.push({key:"z",value:(z==null || z=="")?0:parseInt(z)});
+		console.log(result);
 		var tds = $(".dataTables_scrollHead").find("table>thead>tr:last>td");
 		for(var i=1;i<tds.length;i++){
 			var td = tds[i];

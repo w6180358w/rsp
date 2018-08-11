@@ -1,5 +1,6 @@
 package com.rsp.rsp.controller;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,12 +43,12 @@ public class FormulaController {
     }
 
     @PostMapping("/merge")
-    public String save(@RequestBody Formula formula){
+    public R save(@RequestBody Formula formula){
         try {
-        	formulaService.merge(formula);
-            return "success";
+        	Formula result = formulaService.merge(formula);
+            return new R(Arrays.asList(result));
         }catch (Exception e){
-            return "error";
+            return new R(Arrays.asList(false));
         }
     }
 

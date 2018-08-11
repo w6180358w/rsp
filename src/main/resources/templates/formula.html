@@ -150,7 +150,7 @@
             <!-- Main Navigation -->
             <div id="mws-navigation">
             	<ul>
-                	<li><a href="dashboard" class="mws-i-24 i-home">机构管理</a></li>
+                	<li><a href="org" class="mws-i-24 i-home">机构管理</a></li>
                 	<li><a href="category" class="mws-i-24 i-chart">大类管理</a></li>
                 	<li><a href="subCategory" class="mws-i-24 i-table-1">小类管理</a></li>
                 	<li class="active"><a href="category" class="mws-i-24 i-chart">公式管理</a></li>
@@ -174,8 +174,8 @@
                     <div class="mws-panel-body">
                         <div class="mws-panel-toolbar top clearfix">
                             <form class="mws-form" style="width: 100%; display: flex; margin-bottom: 10px;">
-			                	<div class="mws-form-inline" style="width: 95%;display: inline-block;">
-			                		<div class="mws-form-row" style="width:30%; padding: 5px 20px 0px 20px;">
+			                	<div class="mws-form-inline" style="width: 35%;display: inline-block;">
+			                		<div class="mws-form-row" style="width:90%; padding: 5px 20px 0px 20px;">
 			                			<label>选择类型</label>
 			                			<div class="mws-form-item large">
 			                				<select class="required" onChange="typeChange(this)">
@@ -185,6 +185,11 @@
 			                					<option value="gjj">公积金</option>
 			                				</select>
 			                			</div>
+			                		</div>
+			                    </div>
+			                    <div class="mws-form-inline" style="width: 80%;display: inline-block;">
+			                		<div class="mws-form-row" style="width:80%; padding: 5px 20px 0px 20px;">
+			                			<div style="color:red;margin-top:6px;">注: 申请额度,无抵押还款,信用卡负债等三项参数分别为【x】【y】【z】,不区分大小写</div>
 			                		</div>
 			                    </div>
 			                </form>

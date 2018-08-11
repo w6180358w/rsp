@@ -55,17 +55,17 @@ public class FormulaServiceImpl implements FormulaService {
     }
 
     @Override
-    public void save(Formula Formula) {
-        FormulaRepository.save(Formula);
+    public Formula save(Formula Formula) {
+        return FormulaRepository.save(Formula);
     }
 
     @Override
-    public void update(Formula newFormula) {
+    public Formula update(Formula newFormula) {
         Formula formula = FormulaRepository.findById(newFormula.getId());
         formula.setFormula(newFormula.getFormula());
         formula.setSubCategoryKey(newFormula.getSubCategoryKey());
         formula.setOrgId(newFormula.getOrgId());
-        FormulaRepository.save(formula);
+        return FormulaRepository.save(formula);
     }
 
     @Override
@@ -114,6 +114,9 @@ public class FormulaServiceImpl implements FormulaService {
 		if(bean.getParam()==null || bean.getParam().isEmpty()) {
 			return result;
 		}
+		if(bean.getKeys()==null || bean.getKeys().isEmpty()) {
+			return result;
+		}
 		//封装参数
 		Parameters parameters=ExpressionFactory.createParameters();
 		String base = this.getBaseParamExpr(bean,parameters);
@@ -125,6 +128,7 @@ public class FormulaServiceImpl implements FormulaService {
 		List<Formula> forList = this.FormulaRepository.findAll((Specification<Formula>) (root, query, criteriaBuilder) -> {
 			In<Object> in = criteriaBuilder.in(root.get("subCategoryKey"));
 			List<Predicate> list = new ArrayList<>();
+			in.value("-1");//防止参数为空
         	for (String key : bean.getKeys()) {
 				in.value(key);
 			}
@@ -215,6 +219,7 @@ public class FormulaServiceImpl implements FormulaService {
 		List<Formula> forList = this.FormulaRepository.findAll((Specification<Formula>) (root, query, criteriaBuilder) -> {
 			In<Object> in = criteriaBuilder.in(root.get("subCategoryKey"));
 			List<Predicate> list = new ArrayList<>();
+			in.value("-1");//防止参数为空
 			for (String key : bean.getKeys()) {
 				in.value(key);
 			}
@@ -241,11 +246,13 @@ public class FormulaServiceImpl implements FormulaService {
 			json.put("orgId", org.getId());
 			
 			List<Formula> list = forMap.get(org.getId());
-			for (Formula formula : list) {
-				JSONObject j = new JSONObject();
-				j.put("id", formula.getId());
-				j.put("formula", formula.getFormula());
-				json.put(formula.getSubCategoryKey(), j);
+			if(list!=null && !list.isEmpty()) {
+				for (Formula formula : list) {
+					JSONObject j = new JSONObject();
+					j.put("id", formula.getId());
+					j.put("formula", formula.getFormula());
+					json.put(formula.getSubCategoryKey(), j);
+				}
 			}
 			result.add(json);
 		}
@@ -254,11 +261,11 @@ public class FormulaServiceImpl implements FormulaService {
 	}
 
 	@Override
-	public void merge(Formula formula) {
+	public Formula merge(Formula formula) {
 		if(formula.getId()==null) {
-			this.save(formula);
+			return this.save(formula);
 		}else {
-			this.update(formula);
+			return this.update(formula);
 		}
 	}
 }

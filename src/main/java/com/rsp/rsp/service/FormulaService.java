@@ -23,17 +23,17 @@ public interface FormulaService {
     /**
      * @param Formula
      */
-    void save(Formula Formula);
+    Formula save(Formula Formula);
     
     /**
      * @param Formula
      */
-    void merge(Formula Formula);
+    Formula merge(Formula Formula);
 
     /**
      * @param Formula
      */
-    void update(Formula Formula);
+    Formula update(Formula Formula);
 
     /**
      * @param id

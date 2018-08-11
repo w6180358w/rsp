@@ -75,7 +75,6 @@ function typeChange(el){
 function bindEditor(row,data,displayNum,displayIndex,dataIndex){
 	var api = this.api();
 	$(row).find("td").on("dblclick",function(){
-		console.log(data);
 		var that = $(this).find("span");
 		if(that.index()>=0){
 			var input = $("<input style='width:80px;' placeholder='请输入'/>");
@@ -85,16 +84,17 @@ function bindEditor(row,data,displayNum,displayIndex,dataIndex){
 			input.on("blur",function(){
 				var newv = input.val();
 				if(newv!=old){
-					console.log();
 					var formula = {id:that.attr("data-id"),orgId:data.orgId,subCategoryKey:that.attr("key"),formula:newv};
 					$.ajax({
 						type: "POST",
 						url:"formula/merge",
 						data:JSON.stringify(formula),
 						contentType:"application/json;charset=utf-8",
-						success:function(data){
+						success:function(result){
 							that.empty();
-							if(data=="success"){
+							console.log(result);
+							if(result.success){
+								that.attr("data-id",result.data[0].id);
 								that.html(newv);
 							}else{
 								layer.msg("保存失败，请联系管理员!",{

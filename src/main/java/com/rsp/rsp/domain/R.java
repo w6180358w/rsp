@@ -42,6 +42,16 @@ public class R {
         this.error = null;
     }
     
+    public R(Boolean success) {
+        this.success = success;
+        this.error = "error";
+    }
+    
+    public R(Boolean success,String error) {
+        this.success = success;
+        this.error = error;
+    }
+    
     public Object[] getContent() {
         return content;
     }
