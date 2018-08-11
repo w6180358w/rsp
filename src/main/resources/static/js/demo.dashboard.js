@@ -1,42 +1,64 @@
 $(function () {
-    console.log("dashboard")
-    $(".mws-datatable-fn").dataTable({
-        sPaginationType: "full_numbers",
-        sAjaxSource:"org/queryAll",
-        // 是否允许排序
-        sOrdering: false,
-        bSort:false,
-        bServerSide: true,
-        aoColumns:[
-            {
-                "fnRender": function ( oObj ) {
-                    return "<input type=\"checkbox\" value="+oObj.aData[0]+"/>";
-                },
-                "aTargets" : [ 0 ],"bSortable": false
-            },
-            { "id": "id","sTitle" : "ID","aTargets" : [ 1 ] },
-            { "name": "name","sTitle" : "名称","aTargets" : [ 2 ] },
-            { "limit": "limit","sTitle" : "额度","aTargets" : [ 3 ] },
-            { "term": "term","sTitle" : "期限","aTargets" : [ 4 ] },
-            { "interestRate": "interestRate","sTitle" : "利率","aTargets" : [ 5 ] },
-            { "requirements": "requirements","sTitle" : "申请条件","aTargets" : [ 6 ] },
-            { "material": "material","sTitle" : "申请材料","aTargets" : [ 7 ] },
-            { "logo": "logo","sTitle" : "logo","aTargets" : [ 8 ] },
-            { "desc": "desc","sTitle" : "描述","aTargets" : [ 9 ] },
-            { "contacts": "contacts","sTitle" : "联系人","aTargets" : [ 10 ] },
-            { "phone": "phone","sTitle" : "联系电话","aTargets" : [ 11 ] },
-            { "strengths": "strengths","sTitle" : "优势","aTargets" : [ 12 ] },
-            {
-                "fnRender": function ( oObj ) {
-                    return "<span class=\"ui-icon ui-icon-pencil\" onclick='editOrg("+oObj.aData[0]+")'></span>";
-                },"aTargets" : [ 13 ]
+    $(".mws-datatable-fn").DataTable({
+        "serverSide": true,
+        "orderMulti": false,
+        "ajax": {
+            "url": "org/queryAll",
+            "type": "post",
+            "data": function(data){
+                console.log(data);
+                startNum = data.start;
+                return {
+                    "start":data.start,
+                    "pageSize":data.length,
+                    "sSearch":data.search.value,
+                    "colName":data.columns[data.order[0].column].data,
+                    "dir":data.order[0].dir,
+                    "draw":data.draw
+                }
             }
-        ],
-        sAjaxDataProp:"content",
-        "aoColumnDefs" : [ {
-            sDefaultContent : '',
-            aTargets : [ '_all' ]
-        } ]
+        },
+        "oLanguage": {//国际语言转化
+            "oAria": {
+                "sSortAscending": " - click/return to sort ascending",
+                "sSortDescending": " - click/return to sort descending"
+            },
+            "sLengthMenu": "显示 _MENU_ 记录",
+            "sZeroRecords": "对不起，查询不到任何相关数据",
+            "sEmptyTable": "未有相关数据",
+            "sLoadingRecords": "正在加载数据-请等待...",
+            "sInfo": "当前显示 _START_ 到 _END_ 条，共 _TOTAL_ 条记录。",
+            "sInfoEmpty": "当前显示0到0条，共0条记录",
+            "sInfoFiltered": "（数据库中共为 _MAX_ 条记录）",
+            "sProcessing": "<img src='../resources/user_share/row_details/select2-spinner.gif'/> 正在加载数据...",
+            "sSearch": "模糊查询：",
+            "sUrl": "",
+            //多语言配置文件，可将oLanguage的设置放在一个txt文件中，例：Javascript/datatable/dtCH.txt
+            "oPaginate": {
+                "sFirst": "首页",
+                "sPrevious": " 上一页 ",
+                "sNext": " 下一页 ",
+                "sLast": " 尾页 "
+            }
+        },
+        "columns": [
+            { "data": "id","orderable": false,"title":"ID","width":"40%"},
+            { "data": "name","orderable": false,"title":"名称","width":"40%"},
+            { "data": "limit","orderable": false,"title":"额度","width":"40%"},
+            { "data": "term","orderable": false,"title":"期限","width":"40%"},
+            { "data": "interestRate","orderable": false,"title":"利率","width":"40%"},
+            { "data": "requirements","orderable": false,"title":"申请条件","width":"40%"},
+            { "data": "material","orderable": false,"title":"申请材料","width":"40%"},
+            { "data": "logo","orderable": false,"title":"logo","width":"40%"},
+            { "data": "desc","orderable": false,"title":"描述","width":"40%"},
+            { "data": "contacts","orderable": false,"title":"联系人","width":"40%"},
+            { "data": "phone","orderable": false,"title":"联系电话","width":"40%"},
+            { "data": "strengths","orderable": false,"title":"优势","width":"40%"},
+            { "data": "id","orderable": false,"title":"操作","width":"20%",
+                "render": function(data, type, record,index) {
+                    return "<button onclick='editOrg("+data+")'>修改</button>";
+                } }
+        ]
     });
     var PageViews = [], Sales = [];
     for (var i = 0; i <= 31; i++) {
