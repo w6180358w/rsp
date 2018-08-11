@@ -90,4 +90,8 @@ public class HomeController {
     public String addSubCategory(){
         return "addSubCategory.html";
     }
+    @RequestMapping("formula.html")
+    public String formula(){
+        return "formula.html";
+    }
 }

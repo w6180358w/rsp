@@ -2,10 +2,10 @@ package com.rsp.rsp.domain.bean;
 
 import java.util.List;
 
-import com.rsp.rsp.domain.SubCategory;
-
 public class FormulaBean{
 
+	private List<String> keys;
+	
 	private List<ParamsBean> param;
 
 	public List<ParamsBean> getParam() {
@@ -14,6 +14,14 @@ public class FormulaBean{
 
 	public void setParam(List<ParamsBean> param) {
 		this.param = param;
+	}
+
+	public List<String> getKeys() {
+		return keys;
+	}
+
+	public void setKeys(List<String> keys) {
+		this.keys = keys;
 	}
 	
 }
