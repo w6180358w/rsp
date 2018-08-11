@@ -9,9 +9,9 @@ import javax.persistence.*;
 @Entity
 @Table(name = "t_formula", schema = "rsp", catalog = "")
 public class Formula {
-    private long id;
+    private Long id;
     /**机构id*/
-    private long orgId;
+    private Long orgId;
     /**小类key*/
     private String subCategoryKey;
     /**公式*/
@@ -20,21 +20,21 @@ public class Formula {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
     @Basic
     @Column(name = "org_id")
-    public long getOrgId() {
+    public Long getOrgId() {
         return orgId;
     }
 
-    public void setOrgId(long orgId) {
+    public void setOrgId(Long orgId) {
         this.orgId = orgId;
     }
     

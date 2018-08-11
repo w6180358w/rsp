@@ -24,6 +24,11 @@ public interface FormulaService {
      * @param Formula
      */
     void save(Formula Formula);
+    
+    /**
+     * @param Formula
+     */
+    void merge(Formula Formula);
 
     /**
      * @param Formula
@@ -34,11 +39,28 @@ public interface FormulaService {
      * @param id
      */
     void delete(Long id);
-    
+    /**
+     * 手机端筛选接口 返回org对象
+     * @param bean
+     * @return
+     * @throws Exception
+     */
     List<Org> filter(FormulaBean bean) throws Exception;
-    
+    /**
+     * pc端接口 返回金额对象
+     * @param bean
+     * @return
+     * @throws Exception
+     */
     List<JSONObject> tableFilter(FormulaBean bean) throws Exception;
-    
+    /**
+     * pc端  公式列表（增删改查用）
+     * @param type
+     * @return
+     * @throws Exception
+     */
     List<CategoryBean> columns(String type) throws Exception;
+    
+    List<JSONObject> findAll(FormulaBean bean) throws Exception;
     
 }

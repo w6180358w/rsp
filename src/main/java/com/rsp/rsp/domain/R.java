@@ -24,6 +24,7 @@ public class R {
         this.iTotalDisplayRecords = iTotalDisplayRecords;
         this.draw = draw;
         this.error = error;
+        this.success = error==null?true:false;
     }
 
     public R(List<?> data, int iTotalRecords, int iTotalDisplayRecords, Integer draw, String error) {
@@ -32,6 +33,7 @@ public class R {
         this.iTotalDisplayRecords = iTotalDisplayRecords;
         this.draw = draw;
         this.error = error;
+        this.success = error==null?true:false;
     }
     
     public R(List<?> data) {

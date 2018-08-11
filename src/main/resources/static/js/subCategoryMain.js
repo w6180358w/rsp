@@ -5,7 +5,6 @@ $(function () {
 function loadSubCategory() {
     $(".mws-datatable-fn").DataTable({
         "serverSide": true,
-        "orderMulti": false,
         "ajax": {
             "url": "subCategory/queryAll",
             "type": "post",

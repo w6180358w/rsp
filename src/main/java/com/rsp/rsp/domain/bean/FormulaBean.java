@@ -7,6 +7,8 @@ public class FormulaBean{
 	private List<String> keys;
 	
 	private List<ParamsBean> param;
+	
+	private Integer draw;
 
 	public List<ParamsBean> getParam() {
 		return param;
@@ -23,5 +25,12 @@ public class FormulaBean{
 	public void setKeys(List<String> keys) {
 		this.keys = keys;
 	}
-	
+
+	public Integer getDraw() {
+		return draw;
+	}
+
+	public void setDraw(Integer draw) {
+		this.draw = draw;
+	}
 }

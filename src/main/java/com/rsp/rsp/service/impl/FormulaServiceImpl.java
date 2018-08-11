@@ -27,7 +27,6 @@ import com.rsp.rsp.domain.bean.FormulaBean;
 import com.rsp.rsp.domain.bean.ParamsBean;
 import com.rsp.rsp.service.FormulaService;
 
-import fr.expression4j.basic.MathematicalElement;
 import fr.expression4j.core.Expression;
 import fr.expression4j.core.Parameters;
 import fr.expression4j.factory.ExpressionFactory;
@@ -74,36 +73,6 @@ public class FormulaServiceImpl implements FormulaService {
         FormulaRepository.deleteById(id);
     }
     
-    public static void main(String[] args) throws Exception {
-    	Expression expression = ExpressionFactory.createExpression("result(a,b,c,x,d,e,f)=a*x^2+b*x+c");
-		System.out.println("Expression name: " + expression.getName());
-		
-		System.out.println("Expression parameters: " + expression.getParameters());
-		
-		MathematicalElement element_a=NumberFactory.createReal(1);
-		MathematicalElement element_b=NumberFactory.createReal(4);
-		MathematicalElement element_c=NumberFactory.createReal(4);
-		MathematicalElement element_x=NumberFactory.createReal(1);
-		Parameters parameters=ExpressionFactory.createParameters();
-		parameters.addParameter("a", element_a);
-		parameters.addParameter("b", element_b);
-		parameters.addParameter("c", element_c);
-		parameters.addParameter("x", element_x);
-		System.out.println("Value of expression:  y for x=1 a=1 b=4 c=4 :" +expression.evaluate(parameters).getRealValue());
-		
-		//y=x^2+6x+9=(x+3)^2
-		element_a=NumberFactory.createReal(1);
-		element_b=NumberFactory.createReal(6);
-		element_c=NumberFactory.createReal(9);
-		element_x=NumberFactory.createReal(1);
-		parameters=ExpressionFactory.createParameters();
-		parameters.addParameter("a", element_a);
-		parameters.addParameter("b", element_b);
-		parameters.addParameter("c", element_c);
-		parameters.addParameter("x", element_x);
-		System.out.println("Value of expression:  y for x=1 a=1 b=6 c=9 :" +expression.evaluate(parameters).getRealValue());
-	}
-
 	@Override
 	public List<Org> filter(FormulaBean bean) throws Exception {
 		//封装参数
@@ -142,6 +111,9 @@ public class FormulaServiceImpl implements FormulaService {
 	@Override
 	public List<JSONObject> tableFilter(FormulaBean bean) throws Exception {
 		List<JSONObject> result = new ArrayList<>();
+		if(bean.getParam()==null || bean.getParam().isEmpty()) {
+			return result;
+		}
 		//封装参数
 		Parameters parameters=ExpressionFactory.createParameters();
 		String base = this.getBaseParamExpr(bean,parameters);
@@ -155,8 +127,8 @@ public class FormulaServiceImpl implements FormulaService {
 			List<Predicate> list = new ArrayList<>();
         	for (String key : bean.getKeys()) {
 				in.value(key);
-				list.add(in);
 			}
+        	list.add(in);
         	Predicate[] p = new Predicate[list.size()];
         	query.where(criteriaBuilder.and(list.toArray(p)));
         	return query.getRestriction();
@@ -178,6 +150,9 @@ public class FormulaServiceImpl implements FormulaService {
 			}
 			org.put(formula.getSubCategoryKey(), value);
 			orgMap.put(formula.getOrgId(), org);
+			if(value<0) {
+				orgMap.remove(formula.getOrgId());
+			}
 		}
 		
 		for (Entry<Long, JSONObject> entry : orgMap.entrySet()) {
@@ -230,5 +205,60 @@ public class FormulaServiceImpl implements FormulaService {
 			result.add(bean);
 		}
 		return result;
+	}
+
+	@Override
+	public List<JSONObject> findAll(FormulaBean bean) throws Exception {
+		List<JSONObject> result = new ArrayList<>();
+		
+		//根据前端传来的id查询公式
+		List<Formula> forList = this.FormulaRepository.findAll((Specification<Formula>) (root, query, criteriaBuilder) -> {
+			In<Object> in = criteriaBuilder.in(root.get("subCategoryKey"));
+			List<Predicate> list = new ArrayList<>();
+			for (String key : bean.getKeys()) {
+				in.value(key);
+			}
+			list.add(in);
+			Predicate[] p = new Predicate[list.size()];
+			query.where(criteriaBuilder.and(list.toArray(p)));
+			return query.getRestriction();
+		});
+		
+		//机构ID 和 公式的映射
+		Map<Long,List<Formula>> forMap = new HashMap<>();
+		for (Formula form : forList) {
+			List<Formula> list = forMap.get(form.getOrgId());
+			if(list==null)list = new ArrayList<>();
+			list.add(form);
+			forMap.put(form.getOrgId(), list);
+		}
+		
+		List<Org> orgList = this.orgRepository.findAll();
+		
+		for (Org org : orgList) {
+			JSONObject json = new JSONObject();
+			json.put("name", org.getName());
+			json.put("orgId", org.getId());
+			
+			List<Formula> list = forMap.get(org.getId());
+			for (Formula formula : list) {
+				JSONObject j = new JSONObject();
+				j.put("id", formula.getId());
+				j.put("formula", formula.getFormula());
+				json.put(formula.getSubCategoryKey(), j);
+			}
+			result.add(json);
+		}
+		
+		return result;
+	}
+
+	@Override
+	public void merge(Formula formula) {
+		if(formula.getId()==null) {
+			this.save(formula);
+		}else {
+			this.update(formula);
+		}
 	}
 }

@@ -52,17 +52,16 @@
 <script type="text/javascript" src="plugins/jquery.validate.js"></script>
 <script type="text/javascript" src="plugins/jquery.mousewheel.js"></script>
 <script type="text/javascript" src="plugins/spinner/ui.spinner.js"></script>
-    <script type="text/javascript" src="plugins/layer-v3.1.1/layer/layer.js"></script>
+<script type="text/javascript" src="plugins/layer-v3.1.1/layer/layer.js"></script>
 <script type="text/javascript" src="js/jquery-ui.js"></script>
 
 <script type="text/javascript" src="js/mws.js"></script>
 <script type="text/javascript" src="js/demo.js"></script>
 <script type="text/javascript" src="js/themer.js"></script>
 
-<script type="text/javascript" src="js/demo.formula.js"></script>
+<script type="text/javascript" src="js/demo.filter.js"></script>
 
 <title>MWS Admin - Dashboard</title>
-
 </head>
 
 <body>
@@ -153,8 +152,8 @@
                 	<li><a href="dashboard" class="mws-i-24 i-home">机构管理</a></li>
                 	<li><a href="category" class="mws-i-24 i-chart">大类管理</a></li>
                 	<li><a href="subCategory" class="mws-i-24 i-table-1">小类管理</a></li>
-                	<li class="active"><a href="category" class="mws-i-24 i-chart">公式管理</a></li>
-                	<li><a href="filter" class="mws-i-24 i-chart">机构查询</a></li>
+                	<li><a href="formula" class="mws-i-24 i-chart">公式管理</a></li>
+                	<li class="active"><a href="category" class="mws-i-24 i-chart">机构查询</a></li>
                 </ul>
             </div>
             <!-- End Navigation -->
@@ -169,16 +168,16 @@
             <div class="container">
                 <div class="mws-panel grid_8">
                     <div class="mws-panel-header">
-                        <span class="mws-i-24 i-table-1">公式管理</span>
+                        <span class="mws-i-24 i-table-1">机构查询</span>
                     </div>
                     <div class="mws-panel-body">
                         <div class="mws-panel-toolbar top clearfix">
-                            <form class="mws-form" style="width: 100%; display: flex; margin-bottom: 10px;">
-			                	<div class="mws-form-inline" style="width: 95%;display: inline-block;">
+                            <form class="mws-form" style="width: 100%;" id="searchForm">
+			                	<div class="mws-form-inline" style="width: 100%;display: inline-block;  margin-bottom: 10px;">
 			                		<div class="mws-form-row" style="width:30%; padding: 5px 20px 0px 20px;">
 			                			<label>选择类型</label>
 			                			<div class="mws-form-item large">
-			                				<select class="required" onChange="typeChange(this)">
+			                				<select class="required" name="type" required>
 			                					<option value="" style="font-color: #b6b6b6" disabled selected hidden>请选择</option>
 			                					<option value="ajf">按揭房</option>
 			                					<option value="bd">保单</option>
@@ -187,6 +186,35 @@
 			                			</div>
 			                		</div>
 			                    </div>
+			                    <div class="mws-form-inline" style="width: 30%;display: inline-block;  margin-bottom: 10px;">
+			                		<div class="mws-form-row" style="width: 80%; padding: 5px 20px 0px 20px;">
+			                			<label>申请额度</label>
+			                			<div class="mws-form-item large">
+			                				<input type="number" style="margin-top: 6px;" name="sqed" required></input>
+			                			</div>
+			                		</div>
+			                    </div>
+			                    <div class="mws-form-inline" style="width: 30%;display: inline-block;  margin-bottom: 10px;">
+			                		<div class="mws-form-row" style="width: 80%; padding: 5px 20px 0px 20px;">
+			                			<label>无抵押还款</label>
+			                			<div class="mws-form-item large">
+			                				<input type="number" style="margin-top: 6px;"  name="wdyhk" required></input>
+			                			</div>
+			                		</div>
+			                    </div>
+			                    <div class="mws-form-inline" style="width: 30%;display: inline-block;  margin-bottom: 10px;">
+			                		<div class="mws-form-row" style="width: 80%;padding: 5px 20px 0px 20px;">
+			                			<label>信用卡负债</label>
+			                			<div class="mws-form-item large">
+			                				<input type="number" style="margin-top: 6px;" name="xykfz" required></input>
+			                			</div>
+			                		</div>
+			                    </div>
+			                    <div class="mws-form-inline" style="width: 5%; margin: auto;">
+			                    	<div class="mws-form-row" style="padding: 7px;">
+			                			<button type="button" name="search">查询</<button>
+			                		</button>
+			                	</div>
 			                </form>
                         </div>
                         <table class="mws-datatable-fn mws-table" width="100%" id="listTable"></table>
