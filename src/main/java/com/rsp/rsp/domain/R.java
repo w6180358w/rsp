@@ -32,6 +32,10 @@ public class R {
         this.error = error;
     }
     
+    public R(List<?> data) {
+        this.data = data;
+    }
+    
     public Object[] getContent() {
         return content;
     }

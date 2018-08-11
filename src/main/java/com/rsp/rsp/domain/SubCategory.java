@@ -18,6 +18,7 @@ public class SubCategory {
     private String paramKey;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     public long getId() {
         return id;

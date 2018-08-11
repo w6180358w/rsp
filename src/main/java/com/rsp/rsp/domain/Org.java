@@ -2,6 +2,8 @@ package com.rsp.rsp.domain;
 
 import javax.persistence.*;
 
+import net.sf.json.JSONObject;
+
 /**
  * 机构表
  * @author sjb
@@ -34,6 +36,7 @@ public class Org {
     private String strengths;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     public long getId() {
         return id;
@@ -191,5 +194,11 @@ public class Org {
         result = 31 * result + (phone != null ? phone.hashCode() : 0);
         result = 31 * result + (strengths != null ? strengths.hashCode() : 0);
         return result;
+    }
+    
+    public JSONObject toJSON(){
+    	JSONObject json = new JSONObject();
+		json.put("name", this.getName());
+    	return json;
     }
 }
