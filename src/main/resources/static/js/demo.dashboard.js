@@ -76,10 +76,32 @@ function loadOrg() {
             { "data": "strengths","orderable": false,"title":"优势","width":"40%"},
             { "data": "id","orderable": false,"title":"操作","width":"20%",
                 "render": function(data, type, record,index) {
-                    return "<button onclick='editOrg("+data+")'>修改</button>";
+                    return "<button onclick='editOrg("+data+")'>修改</button>" +
+                        "<button onclick='deleteOrg("+data+")'>删除</button>";
                 } }
         ]
     });
+}
+function deleteOrg(id) {
+    layer.confirm('确定要删除选中的记录？', {
+        btn : [ '确定', '取消' ]
+    }, function() {
+        $.ajax({
+            url : "org/delete",
+            type : "post",
+            data : {
+                'id' : id
+            },
+            success : function(r) {
+                if (r==="success") {
+                    layer.msg("删除成功");
+                    $(".mws-datatable-fn").DataTable().ajax.reload();
+                }else{
+                    layer.msg(r.msg);
+                }
+            }
+        });
+    })
 }
 function editOrg(id) {
     console.log(id)

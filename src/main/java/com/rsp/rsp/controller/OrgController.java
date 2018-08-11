@@ -50,8 +50,8 @@ public class OrgController {
         }
     }
 
-    @GetMapping("/delete/{id}")
-    public String delete(@PathVariable("id")Long id){
+    @PostMapping("/delete")
+    public String delete(@RequestParam(value ="id" )Long id){
         try {
             orgService.delete(id);
             return "success";

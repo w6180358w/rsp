@@ -48,8 +48,8 @@ public class SubCategoryController {
         }
     }
 
-    @GetMapping("/delete/{id}")
-    public String delete(@PathVariable("id")Long id){
+    @PostMapping("/delete")
+    public String delete(@RequestParam(value ="id" )Long id){
         try {
             subCategoryService.delete(id);
             return "success";

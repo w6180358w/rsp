@@ -65,12 +65,34 @@ function loadCategory() {
         "columns": [
             { "data": "name","orderable": false,"title":"名称","width":"40%"},
             { "data": "type","orderable": false,"title":"类型","width":"40%"},
-            { "data": "type","orderable": false,"title":"操作","width":"20%",
+            { "data": "id","orderable": false,"title":"操作","width":"20%",
                 "render": function(data, type, record,index) {
-                    return "<button>修改</button>";
+                    return "<button onclick='editCategory("+data+")'>修改</button>" +
+                        "<button onclick='deleteCategory("+data+")'>删除</button>";
                 } }
         ]
     });
+}
+function deleteCategory(id) {
+    layer.confirm('确定要删除选中的记录？', {
+        btn : [ '确定', '取消' ]
+    }, function() {
+        $.ajax({
+            url : "category/delete",
+            type : "post",
+            data : {
+                'id' : id
+            },
+            success : function(r) {
+                if (r==="success") {
+                    layer.msg("删除成功");
+                    $(".mws-datatable-fn").DataTable().ajax.reload();
+                }else{
+                    layer.msg(r.msg);
+                }
+            }
+        });
+    })
 }
 function editCategory(id) {
     console.log(id)

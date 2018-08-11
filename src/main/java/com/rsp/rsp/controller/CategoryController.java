@@ -48,8 +48,8 @@ public class CategoryController {
         }
     }
 
-    @GetMapping("/delete/{id}")
-    public String delete(@PathVariable("id")Long id){
+    @PostMapping("/delete")
+    public String delete(@RequestParam(value ="id" )Long id){
         try {
             categoryService.delete(id);
             return "success";
