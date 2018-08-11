@@ -16,6 +16,8 @@ public class SubCategory {
     private Long categoryId;
     /**小类的公式参数key，唯一*/
     private String paramKey;
+    /** 列表页显示的大类名 */
+    private String categoryName;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,7 +46,7 @@ public class SubCategory {
         return categoryId;
     }
 
-    public void setCategoryId(long categoryId) {
+    public void setCategoryId(Long categoryId) {
         this.categoryId = categoryId;
     }
 
@@ -57,6 +59,14 @@ public class SubCategory {
 	public void setParamKey(String paramKey) {
 		this.paramKey = paramKey;
 	}
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
 
     @Override
     public boolean equals(Object o) {

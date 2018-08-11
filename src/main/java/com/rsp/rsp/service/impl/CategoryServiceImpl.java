@@ -14,7 +14,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import javax.persistence.criteria.Predicate;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 /**
  * 大类
@@ -69,5 +72,12 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public Category findById(Long id) {
         return categoryRepository.findById(id);
+    }
+
+    @Override
+    public Map<Long, String> findIdAndNameMap() {
+        Map<Long,String> result = new HashMap<>(16);
+        categoryRepository.findAll().forEach(x->result.put(x.getId(),x.getName()));
+        return result;
     }
 }

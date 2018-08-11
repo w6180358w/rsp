@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 大类
@@ -59,4 +60,10 @@ public interface CategoryService {
      * @return
      */
     Category findById(Long id);
+
+    /**
+     * 查询全部category,返回id和name的map
+     * @return
+     */
+    Map<Long,String> findIdAndNameMap();
 }

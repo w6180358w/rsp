@@ -47,7 +47,7 @@ function loadSubCategory() {
         "columns": [
             // { "data": "id","orderable": false,"title":"ID","width":"40%"},
             { "data": "name","orderable": false,"title":"名称","width":"40%"},
-            { "data": "categoryId","orderable": false,"title":"大类ID","width":"40%"},
+            { "data": "categoryName","orderable": false,"title":"大类名","width":"40%"},
             { "data": "paramKey","orderable": false,"title":"paramKey","width":"40%"},
             { "data": "id","orderable": false,"title":"操作","width":"20%",
                 "render": function(data, type, record,index) {

@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * 小类
@@ -35,7 +37,10 @@ public class SubCategoryController {
                                       @RequestParam(value ="pageSize",defaultValue ="10")Integer size,
                                       SubCategoryQuery subCategoryQuery,Integer draw){
         Page<SubCategory> pageInfo = subCategoryService.findSubCategoryCriteria(start,size,subCategoryQuery);
-        return new R(pageInfo.getContent(), (int) pageInfo.getTotalElements(), (int) pageInfo.getTotalElements(),draw,"");
+        Map<Long,String> categories = categoryService.findIdAndNameMap();
+        List<SubCategory> list = pageInfo.getContent().stream()
+                .peek(x-> x.setCategoryName(categories.get(x.getCategoryId()))).collect(Collectors.toList());
+        return new R(list, (int) pageInfo.getTotalElements(), (int) pageInfo.getTotalElements(),draw,"");
     }
 
     @RequestMapping("add")
@@ -46,7 +51,7 @@ public class SubCategoryController {
         }else{
             subCategory = new SubCategory();
             subCategory.setId(0);
-            subCategory.setCategoryId(0);
+            subCategory.setCategoryId(0L);
         }
         model.addAttribute("subCategory",subCategory);
         //查询大类
