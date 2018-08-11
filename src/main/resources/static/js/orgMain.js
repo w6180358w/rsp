@@ -5,6 +5,7 @@ function loadOrg() {
     $(".mws-datatable-fn").DataTable({
         "serverSide": true,
         "orderMulti": false,
+        searching:false,
         "ajax": {
             "url": "org/queryAll",
             "type": "post",
