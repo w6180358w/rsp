@@ -6,6 +6,7 @@ function loadCategory() {
     $(".mws-datatable-fn").DataTable({
         "serverSide": true,
         "orderMulti": false,
+        searching:false,
         "ajax": {
             "url": "category/queryAll",
             "type": "post",

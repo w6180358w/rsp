@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 测试大类service
@@ -51,5 +52,11 @@ public class CategoryServiceTest {
     @Test
     public void testDelete(){
         categoryService.delete(2L);
+    }
+
+    @Test
+    public void testFindMap(){
+        Map<Long,String> result = categoryService.findIdAndNameMap();
+        System.out.println(result.size());
     }
 }
