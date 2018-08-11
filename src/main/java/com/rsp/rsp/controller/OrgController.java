@@ -22,6 +22,11 @@ public class OrgController {
     @Autowired
     private OrgService orgService;
 
+    @RequestMapping()
+    public ModelAndView dashboard(){
+        return new ModelAndView("org.html");
+    }
+
     @RequestMapping("/queryAll")
     public R queryAll(@RequestParam(value ="start",defaultValue ="0")Integer start,
                               @RequestParam(value ="pageSize",defaultValue ="10")Integer size,

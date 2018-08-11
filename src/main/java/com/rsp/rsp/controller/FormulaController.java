@@ -19,6 +19,7 @@ import com.rsp.rsp.domain.bean.FormulaBean;
 import com.rsp.rsp.service.FormulaService;
 
 import net.sf.json.JSONObject;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * 公式
@@ -29,6 +30,11 @@ import net.sf.json.JSONObject;
 public class FormulaController {
     @Autowired
     private FormulaService formulaService;
+
+    @RequestMapping()
+    public ModelAndView formula(){
+        return new ModelAndView("formula.html");
+    }
 
     @RequestMapping("/queryAll")
     @ResponseBody

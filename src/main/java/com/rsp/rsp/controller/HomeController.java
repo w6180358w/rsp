@@ -18,8 +18,7 @@ public class HomeController {
 
     @RequestMapping("dashboard.html")
     public String dashboard(){
-        return "dashboard.html";
-//        return "dashboard-backup.html";
+        return "dashboard-backup.html";
     }
     @RequestMapping("charts.html")
     public String charts(){
@@ -68,30 +67,5 @@ public class HomeController {
     @RequestMapping("icons.html")
     public String icons(){
         return "icons.html";
-    }
-    @RequestMapping("category.html")
-    public String category(){
-        return "category.html";
-    }
-    @RequestMapping("subCategory.html")
-    public String subCategory(){
-        return "subCategory.html";
-    }
-
-    @RequestMapping("addOrg.html")
-    public String addOrg(){
-        return "addOrg.html";
-    }
-    @RequestMapping("addCategory.html")
-    public String addCategory(){
-        return "addCategory.html";
-    }
-    @RequestMapping("addSubCategory.html")
-    public String addSubCategory(){
-        return "addSubCategory.html";
-    }
-    @RequestMapping("formula.html")
-    public String formula(){
-        return "formula.html";
     }
 }

@@ -59,7 +59,7 @@
 <script type="text/javascript" src="js/demo.js"></script>
 <script type="text/javascript" src="js/themer.js"></script>
 
-<script type="text/javascript" src="js/categoryMain.js"></script>
+<script type="text/javascript" src="js/orgMain.js"></script>
 
 <title>MWS Admin - Dashboard</title>
 
@@ -119,7 +119,7 @@
         <!-- User Area Wrapper -->
         <div id="mws-user-tools" class="clearfix">
             <!-- User Functions -->
-            <div id="mws-user-info" class="mws-inset" style="display: none;">
+            <div id="mws-user-info" class="mws-inset" style="display: none">
             	<div id="mws-user-photo">
                 	<img src="example/profile.jpg" alt="User Photo" />
                 </div>
@@ -150,10 +150,10 @@
             <!-- Main Navigation -->
             <div id="mws-navigation">
             	<ul>
-                	<li><a href="org" class="mws-i-24 i-home">贷款机构列表</a></li>
-                	<li class="active"><a href="category" class="mws-i-24 i-chart">大类</a></li>
+                	<li class="active"><a href="org" class="mws-i-24 i-home">贷款机构列表</a></li>
+                	<li><a href="category" class="mws-i-24 i-chart">大类</a></li>
                 	<li><a href="subCategory" class="mws-i-24 i-table-1">小类</a></li>
-                    <li><a href="formula" class="mws-i-24 i-table-1">公式</a></li>
+                	<li><a href="formula" class="mws-i-24 i-table-1">公式</a></li>
                     <li class="active">
                         <a href="icons.html" class="mws-i-24 i-pacman">
                             Icons <span class="mws-nav-tooltip">2000+</span>
@@ -173,19 +173,55 @@
             <div class="container">
                 <div class="mws-panel grid_8">
                     <div class="mws-panel-header">
-                        <span class="mws-i-24 i-table-1">大类列表</span>
+                        <span class="mws-i-24 i-table-1">贷款机构列表</span>
                     </div>
                     <div class="mws-panel-body">
                         <div class="mws-panel-toolbar top clearfix">
                             <ul>
-                                <li><a href="javascript:void(0);" onclick="addCategory();" class="mws-ic-16 ic-add">添加</a></li>
+                                <li><a href="javascript:void(0);" onclick="addOrg();" class="mws-ic-16 ic-add">添加</a></li>
                                 <!--<li><a href="javascript:void(0);" class="mws-ic-16 ic-cross">删除</a></li>-->
                                 <!--<li><a href="#" class="mws-ic-16 ic-printer">Print</a></li>-->
                                 <li><a href="javascript:void(0);" class="mws-ic-16 ic-arrow-refresh">刷新</a></li>
                                 <!--<li><a href="#" class="mws-ic-16 ic-edit">Update</a></li>-->
                             </ul>
                         </div>
-                        <table class="mws-datatable-fn mws-table" style="width:100%"></table>
+                        <table class="mws-datatable-fn mws-table">
+                            <thead>
+                            <tr>
+                                <th>id</th>
+                                <th>name</th>
+                                <th>limit</th>
+                                <th>term</th>
+                                <th>term</th>
+                                <th>term</th>
+                                <th>term</th>
+                                <th>term</th>
+                                <th>term</th>
+                                <th>term</th>
+                                <th>term</th>
+                                <th>term</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr class="gradeX">
+                                <td>Trident</td>
+                                <td>Trident</td>
+                                <td>Trident</td>
+                                <td>Trident</td>
+                                <td>Trident</td>
+                                <td>Trident</td>
+                                <td>Trident</td>
+                                <td>Trident</td>
+                                <td>Trident</td>
+                                <td>Internet
+                                    Explorer 4.0</td>
+                                <td>Win 95+</td>
+                                <td class="center">4</td>
+                                <td class="center"><span class="ui-icon ui-icon-pencil"></span></td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

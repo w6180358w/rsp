@@ -20,6 +20,11 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
+    @RequestMapping()
+    public ModelAndView category(){
+        return new ModelAndView("category.html");
+    }
+
     @RequestMapping("/queryAll")
     public R queryAll(@RequestParam(value ="start",defaultValue ="0")Integer start,
                                    @RequestParam(value ="pageSize",defaultValue ="10")Integer size,
