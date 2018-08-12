@@ -1,6 +1,7 @@
 package com.rsp.rsp.domain.bean;
 
 import java.util.List;
+import java.util.Map;
 
 public class FormulaBean{
 
@@ -9,7 +10,9 @@ public class FormulaBean{
 	private List<ParamsBean> param;
 	
 	private Integer draw;
-
+	
+	private String type;
+	
 	public List<ParamsBean> getParam() {
 		return param;
 	}
@@ -32,5 +35,13 @@ public class FormulaBean{
 
 	public void setDraw(Integer draw) {
 		this.draw = draw;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 }

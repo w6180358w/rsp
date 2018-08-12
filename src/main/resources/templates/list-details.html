@@ -1,0 +1,98 @@
+
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>详情页</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" th:href="@{/css/common.css}" >
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" >
+</head>
+
+<body>
+<!--项目详情-->
+<div class="projectd_f">
+	<div class="projectd_f_in">
+    	<a href="javascript:window.history.back()" class="fa fa-chevron-left"></a>
+        项目详情
+    </div>
+</div>
+<!--2占固定定位的块-->
+<div class="occupy_f2"></div>
+<!--内容-->
+<div class="neirbg_f">
+	<div class="neirbg_f_in">
+    	<h2 th:text="${org.name}"></h2>
+        <div class="twobf_f">
+        	<ul>
+            	<li>
+              	<em>额度</em>
+                  <p>
+	                  <span th:text="${org.limitMin}"></span>
+		              <span th:text=" ${(org.limitMax == '' || org.limitMax==null)? '' : ('-'+org.limitMax)}"></span>
+	                  <font>万</font>
+                  </p>
+              </li>
+              <li>
+              	<em>期限</em>
+                  <p><span th:text="${org.term}"></span><font>个月</font></p>
+              </li>
+							<li>
+              	<em>利率</em>
+                  <p>
+	                  <span th:text="${org.interestRateMin}"></span>
+			          <span th:text=" ${(org.interestRateMax == '' || org.interestRateMax==null)? '' : ('-'+org.interestRateMax)}"></span>
+	                  <font>%</font>
+                  </p>
+              </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!--显示区域2-->
+<div class="xsiqy_f">
+	<!--包2-->
+    <div class="xsiqy_f_in">
+    	<!--借入描述-->
+        <div class="xsiqy_f_in_1">
+        	<!--文字信息-->
+          <div class="wnzims_f">
+          	<dl>
+              	<dt>申请条件</dt>
+                <dd th:text="${org.requirements}"></dd>
+            </dl>
+            <dl>
+            	<dt>申请材料</dt>
+              <dd th:text="${org.material}"></dd>
+            </dl>
+          </div>
+					<!--图文信息-->
+					<div class="pic-text">
+						<dl class="left-right">
+	            <dt><!-- <img th:src="@{''+${org.logo}}"> --><img src="/images/tuigpng.png"></dt>
+	            <dd th:text="${org.desc}"></dd>
+	          </dl>
+					</div>
+        </div>
+    </div>
+
+		<div class="sxdymy_f">
+			<div class="sxdymy_f_in">
+					<ul>
+							<li>
+									<span>客户经理</span>
+									<i th:text="${org.contacts}"></i>
+							</li>
+							<li>
+									<span>联系电话</span>
+									<i th:text="${org.phone}"></i>
+							</li>
+					</ul>
+				</div>
+		</div>
+</div>
+
+</body>
+</html>

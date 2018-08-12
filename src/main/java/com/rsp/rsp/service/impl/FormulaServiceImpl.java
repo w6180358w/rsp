@@ -79,36 +79,71 @@ public class FormulaServiceImpl implements FormulaService {
     
 	@Override
 	public List<Org> filter(FormulaBean bean) throws Exception {
+		List<Org> result = new ArrayList<>();
+		if(bean.getParam()==null || bean.getParam().isEmpty()) {
+			return result;
+		}
+		if(bean.getKeys()==null || bean.getKeys().isEmpty()) {
+			return result;
+		}
 		//封装参数
 		Parameters parameters=ExpressionFactory.createParameters();
 		String base = this.getBaseParamExpr(bean,parameters);
 		
 		List<Org> orgList = this.orgRepository.findAll();
-		Map<Long,Org> orgMap = orgList.stream().collect(Collectors.toMap(Org::getId, org->org));
+		
+		Map<Long,Org> orgMap = orgList.stream().collect(Collectors.toMap(Org::getId, Org->Org));
 		//所有公式
-		List<Formula> forList = this.formulaRepository.findAll();
+		List<Formula> forList = this.formulaRepository.findAll((Specification<Formula>) (root, query, criteriaBuilder) -> {
+			In<Object> in = criteriaBuilder.in(root.get("subCategoryKey"));
+			List<Predicate> list = new ArrayList<>();
+			in.value("-1");//防止参数为空
+        	for (String key : bean.getKeys()) {
+				in.value(key);
+			}
+        	list.add(in);
+        	Predicate[] p = new Predicate[list.size()];
+        	query.where(criteriaBuilder.and(list.toArray(p)));
+        	return query.getRestriction();
+      	});
 		for (Formula formula : forList) {
 			//如果orgMap中机构不存在（数据不全或已经被筛除）  跳过
-			if(orgMap.get(formula.getOrgId())==null) {
+			Org org = orgMap.get(formula.getOrgId());
+			if(org==null) {
 				continue;
 			}
+			Double value = null;
 			//如果公式为空  跳过
 			String formu = formula.getFormula();
-			if(formu==null || "".equals(formu)) {
-				continue;
+			if(formu!=null && !"".equals(formu)) {
+				String expr = (base+formu).toUpperCase();
+				try {
+					Expression expression = ExpressionFactory.createExpression(expr);
+					value = expression.evaluate(parameters).getRealValue();
+					System.out.println("机构："+orgMap.get(formula.getOrgId()).getName()+"公式："+expr+"值："+value);
+				} catch (Exception e) {
+					e.printStackTrace();
+					throw new Exception("机构【"+orgMap.get(formula.getOrgId()).getName()+"】在此类型下的公式【"+formu+"】计算错误，请检查公式中包含参数对应的小类是否存在！");
+				}
 			}
-			String expr = (base+formu).toUpperCase();
-			Expression expression = ExpressionFactory.createExpression(expr);
-			Double value = expression.evaluate(parameters).getRealValue();
-			System.out.println("机构："+orgMap.get(formula.getOrgId()).getName()+"公式："+expr+"值："+value);
+			//orgMap中有就数据  如果计算值小于0  新老数据一起删除
+			orgMap.put(formula.getOrgId(), org);
 			if(value<0) {
 				orgMap.remove(formula.getOrgId());
 			}
+			
 		}
-		List<Org> result = new ArrayList<>();
+		Long now = System.currentTimeMillis();
 		for (Entry<Long, Org> entry : orgMap.entrySet()) {
+			//保存查询次数  统计用
+			Statistics stat = new Statistics();
+			stat.setOrgId(entry.getValue().getId());
+			stat.setCountTime(now);
+			this.statisticsRepository.save(stat);
+			
 			result.add(entry.getValue());
 		}
+		
 		return result;
 	}
 
