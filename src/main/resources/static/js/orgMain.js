@@ -127,3 +127,7 @@ function addOrg() {
         }
     });
 }
+
+function refreshOrg() {
+    $(".mws-datatable-fn").DataTable().ajax.reload();
+}

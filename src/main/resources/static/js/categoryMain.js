@@ -109,3 +109,7 @@ function addCategory() {
         }
     });
 }
+
+function refreshCategory() {
+    $(".mws-datatable-fn").DataTable().ajax.reload();
+}

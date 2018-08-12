@@ -114,3 +114,6 @@ function addSubCategory() {
     });
 }
 
+function refreshSubCategory() {
+    $(".mws-datatable-fn").DataTable().ajax.reload();
+}
