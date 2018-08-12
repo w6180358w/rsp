@@ -78,7 +78,7 @@ $(function () {
 	            	console.log(eval(JSON.stringify(data.responseText)));
 	            	var result = JSON.parse(data.responseText);
 	            	layer.confirm(result.message, {
-	                    btn : [ '确定', '取消' ]
+	                    btn : [ '确定' ]
 	                }, function() {
 	                   window.location.reload();
 	                })
