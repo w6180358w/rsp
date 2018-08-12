@@ -9,8 +9,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.File;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -79,8 +81,14 @@ public class OrgController {
     }
 
     @PostMapping("/update")
-    public String update(Org org){
+    public String update(Org org, MultipartFile file){
         try {
+            // 文件名称
+            String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+            // 设置存放图片文件的路径
+            String path = "E:\\tmp\\"+fileName;
+            file.transferTo(new File(path));
+            org.setLogo(path);
             orgService.update(org);
             return "success";
         }catch (Exception e){

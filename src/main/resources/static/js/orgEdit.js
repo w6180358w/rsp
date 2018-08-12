@@ -50,11 +50,12 @@ function submitOrgForm() {
         msg = "更新成功";
         errMsg = "更新失败"
     }
+    var formData = new FormData($("#orgForm")[0]);
     $.ajax({
         type: "POST",
-        dataType: "html",
         url: url,
-        data: $('#orgForm').serialize(),
+        processData: false,contentType: false,
+        data: formData,
         success: function (data) {
             if(data==="success"){
                 var index = parent.layer.getFrameIndex(window.name);

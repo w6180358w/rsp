@@ -34,7 +34,7 @@
 					<span class="mws-i-24 i-list"></span>
 				</div>
 				<div class="mws-panel-body">
-					<form class="mws-form" id="orgForm">
+					<form class="mws-form" id="orgForm" enctype="multipart/form-data">
 						<div class="mws-form-inline">
 							<input type="hidden" name="id" id="id" th:value="${org.id}"/>
 							<div class="mws-form-row">
@@ -78,7 +78,7 @@
 								<label>logo</label>
 								<div class="mws-form-item large">
 									<img src="example/cyan_koala.jpg" alt="" />
-									<input type="file" name="logo" class="mws-textinput" th:value="${org.logo}"/>
+									<input type="file" name="file" class="mws-textinput" th:value="${org.logo}"/>
 								</div>
 							</div>
 							<div class="mws-form-row">
