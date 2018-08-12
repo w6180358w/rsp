@@ -6,9 +6,22 @@ $(function () {
                 required : true,
                 digits:true
             },
-            limit : {
+            limitMin : {
                 required : true,
+                digits:true
+            },
+            limitMax : {
+                required : true,
+                digits:true
+            },
+            interestRateMin : {
                 number:true
+            },
+            interestRateMax : {
+                number:true
+            },
+            phone : {
+                _mobile : true
             },
             name:{
                 required : true
@@ -19,15 +32,34 @@ $(function () {
                 required : icon + "请输入期限",
                 digits : icon + "请输入整数"
             },
-            limit : {
+            limitMin : {
                 required : icon + "请输入额度",
+                digits : icon + "请输入整数"
+            },
+            limitMax : {
+                required : icon + "请输入额度",
+                digits : icon + "请输入整数"
+            },
+            interestRateMin : {
                 number : icon + "请输入合法的数字"
+            },
+            interestRateMax : {
+                number : icon + "请输入合法的数字"
+            },
+            phone : {
+                _mobile : icon + "请正确填写联系电话"
             },
             name : {
                 required : icon + "请输入名称"
             }
         },
     });
+    // 手机号码验证
+    jQuery.validator.addMethod("_mobile",function (value, element) {
+        var length = value.length;
+        var mobile = /^(13[0-9]{9})|(18[0-9]{9})|(14[0-9]{9})|(17[0-9]{9})|(15[0-9]{9})$/;
+        return this.optional(element) || (length == 11 && mobile.test(value));
+    }, "请正确填写您的手机号码");
     if($.fn.filestyle) {
         $("input[type='file']").filestyle({
             imagewidth: 78,

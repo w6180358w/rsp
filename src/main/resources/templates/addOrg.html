@@ -45,10 +45,18 @@
 							</div>
 							<div class="mws-form-row">
 								<label>额度 <span style="color: #b90a0f">*</span></label>
-								<input type="text" name="limitMin" class="mws-textinput" th:value="${org.limitMin}"/>
-								-
-								<input type="text" name="limitMax" class="mws-textinput" th:value="${org.limitMax}"/>
-								(万)
+								<div class="mws-form-item large" style="float: left;width: 30%;margin-left: 0;">
+									<input type="text" name="limitMin" class="mws-textinput" th:value="${org.limitMin}"/>
+								</div>
+								<div class="mws-form-item large" style="float: left;width: 3%;margin-left: 0;text-align: center;">
+									-
+								</div>
+								<div class="mws-form-item large" style="float: left;width: 30%;margin-left: 0;">
+									<input type="text" name="limitMax" class="mws-textinput" th:value="${org.limitMax}"/>
+								</div>
+								<div class="mws-form-item large" style="float: left;width: 3%;margin-left: 0;text-align: center;transform: translate(0%,10%);">
+									(万)
+								</div>
 							</div>
 							<div class="mws-form-row">
 								<label>期限 <span style="color: #b90a0f">*</span></label>
@@ -58,9 +66,21 @@
 							</div>
 							<div class="mws-form-row">
 								<label>利率</label>
-								<input type="text" name="interestRateMin" class="mws-textinput" th:value="${org.interestRateMin}"/>&#37;
-								-
-								<input type="text" name="interestRateMax" class="mws-textinput" th:value="${org.interestRateMax}"/>&#37;
+								<div class="mws-form-item large" style="float: left;width: 30%;margin-left: 0;">
+									<input type="text" name="interestRateMin" class="mws-textinput" th:value="${org.interestRateMin}"/>
+								</div>
+								<div class="mws-form-item large" style="float: left;width: 3%;margin-left: 0;text-align: center;transform: translate(0%,10%);">
+									&#37;
+								</div>
+								<div class="mws-form-item large" style="float: left;width: 3%;margin-left: 0;text-align: center;">
+									-
+								</div>
+								<div class="mws-form-item large" style="float: left;width: 30%;margin-left: 0;">
+									<input type="text" name="interestRateMax" class="mws-textinput" th:value="${org.interestRateMax}"/>
+								</div>
+								<div class="mws-form-item large" style="float: left;width: 3%;margin-left: 0;text-align: center;transform: translate(0%,10%);">
+									&#37;
+								</div>
 							</div>
 							<div class="mws-form-row">
 								<label>申请条件</label>
