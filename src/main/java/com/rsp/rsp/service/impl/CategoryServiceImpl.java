@@ -1,9 +1,11 @@
 package com.rsp.rsp.service.impl;
 
-import com.rsp.rsp.dao.CategoryRepository;
-import com.rsp.rsp.domain.query.CategoryQuery;
-import com.rsp.rsp.domain.Category;
-import com.rsp.rsp.service.CategoryService;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.persistence.criteria.Predicate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -11,13 +13,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
-import javax.persistence.criteria.Predicate;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import com.rsp.rsp.dao.CategoryRepository;
+import com.rsp.rsp.domain.Category;
+import com.rsp.rsp.domain.query.CategoryQuery;
+import com.rsp.rsp.service.CategoryService;
 
 /**
  * 大类

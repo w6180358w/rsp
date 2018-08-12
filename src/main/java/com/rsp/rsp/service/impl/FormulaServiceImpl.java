@@ -17,10 +17,12 @@ import org.springframework.stereotype.Service;
 import com.rsp.rsp.dao.CategoryRepository;
 import com.rsp.rsp.dao.FormulaRepository;
 import com.rsp.rsp.dao.OrgRepository;
+import com.rsp.rsp.dao.StatisticsRepository;
 import com.rsp.rsp.dao.SubCategoryRepository;
 import com.rsp.rsp.domain.Category;
 import com.rsp.rsp.domain.Formula;
 import com.rsp.rsp.domain.Org;
+import com.rsp.rsp.domain.Statistics;
 import com.rsp.rsp.domain.SubCategory;
 import com.rsp.rsp.domain.bean.CategoryBean;
 import com.rsp.rsp.domain.bean.FormulaBean;
@@ -41,36 +43,38 @@ import net.sf.json.JSONObject;
 public class FormulaServiceImpl implements FormulaService {
 
     @Autowired
-    private FormulaRepository FormulaRepository;
+    private FormulaRepository formulaRepository;
     @Autowired
     private OrgRepository orgRepository;
     @Autowired
     private CategoryRepository categoryRepository;
     @Autowired
     private SubCategoryRepository subCategoryRepository;
+    @Autowired
+    private StatisticsRepository statisticsRepository;
 
     @Override
     public List<Formula> findAll() {
-        return FormulaRepository.findAll();
+        return formulaRepository.findAll();
     }
 
     @Override
     public Formula save(Formula Formula) {
-        return FormulaRepository.save(Formula);
+        return formulaRepository.save(Formula);
     }
 
     @Override
     public Formula update(Formula newFormula) {
-        Formula formula = FormulaRepository.findById(newFormula.getId());
+        Formula formula = formulaRepository.findById(newFormula.getId());
         formula.setFormula(newFormula.getFormula());
         formula.setSubCategoryKey(newFormula.getSubCategoryKey());
         formula.setOrgId(newFormula.getOrgId());
-        return FormulaRepository.save(formula);
+        return formulaRepository.save(formula);
     }
 
     @Override
     public void delete(Long id) {
-        FormulaRepository.deleteById(id);
+    	formulaRepository.deleteById(id);
     }
     
 	@Override
@@ -82,7 +86,7 @@ public class FormulaServiceImpl implements FormulaService {
 		List<Org> orgList = this.orgRepository.findAll();
 		Map<Long,Org> orgMap = orgList.stream().collect(Collectors.toMap(Org::getId, org->org));
 		//所有公式
-		List<Formula> forList = this.FormulaRepository.findAll();
+		List<Formula> forList = this.formulaRepository.findAll();
 		for (Formula formula : forList) {
 			//如果orgMap中机构不存在（数据不全或已经被筛除）  跳过
 			if(orgMap.get(formula.getOrgId())==null) {
@@ -125,7 +129,7 @@ public class FormulaServiceImpl implements FormulaService {
 		
 		Map<Long,JSONObject> orgMap = orgList.stream().collect(Collectors.toMap(Org::getId, Org::toJSON));
 		//所有公式
-		List<Formula> forList = this.FormulaRepository.findAll((Specification<Formula>) (root, query, criteriaBuilder) -> {
+		List<Formula> forList = this.formulaRepository.findAll((Specification<Formula>) (root, query, criteriaBuilder) -> {
 			In<Object> in = criteriaBuilder.in(root.get("subCategoryKey"));
 			List<Predicate> list = new ArrayList<>();
 			in.value("-1");//防止参数为空
@@ -148,20 +152,35 @@ public class FormulaServiceImpl implements FormulaService {
 			String formu = formula.getFormula();
 			if(formu!=null && !"".equals(formu)) {
 				String expr = (base+formu).toUpperCase();
-				Expression expression = ExpressionFactory.createExpression(expr);
-				value = expression.evaluate(parameters).getRealValue();
-				System.out.println("机构："+orgMap.get(formula.getOrgId()).getString("name")+"公式："+expr+"值："+value);
+				try {
+					Expression expression = ExpressionFactory.createExpression(expr);
+					value = expression.evaluate(parameters).getRealValue();
+					System.out.println("机构："+orgMap.get(formula.getOrgId()).getString("name")+"公式："+expr+"值："+value);
+				} catch (Exception e) {
+					e.printStackTrace();
+					throw new Exception("机构【"+orgMap.get(formula.getOrgId()).getString("name")+"】在此类型下的公式【"+formu+"】计算错误，请检查公式中包含参数对应的小类是否存在！");
+				}
 			}
 			org.put(formula.getSubCategoryKey(), value);
+			org.put("orgId", formula.getOrgId());
+			//orgMap中有就数据  如果计算值小于0  新老数据一起删除
 			orgMap.put(formula.getOrgId(), org);
 			if(value<0) {
 				orgMap.remove(formula.getOrgId());
 			}
+			
 		}
-		
+		Long now = System.currentTimeMillis();
 		for (Entry<Long, JSONObject> entry : orgMap.entrySet()) {
+			//保存查询次数  统计用
+			Statistics stat = new Statistics();
+			stat.setOrgId(entry.getValue().getLong("orgId"));
+			stat.setCountTime(now);
+			this.statisticsRepository.save(stat);
+			
 			result.add(entry.getValue());
 		}
+		
 		return result;
 	}
 	
@@ -216,7 +235,7 @@ public class FormulaServiceImpl implements FormulaService {
 		List<JSONObject> result = new ArrayList<>();
 		
 		//根据前端传来的id查询公式
-		List<Formula> forList = this.FormulaRepository.findAll((Specification<Formula>) (root, query, criteriaBuilder) -> {
+		List<Formula> forList = this.formulaRepository.findAll((Specification<Formula>) (root, query, criteriaBuilder) -> {
 			In<Object> in = criteriaBuilder.in(root.get("subCategoryKey"));
 			List<Predicate> list = new ArrayList<>();
 			in.value("-1");//防止参数为空

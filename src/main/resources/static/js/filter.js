@@ -63,6 +63,7 @@ $(function () {
 	        "ajax": {
 	            "url": "filter/tableFilter",
 	            "type": "post",
+	            "dataType":"json",
 	            "contentType":"application/json;charset=utf-8",//data.data.unshift(firstCol)
 	            data:function(data){
 	            	var param = getColParams();
@@ -72,6 +73,15 @@ $(function () {
 	                		"draw":data.draw
 	                	};
 	            	return JSON.stringify(result);
+	            },
+	            "error":function(data){
+	            	console.log(eval(JSON.stringify(data.responseText)));
+	            	var result = JSON.parse(data.responseText);
+	            	layer.confirm(result.message, {
+	                    btn : [ '确定', '取消' ]
+	                }, function() {
+	                   window.location.reload();
+	                })
 	            }
 	        },
 	        "columns": columns

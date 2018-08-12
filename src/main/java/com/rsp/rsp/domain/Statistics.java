@@ -14,7 +14,7 @@ public class Statistics {
     /**机构id*/
     private Long orgId;
     /**统计时间*/
-    private Timestamp countTime;
+    private Long countTime;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,11 +39,11 @@ public class Statistics {
 
     @Basic
     @Column(name = "count_time")
-    public Timestamp getCountTime() {
+    public Long getCountTime() {
         return countTime;
     }
 
-    public void setCountTime(Timestamp countTime) {
+    public void setCountTime(Long countTime) {
         this.countTime = countTime;
     }
 
