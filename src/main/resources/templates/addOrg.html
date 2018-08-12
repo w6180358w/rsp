@@ -77,8 +77,9 @@
 							<div class="mws-form-row">
 								<label>logo</label>
 								<div class="mws-form-item large">
-									<img src="example/cyan_koala.jpg" alt="" />
-									<input type="file" name="file" class="mws-textinput" th:value="${org.logo}"/>
+									<img th:src="${org.logo}" alt="" height="80" width="100"/><br/>
+									<input type="file" name="file" class="mws-textinput"/>
+									<span>最佳图片大小:100*80</span>
 								</div>
 							</div>
 							<div class="mws-form-row">

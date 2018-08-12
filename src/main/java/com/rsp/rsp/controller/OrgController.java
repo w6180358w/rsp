@@ -8,6 +8,7 @@ import com.rsp.rsp.service.OrgService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.ui.Model;
+import org.springframework.util.ResourceUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -93,13 +94,18 @@ public class OrgController {
     @PostMapping("/update")
     public String update(Org org, MultipartFile file){
         try {
+            String classpath = ResourceUtils.getURL("classpath:").getPath();
             //文件名称
             String fileName = StringUtils.cleanPath(file.getOriginalFilename());
             String temp = fileName.substring(fileName.lastIndexOf("."));
             // 设置存放图片文件的路径 +
-            String path = conif.getLocalPath()+StringUtils.cleanPath(org.getName())+temp;
+            String path = classpath + conif.getLocalPath() +StringUtils.cleanPath(org.getName())+temp;
+            File logo = new File(classpath + conif.getLocalPath());
+            if(!logo.exists()){
+                logo.mkdirs();
+            }
             file.transferTo(new File(path));
-            org.setLogo(path);
+            org.setLogo("../"+path.substring(path.lastIndexOf("logo")));
             orgService.update(org);
             return "success";
         }catch (Exception e){
