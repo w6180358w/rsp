@@ -1,5 +1,6 @@
 package com.rsp.rsp.controller;
 
+import com.rsp.rsp.config.PropertiesConif;
 import com.rsp.rsp.domain.R;
 import com.rsp.rsp.domain.query.OrgQuery;
 import com.rsp.rsp.domain.Org;
@@ -27,6 +28,8 @@ public class OrgController {
 
     @Autowired
     private OrgService orgService;
+    @Autowired
+    private PropertiesConif conif;
 
     @RequestMapping()
     public ModelAndView dashboard(){
@@ -71,8 +74,15 @@ public class OrgController {
     }
 
     @PostMapping("/save")
-    public String save(Org org){
+    public String save(Org org, MultipartFile file){
         try {
+            //文件名称
+            String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+            String temp = fileName.substring(fileName.lastIndexOf("."));
+            // 设置存放图片文件的路径 +
+            String path = conif.getLocalPath()+StringUtils.cleanPath(org.getName())+temp;
+            file.transferTo(new File(path));
+            org.setLogo(path);
             orgService.save(org);
             return "success";
         }catch (Exception e){
@@ -83,10 +93,11 @@ public class OrgController {
     @PostMapping("/update")
     public String update(Org org, MultipartFile file){
         try {
-            // 文件名称
+            //文件名称
             String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-            // 设置存放图片文件的路径
-            String path = "E:\\tmp\\"+fileName;
+            String temp = fileName.substring(fileName.lastIndexOf("."));
+            // 设置存放图片文件的路径 +
+            String path = conif.getLocalPath()+StringUtils.cleanPath(org.getName())+temp;
             file.transferTo(new File(path));
             org.setLogo(path);
             orgService.update(org);
