@@ -10,30 +10,30 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "t_statistics", schema = "rsp", catalog = "")
 public class Statistics {
-    private long id;
+    private Long id;
     /**机构id*/
-    private long orgId;
+    private Long orgId;
     /**统计时间*/
     private Timestamp countTime;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
     @Basic
     @Column(name = "org_id")
-    public long getOrgId() {
+    public Long getOrgId() {
         return orgId;
     }
 
-    public void setOrgId(long orgId) {
+    public void setOrgId(Long orgId) {
         this.orgId = orgId;
     }
 

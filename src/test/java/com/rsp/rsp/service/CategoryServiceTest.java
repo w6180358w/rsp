@@ -43,7 +43,7 @@ public class CategoryServiceTest {
     @Test
     public void testUpdate(){
         Category category = new Category();
-        category.setId(1);
+        category.setId(1L);
         category.setType("type");
         category.setName("name");
         categoryService.update(category);

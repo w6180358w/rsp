@@ -40,7 +40,7 @@ public class CategoryController {
             category = categoryService.findById(id);
         }else{
             category = new Category();
-            category.setId(0);
+            category.setId(0L);
         }
         model.addAttribute("category",category);
         return new ModelAndView("addCategory.html");

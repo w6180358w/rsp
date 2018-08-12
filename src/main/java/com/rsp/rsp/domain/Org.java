@@ -11,15 +11,19 @@ import net.sf.json.JSONObject;
 @Entity
 @Table(name = "t_org", schema = "rsp", catalog = "")
 public class Org {
-    private long id;
+    private Long id;
     /**机构名称*/
     private String name;
-    /**额度*/
-    private Long limit;
+    /**额度 小*/
+    private Long limitMin;
+    /**额度 大*/
+    private Long limitMax;
     /**期限*/
     private Long term;
-    /**利率*/
-    private String interestRate;
+    /**利率小*/
+    private String interestRateMin;
+    /**利率大*/
+    private String interestRateMax;
     /**申请条件*/
     private String requirements;
     /**申请材料*/
@@ -35,14 +39,19 @@ public class Org {
     /**优势*/
     private String strengths;
 
+    /**列表显示时额度拼成一个字符串*/
+    private String limitString;
+    /**列表显示时利率拼成一个字符串*/
+    private String interestRateString;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -57,13 +66,23 @@ public class Org {
     }
 
     @Basic
-    @Column(name = "loan_limit")
-    public Long getLimit() {
-        return limit;
+    @Column(name = "loan_limit_min")
+    public Long getLimitMin() {
+        return limitMin;
     }
 
-    public void setLimit(Long limit) {
-        this.limit = limit;
+    public void setLimitMin(Long limitMin) {
+        this.limitMin = limitMin;
+    }
+
+    @Basic
+    @Column(name = "loan_limit_max")
+    public Long getLimitMax() {
+        return limitMax;
+    }
+
+    public void setLimitMax(Long limitMax) {
+        this.limitMax = limitMax;
     }
 
     @Basic
@@ -77,13 +96,23 @@ public class Org {
     }
 
     @Basic
-    @Column(name = "interest_rate")
-    public String getInterestRate() {
-        return interestRate;
+    @Column(name = "interest_rate_min")
+    public String getInterestRateMin() {
+        return interestRateMin;
     }
 
-    public void setInterestRate(String interestRate) {
-        this.interestRate = interestRate;
+    public void setInterestRateMin(String interestRateMin) {
+        this.interestRateMin = interestRateMin;
+    }
+
+    @Basic
+    @Column(name = "interest_rate_max")
+    public String getInterestRateMax() {
+        return interestRateMax;
+    }
+
+    public void setInterestRateMax(String interestRateMax) {
+        this.interestRateMax = interestRateMax;
     }
 
     @Basic
@@ -156,6 +185,24 @@ public class Org {
         this.strengths = strengths;
     }
 
+    @Transient
+    public String getLimitString() {
+        return limitString;
+    }
+
+    public void setLimitString(String limitString) {
+        this.limitString = limitString;
+    }
+
+    @Transient
+    public String getInterestRateString() {
+        return interestRateString;
+    }
+
+    public void setInterestRateString(String interestRateString) {
+        this.interestRateString = interestRateString;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -164,10 +211,12 @@ public class Org {
         Org that = (Org) o;
 
         if (id != that.id) return false;
-        if (limit != that.limit) return false;
+        if (limitMin != that.limitMin) return false;
+        if (limitMax != that.limitMax) return false;
         if (term != that.term) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
-        if (interestRate != null ? !interestRate.equals(that.interestRate) : that.interestRate != null) return false;
+        if (interestRateMin != null ? !interestRateMin.equals(that.interestRateMin) : that.interestRateMin != null) return false;
+        if (interestRateMax != null ? !interestRateMax.equals(that.interestRateMax) : that.interestRateMax != null) return false;
         if (requirements != null ? !requirements.equals(that.requirements) : that.requirements != null) return false;
         if (material != null ? !material.equals(that.material) : that.material != null) return false;
         if (logo != null ? !logo.equals(that.logo) : that.logo != null) return false;
@@ -183,9 +232,11 @@ public class Org {
     public int hashCode() {
         int result = (int) (id ^ (id >>> 32));
         result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (int) (limit ^ (limit >>> 32));
+        result = 31 * result + (int) (limitMin ^ (limitMin >>> 32));
+        result = 31 * result + (int) (limitMax ^ (limitMax >>> 32));
         result = 31 * result + (int) (term ^ (term >>> 32));
-        result = 31 * result + (interestRate != null ? interestRate.hashCode() : 0);
+        result = 31 * result + (interestRateMin != null ? interestRateMin.hashCode() : 0);
+        result = 31 * result + (interestRateMax != null ? interestRateMax.hashCode() : 0);
         result = 31 * result + (requirements != null ? requirements.hashCode() : 0);
         result = 31 * result + (material != null ? material.hashCode() : 0);
         result = 31 * result + (logo != null ? logo.hashCode() : 0);

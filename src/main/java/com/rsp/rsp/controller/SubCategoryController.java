@@ -50,7 +50,7 @@ public class SubCategoryController {
             subCategory = subCategoryService.findById(id);
         }else{
             subCategory = new SubCategory();
-            subCategory.setId(0);
+            subCategory.setId(0L);
             subCategory.setCategoryId(0L);
         }
         model.addAttribute("subCategory",subCategory);

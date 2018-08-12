@@ -18,7 +18,7 @@ public class HomeController {
 
     @RequestMapping("dashboard.html")
     public String dashboard(){
-        return "dashboard-backup.html";
+        return "dashboard.html";
     }
     @RequestMapping("charts.html")
     public String charts(){

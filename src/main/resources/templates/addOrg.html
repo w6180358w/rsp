@@ -18,7 +18,7 @@
 	<script type="text/javascript" src="../js/jquery-ui.js"></script>
 	<script type="text/javascript" src="../plugins/layer-v3.1.1/layer/layer.js"></script>
 	<script type="text/javascript" src="../plugins/jquery.validate.js"></script>
-
+	<script type="text/javascript" src="../plugins/jquery.filestyle.js"></script>
 	<script type="text/javascript" src="../js/orgEdit.js"></script>
 
 <title>MWS Admin - Form Layouts</title>
@@ -45,9 +45,10 @@
 							</div>
 							<div class="mws-form-row">
 								<label>额度 <span style="color: #b90a0f">*</span></label>
-								<div class="mws-form-item large">
-									<input type="text" name="limit" class="mws-textinput" th:value="${org.limit}"/>
-								</div>
+								<input type="text" name="limitMin" class="mws-textinput" th:value="${org.limitMin}"/>
+								-
+								<input type="text" name="limitMax" class="mws-textinput" th:value="${org.limitMax}"/>
+								(万)
 							</div>
 							<div class="mws-form-row">
 								<label>期限 <span style="color: #b90a0f">*</span></label>
@@ -57,32 +58,33 @@
 							</div>
 							<div class="mws-form-row">
 								<label>利率</label>
-								<div class="mws-form-item large">
-									<input type="text" name="interestRate" class="mws-textinput" th:value="${org.interestRate}"/>
-								</div>
+								<input type="text" name="interestRateMin" class="mws-textinput" th:value="${org.interestRateMin}"/>&#37;
+								-
+								<input type="text" name="interestRateMax" class="mws-textinput" th:value="${org.interestRateMax}"/>&#37;
 							</div>
 							<div class="mws-form-row">
 								<label>申请条件</label>
 								<div class="mws-form-item large">
-									<input type="text" name="requirements" class="mws-textinput" th:value="${org.requirements}"/>
+									<textarea cols="auto" rows="auto" name="requirements" th:text="${org.requirements}"></textarea>
 								</div>
 							</div>
 							<div class="mws-form-row">
 								<label>申请材料</label>
 								<div class="mws-form-item large">
-									<input type="text" name="material" class="mws-textinput" th:value="${org.material}"/>
+									<textarea cols="auto" rows="auto" name="material" th:text="${org.material}"></textarea>
 								</div>
 							</div>
 							<div class="mws-form-row">
 								<label>logo</label>
 								<div class="mws-form-item large">
-									<input type="text" name="logo" class="mws-textinput" th:value="${org.logo}"/>
+									<img src="example/cyan_koala.jpg" alt="" />
+									<input type="file" name="logo" class="mws-textinput" th:value="${org.logo}"/>
 								</div>
 							</div>
 							<div class="mws-form-row">
 								<label>描述</label>
 								<div class="mws-form-item large">
-									<input type="text" name="desc" class="mws-textinput" th:value="${org.desc}"/>
+									<textarea cols="auto" rows="auto" name="desc" th:text="${org.desc}"></textarea>
 								</div>
 							</div>
 							<div class="mws-form-row">
@@ -100,7 +102,7 @@
 							<div class="mws-form-row">
 								<label>优势</label>
 								<div class="mws-form-item large">
-									<input type="text" name="strengths" class="mws-textinput" th:value="${org.strengths}"/>
+									<textarea cols="auto" rows="auto" name="strengths" th:text="${org.strengths}"></textarea>
 								</div>
 							</div>
 						</div>

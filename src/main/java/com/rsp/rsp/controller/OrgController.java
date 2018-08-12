@@ -7,8 +7,12 @@ import com.rsp.rsp.service.OrgService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 /**
@@ -32,7 +36,23 @@ public class OrgController {
                               @RequestParam(value ="pageSize",defaultValue ="10")Integer size,
                               OrgQuery orgQuery,Integer draw){
         Page<Org> pageInfo = orgService.findOrgCriteria(start,size,orgQuery);
-        return new R(pageInfo.getContent(), (int) pageInfo.getTotalElements(), (int) pageInfo.getTotalElements(),draw,"");
+        List<Org> list = pageInfo.getContent().stream()
+                .peek(x->{
+                    x.setLimitString(x.getLimitMin()+"-"+x.getLimitMax()+"万");
+                    String rateStr;
+                    if(StringUtils.isEmpty(x.getInterestRateMin()) && StringUtils.isEmpty(x.getInterestRateMax())){
+                        //都没值
+                        rateStr = "";
+                    }else if(StringUtils.hasText(x.getInterestRateMin()) && StringUtils.hasText(x.getInterestRateMax())){
+                        //都有值
+                        rateStr = x.getInterestRateMin()+"%-"+x.getInterestRateMax()+"%";
+                    }else {
+                        //有一个值
+                        rateStr = StringUtils.hasText(x.getInterestRateMin())?x.getInterestRateMin()+"%":x.getInterestRateMax()+"%";
+                    }
+                    x.setInterestRateString(rateStr);
+                }).collect(Collectors.toList());
+        return new R(list, (int) pageInfo.getTotalElements(), (int) pageInfo.getTotalElements(),draw,"");
     }
 
     @RequestMapping("add")
@@ -42,7 +62,7 @@ public class OrgController {
             org = orgService.findById(id);
         }else{
             org = new Org();
-            org.setId(0);
+            org.setId(0L);
         }
         model.addAttribute("org",org);
         return new ModelAndView("addOrg.html");

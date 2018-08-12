@@ -74,12 +74,14 @@ public class OrgServiceImpl implements OrgService {
     public void update(Org newOrg) {
         Org org = orgRepository.findById(newOrg.getId());
         org.setName(newOrg.getName());
-        org.setLimit(newOrg.getLimit());
+        org.setLimitMin(newOrg.getLimitMin());
+        org.setLimitMax(newOrg.getLimitMax());
         org.setTerm(newOrg.getTerm());
         org.setLogo(newOrg.getLogo());
         org.setContacts(newOrg.getContacts());
         org.setDesc(newOrg.getDesc());
-        org.setInterestRate(newOrg.getInterestRate());
+        org.setInterestRateMin(newOrg.getInterestRateMin());
+        org.setInterestRateMax(newOrg.getInterestRateMax());
         org.setMaterial(newOrg.getMaterial());
         org.setPhone(newOrg.getPhone());
         org.setRequirements(newOrg.getRequirements());

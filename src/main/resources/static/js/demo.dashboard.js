@@ -64,9 +64,9 @@ function loadOrg() {
         "columns": [
             { "data": "id","orderable": false,"title":"ID","width":"40%"},
             { "data": "name","orderable": false,"title":"名称","width":"40%"},
-            { "data": "limit","orderable": false,"title":"额度","width":"40%"},
+            { "data": "limitString","orderable": false,"title":"额度","width":"40%"},
             { "data": "term","orderable": false,"title":"期限","width":"40%"},
-            { "data": "interestRate","orderable": false,"title":"利率","width":"40%"},
+            { "data": "interestRateString","orderable": false,"title":"利率","width":"40%"},
             { "data": "requirements","orderable": false,"title":"申请条件","width":"40%"},
             { "data": "material","orderable": false,"title":"申请材料","width":"40%"},
             { "data": "logo","orderable": false,"title":"logo","width":"40%"},

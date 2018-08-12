@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "t_sub_category", schema = "rsp", catalog = "")
 public class SubCategory {
-    private long id;
+    private Long id;
     /**名称*/
     private String name;
     /**大类id*/
@@ -22,11 +22,11 @@ public class SubCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -42,7 +42,7 @@ public class SubCategory {
 
     @Basic
     @Column(name = "category_id")
-    public long getCategoryId() {
+    public Long getCategoryId() {
         return categoryId;
     }
 

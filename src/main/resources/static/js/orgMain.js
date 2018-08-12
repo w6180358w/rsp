@@ -5,6 +5,7 @@ function loadOrg() {
     $(".mws-datatable-fn").DataTable({
         "serverSide": true,
         "orderMulti": false,
+        bAutoWidth:false,
         // searching:false,
         "ajax": {
             "url": "org/queryAll",
@@ -47,22 +48,27 @@ function loadOrg() {
         },
         "columns": [
             // { "data": "id","orderable": false,"title":"ID","width":"40%"},
-            { "data": "name","orderable": false,"title":"名称","width":"40%"},
-            { "data": "limit","orderable": false,"title":"额度","width":"40%"},
-            { "data": "term","orderable": false,"title":"期限","width":"40%"},
-            { "data": "interestRate","orderable": false,"title":"利率","width":"40%"},
-            { "data": "requirements","orderable": false,"title":"申请条件","width":"40%"},
-            { "data": "material","orderable": false,"title":"申请材料","width":"40%"},
-            { "data": "logo","orderable": false,"title":"logo","width":"40%"},
-            { "data": "desc","orderable": false,"title":"描述","width":"40%"},
-            { "data": "contacts","orderable": false,"title":"联系人","width":"40%"},
-            { "data": "phone","orderable": false,"title":"联系电话","width":"40%"},
-            { "data": "strengths","orderable": false,"title":"优势","width":"40%"},
-            { "data": "id","orderable": false,"title":"操作","width":"20%",
+            { "data": "name","orderable": false,"title":"名称","width":"40px"},
+            { "data": "limitString","orderable": false,"title":"额度","width":"40px"},
+            { "data": "term","orderable": false,"title":"期限","width":"40px"},
+            { "data": "interestRateString","orderable": false,"title":"利率","width":"40px"},
+            // { "data": "requirements","orderable": false,"title":"申请条件","width":"40%"},
+            // { "data": "material","orderable": false,"title":"申请材料","width":"40%"},
+            // { "data": "logo","orderable": false,"title":"logo","width":"40px"},
+            // { "data": "desc","orderable": false,"title":"描述","width":"40%"},
+            { "data": "contacts","orderable": false,"title":"联系人","width":"40px"},
+            { "data": "phone","orderable": false,"title":"联系电话","width":"40px"},
+            { "data": "strengths","orderable": false,"title":"优势","width":"40px",
+                "render": function(data, type, record,index) {
+                    return "<span title='"+data+"'>"+(data.length>10?(data.substr(0,10)+"..."):data)+"</span>";
+                }
+            },
+            { "data": "id","orderable": false,"title":"操作","width":"20px",
                 "render": function(data, type, record,index) {
                     return "<button onclick='editOrg("+data+")'>修改</button>" +
                         "<button onclick='deleteOrg("+data+")'>删除</button>";
-                } }
+                }
+            }
         ]
     });
 }

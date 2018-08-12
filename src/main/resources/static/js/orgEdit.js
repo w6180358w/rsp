@@ -28,6 +28,13 @@ $(function () {
             }
         },
     });
+    if($.fn.filestyle) {
+        $("input[type='file']").filestyle({
+            imagewidth: 78,
+            imageHeight: 28
+        });
+        $("input.file").attr("readonly", true);
+    }
 })
 
 function submitOrgForm() {
