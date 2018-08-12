@@ -79,8 +79,8 @@ $(function(){
 		}
 		
 		var params = getColParams();
-		form.append($("<input name='keys'/>").val(params.keys));
-		form.append($("<input name='type'/>").val(type));
+		form.append($("<input name='keys' hidden/>").val(params.keys));
+		form.append($("<input name='type' hidden/>").val(type));
 		form.submit();
 	});
 	
