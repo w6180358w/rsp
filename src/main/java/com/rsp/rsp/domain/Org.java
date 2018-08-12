@@ -250,6 +250,8 @@ public class Org {
     public JSONObject toJSON(){
     	JSONObject json = new JSONObject();
 		json.put("name", this.getName());
+		json.put("orgId", this.getId());
+		json.put("id", this.getId());
     	return json;
     }
 }
