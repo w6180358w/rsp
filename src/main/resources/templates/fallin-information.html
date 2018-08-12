@@ -1,0 +1,156 @@
+
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>填写资料页面</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" th:href="@{/css/common.css}" >
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" >
+<script type="text/javascript" th:src="@{/js/jquery-1.7.1.min.js}" ></script>
+<script type="text/javascript" th:src="@{/plugins/jquery.validate.js}" ></script>
+<script type="text/javascript" th:src="@{/plugins/layer-v3.1.1/layer/layer.js}"></script>
+<script type="text/javascript" th:src="@{/js/jquery-ui.js}" ></script>
+<script type="text/javascript" th:src="@{/js/mws.js}" ></script>
+</head>
+
+<body>
+<!--项目详情-->
+<div class="projectd_f">
+	<div class="projectd_f_in">
+    	<a th:href="@{/phone}" class="fa fa-chevron-left"></a>
+        填写资料
+    </div>
+</div>
+<!--2占固定定位的块-->
+<div class="occupy_f2"></div>
+<form id="paramForm" action="/list" method="post">
+<!--内容-->
+<div class="fallin-content" id="content">
+	<!-- 大类 -->
+	<div class="fallin-group">
+		<div class="group-cont">
+			<div class="cont-form">
+				<label>申请额度:</label>
+				<input type="number" name="x" id="sqed" value="">
+			</div>
+			<div class="cont-form">
+				<label>无抵押还款:</label>
+				<input type="number" name="y" id="wdyhk" value="">
+			</div>
+			<div class="cont-form">
+				<label>信用卡负债:</label>
+				<input type="number" name="z" id="xykfz" value="">
+			</div>
+		</div>
+	</div>
+
+</div>
+</form>
+<!--立即投标-->
+<a href="javascript:void(0)" class="lijitoubiaocx_f">提交</a>
+</body>
+
+<script th:inline="javascript">
+$(function(){
+	var error = [[${error}]];
+	if(error!=null && error!=""){
+		layer.msg(error);
+	}
+	
+	var form = $("#paramForm");
+	$("#paramForm").validate();
+	$("a.lijitoubiaocx_f").on("click",function(){
+		var sqed = $("#sqed").val();
+		var wdyhk = $("#wdyhk").val();
+		var xykfz = $("#xykfz").val();
+		if(sqed==null || sqed==""){
+			layer.msg("请输入申请额度!");
+			return;
+		}
+		if(wdyhk==null || wdyhk==""){
+			layer.msg("请输入无抵押还款!");
+			return;
+		}
+		if(xykfz==null || xykfz==""){
+			layer.msg("请输入信用卡负债!");
+			return;
+		}
+		
+		var params = getColParams();
+		form.append($("<input name='keys'/>").val(params.keys));
+		form.append($("<input name='type'/>").val(type));
+		form.submit();
+	});
+	
+	
+    var type = [[${type}]];
+    
+    if(type!=null && type!=""){
+    	$.get("/filter/columns/"+type,function(data){
+			if(data.success){
+				var catas = data.data;
+				var content = $("#content");
+				catas.forEach(function(cata){
+					var html = "<div class='fallin-group'>"+
+						"<div class='group-title'>"+
+							"<span>"+cata.name+"</span>"+
+							"<div class='toggle-more'>"+
+									"<span class='toggle-text'>收起</span>"+
+									"<i class='fa fa-angle-up toggle-icon'></i>"+
+							"</div>"+
+						"</div>"+
+						"<div class='group-cont'>";
+					var subList = cata.subList;
+					subList.forEach(function(sub){
+						html += "<div class='cont-form'>"+
+									"<label>"+sub.name+":</label>"+
+									"<input type='number' name='"+sub.paramKey+"' value=''>"+
+								"</div>";
+					})
+					html += "</div>";	
+					content.append($(html));
+				});
+				onEvent();
+			}
+		});
+    }
+    
+    function onEvent(){
+    	// 展开收缩
+        $(".group-title .toggle-more").click(function(e) {
+         $(this).parents('.fallin-group').find(".group-cont").stop().slideToggle(500);
+         $(this).find(".toggle-icon").stop().toggleClass("active");
+         if ($(this).find(".toggle-text").text() == "收起") {
+                $(this).find(".toggle-text").text("更多");
+            }
+         else {
+                $(this).find(".toggle-text").text("收起");
+            }
+        });
+    }
+    
+    function getColParams(){
+		var result = [];
+		var keys = [];
+		var tds = form.find("input[type=number]");
+		for(var i=0;i<tds.length;i++){
+			var td = tds[i];
+			var value = $(td).val();
+			if(value==null || value==""){
+				value = 0;
+			}
+			result.push({
+				key:$(td).prop("name"),
+				value:parseInt(value)
+			});
+			
+			keys.push($(td).prop("name")+"_rsp_"+value);
+		}
+		return {param:result,keys:keys};
+	}
+})
+
+</script>
+</html>

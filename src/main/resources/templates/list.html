@@ -1,0 +1,165 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>index</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" th:href="@{/css/common.css}" >
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" >
+<!--banner-->
+
+<script type="text/javascript" th:src="@{/js/jquery-1.7.1.min.js}" ></script>
+</head>
+
+<body>
+<!--top-->
+<div class="projectd_f">
+	<div class="projectd_f_in">
+    	<a th:href="@{'/fallin-information/'+${type}}" href="" class="fa fa-chevron-left"></a>
+        匹配结果
+    </div>
+</div>
+
+<!--2占固定定位的块-->
+<div class="occupy_f2"></div>
+
+
+<div th:each="org:${orgs}">
+	<!--推广标标题-->
+	<div class="novice_f">
+		<div class="novice_f_in">
+	    	<!-- <img src="images/tuigpng.png"/> -->
+	        <h2 th:text="${org.name}"></h2>
+	    </div>
+	</div>
+	<!--推广标-->
+	<div class="novice_zs_f">
+		<div class="novice_zs_f_in">
+	    <!--left-->
+	        <div class="novice_zs_f_in_l" style="background:url(images/013b1ec6df24.png) no-repeat center; background-size:cover;">
+	        	<!--top-->
+	            <div class="novice_zs_f_in_l_top" th:switch="${type}">
+					<img src="images/biao5.png"/> 
+	            	<span th:case="'bd'">保单</span>
+	            	<span th:case="'gjj'">公积金</span>
+	            	<span th:case="'ajf'">按揭房</span>
+	            </div>
+	            <!--bottom-->
+	            <div class="novice_zs_f_in_l_bottom">
+	            	<ul>
+	                	<li class="mark1_f" style="width:33%">
+	                    	<em>
+		                    	<span th:text="${org.interestRateMin}"></span>
+		                    	<span th:text=" ${(org.interestRateMax == '' || org.interestRateMax==null)? '' : ('-'+org.interestRateMax)}"></span>
+		                    	%
+	                    	</em>
+	                        <p>利率</p>
+	                    </li>
+	                    <li class="mark2_f" style="width:33%">
+	                    	<em><span th:text="${org.term}"></span><font>个月</font></em>
+	                        <p>期限</p>
+	                    </li>
+	                    <li class="mark3_f" style="width:33%">
+	                    	<em>
+	                    		<font>￥</font>
+	                    		<span th:text="${org.limitMin}"></span>
+	                    		<span th:text=" ${(org.limitMax == '' || org.limitMax==null)? '' : ('-'+org.limitMax)}"></span>
+	                    		<font>万</font>
+	                    	</em>
+	                        <p>额度</p>
+	                    </li>
+	                </ul>
+	            </div>
+	
+				<div class="notice-info">
+					<p th:text="${org.strengths}"></p>
+				</div>
+	        </div>
+	    <!--right-->
+	    	<a th:href="@{'/details/'+${org.id}}">
+					<div class="novice_zs_f_in_r">
+	        	<span>查看详情</span>
+	        </div>
+				</a>
+	    </div>
+	</div>
+</div>
+<!--新手专区标题-->
+<!-- <div class="novice_f">
+	<div class="novice_f_in">
+    	<img src="images/cainiao.png"/>
+        <h2>鼎方—物业好贷</h2>
+    </div>
+</div>
+新手专享
+<div class="novice_zs_f">
+	<div class="novice_zs_f_in">
+    left
+        <div class="novice_zs_f_in_l">
+        	top
+            <div class="novice_zs_f_in_l_top">
+            	<img src="images/biao5.png"/>
+              <span>本地按揭房</span>
+            </div>
+            bottom
+            <div class="novice_zs_f_in_l_bottom">
+            	<ul>
+                	<li class="mark1_f">
+                    	<em>1.9%</em>
+                        <p>年利率</p>
+                    </li>
+                    <li class="mark2_f">
+                    	<em>6<font>个月</font></em>
+                        <p>期限</p>
+                    </li>
+                    <li class="mark3_f">
+                    	<em><font>￥</font>20.10<font>万</font></em>
+                        <p>投资金额</p>
+                    </li>
+                    <li class="mark4_f">
+                    	<span>
+                        	<img src="images/redbl.png"/ style="height:50%;">
+                            <p>50%</p>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+
+						<div class="notice-info">
+							<p>易通过、审核快、额度大</p>
+						</div>
+        </div>
+    right
+    	<a >
+				<div class="novice_zs_f_in_r">
+        	<span>查看详情</span>
+        </div>
+			</a>
+    </div>
+</div> -->
+
+
+<!--底部导航栏-->
+<!-- <div class="footerdhl_f">
+	<a href="index.html">
+    	<b class="movek_f"><img src="images/zhuye.png"/></b>
+        <p>首页</p>
+    </a>
+    <a href="Investment list.html">
+    	<b><img src="images/touzi.png"/></b>
+        <p>投资</p>
+    </a>
+    <a href="user.html">
+    	<b><img src="images/grzx.png"/></b>
+        <p>账户</p>
+    </a>
+    <a href="more.html">
+    	<b><img src="images/mores.png"/></b>
+        <p>更多</p>
+    </a>
+</div> -->
+</body>
+
+
+</html>
