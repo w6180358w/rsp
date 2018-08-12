@@ -11,7 +11,7 @@ $(function () {
         },
         messages : {
             type : {
-                required : icon + "请输入类型"
+                required : icon + "请选择类型"
             },
             name : {
                 required : icon + "请输入名称"

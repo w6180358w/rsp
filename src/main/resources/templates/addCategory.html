@@ -47,7 +47,12 @@
 							<div class="mws-form-row">
 								<label>类型 <span style="color: #b90a0f">*</span></label>
 								<div class="mws-form-item large">
-									<input type="text" id="type" name="type" class="mws-textinput" th:value="${category.type}" required/>
+									<select name="type" th:field="*{category.type}">
+										<option value="" style="font-color: #b6b6b6">请选择</option>
+										<option value="ajf">按揭房</option>
+										<option value="bd">保单</option>
+										<option value="gjj">公积金</option>
+									</select>
 								</div>
 							</div>
 						</div>
