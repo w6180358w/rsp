@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -80,15 +81,7 @@ public class OrgController {
             String classpath = ResourceUtils.getURL("classpath:").getPath();
             //文件名称
             String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-            String temp = fileName.substring(fileName.lastIndexOf("."));
-            // 设置存放图片文件的路径 +
-            String path = classpath + conif.getLocalPath() +StringUtils.cleanPath(org.getName())+temp;
-            File logo = new File(classpath + conif.getLocalPath());
-            if(!logo.exists()){
-                logo.mkdirs();
-            }
-            file.transferTo(new File(path));
-            org.setLogo("../"+path.substring(path.lastIndexOf("logo")));
+            setLogo(file,org,classpath,fileName);
             orgService.save(org);
             return "success";
         }catch (Exception e){
@@ -102,6 +95,16 @@ public class OrgController {
             String classpath = ResourceUtils.getURL("classpath:").getPath();
             //文件名称
             String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+            setLogo(file, org, classpath,fileName);
+            orgService.update(org);
+            return "success";
+        }catch (Exception e){
+            return "error";
+        }
+    }
+
+    private void setLogo(MultipartFile file, Org org, String classpath, String fileName) throws IOException {
+        if(StringUtils.hasText(fileName)){
             String temp = fileName.substring(fileName.lastIndexOf("."));
             // 设置存放图片文件的路径 +
             String path = classpath + conif.getLocalPath() +StringUtils.cleanPath(org.getName())+temp;
@@ -111,13 +114,8 @@ public class OrgController {
             }
             file.transferTo(new File(path));
             org.setLogo("../"+path.substring(path.lastIndexOf("logo")));
-            orgService.update(org);
-            return "success";
-        }catch (Exception e){
-            return "error";
         }
     }
-
     @PostMapping("/delete")
     public String delete(@RequestParam(value ="id" )Long id){
         try {
