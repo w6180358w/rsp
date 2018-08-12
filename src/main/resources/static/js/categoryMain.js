@@ -49,12 +49,27 @@ function loadCategory() {
         "columns": [
             // { "data": "id","orderable": false,"title":"ID","width":"40%"},
             { "data": "name","orderable": false,"title":"名称","width":"40%"},
-            { "data": "type","orderable": false,"title":"类型","width":"40%"},
+            { "data": "type","orderable": false,"title":"类型","width":"40%",
+                "render": function(data, type, record,index) {
+                    var result;
+                    if(data==="ajf"){
+                        result = "按揭房"
+                    }else if(data === "bd"){
+                        result = "保单"
+                    }else if (data === "gjj"){
+                        result = "公积金"
+                    }else {
+                        result = "";
+                    }
+                    return result;
+                }
+            },
             { "data": "id","orderable": false,"title":"操作","width":"20%",
                 "render": function(data, type, record,index) {
                     return "<button onclick='editCategory("+data+")'>修改</button>" +
                         "<button onclick='deleteCategory("+data+")'>删除</button>";
-                } }
+                }
+            }
         ]
     });
 }
