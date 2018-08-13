@@ -24,7 +24,10 @@ $(function () {
 	function loadFormula(type) {
 		$.get("filter/columns/"+type,function(data){
 			if(data.success){
-				var columns = [{"data": "name","orderable": false,"width":"100"}];
+				var columns = [{"data": "name","orderable": false,"width":"100",
+                    "render": function(data, type, record,index) {
+                        return "<span title='"+data+"'>"+data+"</span>";
+                    }}];
 				var keys = [];
 				generateTitle(data.data,columns,keys);
 				initTable(columns,keys);

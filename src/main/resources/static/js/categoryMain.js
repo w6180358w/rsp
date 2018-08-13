@@ -47,8 +47,10 @@ function loadCategory() {
             }
         },
         "columns": [
-            // { "data": "id","orderable": false,"title":"ID","width":"40%"},
-            { "data": "name","orderable": false,"title":"名称","width":"40%"},
+            { "data": "name","orderable": false,"title":"名称","width":"40%",
+                "render": function(data, type, record,index) {
+                    return "<span title='"+data+"'>"+data+"</span>";
+                }},
             { "data": "type","orderable": false,"title":"类型","width":"40%",
                 "render": function(data, type, record,index) {
                     var result;

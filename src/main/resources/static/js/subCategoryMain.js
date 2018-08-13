@@ -45,10 +45,18 @@ function loadSubCategory() {
             }
         },
         "columns": [
-            // { "data": "id","orderable": false,"title":"ID","width":"40%"},
-            { "data": "name","orderable": false,"title":"名称","width":"40%"},
-            { "data": "categoryName","orderable": false,"title":"大类名","width":"40%"},
-            { "data": "paramKey","orderable": false,"title":"paramKey","width":"40%"},
+            { "data": "name","orderable": false,"title":"名称","width":"40%",
+                "render": function(data, type, record,index) {
+                    return "<span title='"+data+"'>"+data+"</span>";
+                }},
+            { "data": "categoryName","orderable": false,"title":"大类名","width":"40%",
+                "render": function(data, type, record,index) {
+                    return "<span title='"+data+"'>"+data+"</span>";
+                }},
+            { "data": "paramKey","orderable": false,"title":"paramKey","width":"40%",
+                "render": function(data, type, record,index) {
+                    return "<span title='"+data+"'>"+data+"</span>";
+                }},
             { "data": "id","orderable": false,"title":"操作","width":"20%",
                 "render": function(data, type, record,index) {
                     return "<button onclick='editSubCategory("+data+")'>修改</button>" +
