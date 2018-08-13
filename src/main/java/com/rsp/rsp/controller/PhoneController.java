@@ -62,6 +62,7 @@ public class PhoneController {
 			model.addAttribute("orgs",list);
 			model.addAttribute("type",bean.getType());
 		} catch (Exception e) {
+			e.printStackTrace();
 			model.addAttribute("type",bean.getType());
 			model.addAttribute("error",e.getMessage());
 			return new ModelAndView("fallin-information.html");

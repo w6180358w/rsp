@@ -1,7 +1,7 @@
 /*top*/
 .top_f{width:100%;height:45px;background:#3db1fa;overflow:hidden;position: relative;}
 .top_f .fa-chevron-left{color: #fff;font-size: 20px;height:45px;line-height: 45px;position: absolute;top: 0;left: 0;padding: 0 14px;}
-.top_f_in{width:94%;height:28px;margin:8px auto;overflow:hidden;}
+.top_f_in{width:94%;height:28px;line-height: 28px;margin:8px auto;overflow:hidden;font-size: 18px;text-align: center;color: #fff;}
 .login_f{font-size:16px;float:left;line-height:28px;color:#fff;height:28px;display:block}
 .register_f{font-size:16px;float:right;line-height:28px;color:#fff;height:28px;display:block}
 .top_f_in img{display:block;width:93px;height:28px; margin:0 auto}
@@ -26,9 +26,9 @@
 .novice_f{width:100%;height:20px;overflow:hidden;margin-top:15px;}
 .novice_f_in{width:94%;height:20px;margin:0 auto;overflow:hidden;}
 .novice_f_in img{display:block;width:22px;height:20px;float:left; margin-right:6px;}
-.novice_f_in h2{ font-size:14px; font-weight:100;line-height:19px;height:20px;color:#333;float:left;}
+.novice_f_in h2{ font-size:15px; font-weight:100;line-height:19px;height:20px;color:#333;float:left;padding: 0 6px;}
 /*新手专享*/
-.novice_zs_f{ width:100%;overflow:hidden;margin-top:12px;}
+.novice_zs_f{ width:100%;overflow:hidden;margin-top:10px;}
 .novice_zs_f_in{ width:94%;height:146px;margin:0 auto;overflow:hidden;background:#fff;border-radius:6px;}
 .novice_zs_f_in_l{ width:88%;height:146px;float:left;background:#fff;}
 .novice_zs_f_in_r{ width:12%;height:146px;float:left;}
@@ -72,7 +72,7 @@
 /*内容*/
 .neirbg_f{width:100%;height:142px;background:#fff;}
 .neirbg_f_in{width:94%;height:142px;overflow:hidden; margin:0 auto;}
-.neirbg_f_in h2{display:block; width:100%;height:36px; font-weight:100; text-align:center; color:#333; font-size:20px; line-height:36px; margin-top:12px; margin-bottom:20px;}
+.neirbg_f_in h2{display:block; width:100%;height:36px; font-weight:100; text-align:center; color:#333; font-size:20px; line-height:36px; margin-top:12px; margin-bottom:20px;font-weight: bolder;}
 .twobf_f{width:100%;height:60px;overflow:hidden;}
 .twobf_f ul{width:100%;height:60px;overflow:hidden;}
 .twobf_f ul li{ width:33.3%;height:60px;float:left;}
@@ -95,6 +95,7 @@
 .sxdymy_f_in{width:94%;height:auto;overflow:hidden;margin:0 auto;}
 .sxdymy_f_in ul{width:100%;height:auto;overflow:hidden;}
 .sxdymy_f_in ul li{width:100%;height:42px; border-bottom:1px solid #dcdcdc;overflow:hidden;}
+.sxdymy_f_in ul li:last-child{border-bottom:none;}
 .sxdymy_f_in ul li span{display:block; float:left; height:42px;line-height:42px;font-size:14px;color:#333;}
 .sxdymy_f_in ul li i{display:block;float:right;height:42px;line-height:42px;font-size:14px;color:#999;font-style:normal;}
 .sxdymy_f_in ul li img{display:block; width:20px;height:20px;float:right; margin-top:10px;}
@@ -109,9 +110,9 @@
 .xsiqy_f_in{width:90%;height:auto;overflow:hidden;margin:0 auto; margin-top:8px;}
 .xsiqy_f_in_1{width:100%;height:auto;overflow:hidden;}
 .wnzims_f{width:100%;height:auto;overflow:hidden;}
-.wnzims_f dl{width:100%;height:auto; overflow:hidden;margin-bottom: 10px;border-bottom: 1px dashed #999;padding-bottom: 10px;}
-.wnzims_f dl dt{width:100%;height:32px;line-height:32px; font-size:16px;color:#333;font-weight:bold;text-align: center;margin-bottom: 6px;}
-.wnzims_f dl dd{width:100%;line-height:24px;font-size:14px;color:#888;margin-bottom:4px;}
+.wnzims_f dl{width:100%;height:auto; overflow:hidden;margin-bottom: 12px;border-bottom: 1px dashed #ddd;padding-bottom: 8px;}
+.wnzims_f dl dt{width:100%;height:32px;line-height:32px; font-size:16px;color:#333;text-align: center;margin-bottom: 6px;}
+.wnzims_f dl dd{width:100%;line-height:24px;font-size:14px;color:#888;}
 .tuatua_f{width:100%;height:auto;overflow:hidden;}
 .tuatua_f ul li img{display:block; width:138px;height:104px;float:left; margin:6px;overflow:hidden;}
 /*图片的适配*/
@@ -223,7 +224,7 @@ html,body {
 	font-size: 13px;
 }
 .fallin-group .group-cont {
-	padding: 20px;
+	padding: 20px 14px;
 }
 .cont-form {
 	overflow: hidden;
@@ -233,26 +234,27 @@ html,body {
 	margin-bottom: 0;
 }
 .cont-form label{
-	width: 25%;
-	height: 32px;
-	line-height: 32px;
+	width: 32%;
+	padding-top: 6px;
+	line-height: 16px;
 	text-align: right;
 	float: left;
+	font-size: 14px;
 }
 .cont-form label em{
 	margin-right: 5px;
 	vertical-align: middle;
 }
 .cont-form input{
-	width: 58%;
-	height: 32px;
-	line-height: 32px;
-	padding: 0 10px;
+	width: 50%;
+	height: 18px;
+	line-height: 18px;
+	padding: 6px 10px;
 	float: left;
 	background: #fff;
 	border: 1px solid #ddd;
 	outline: none;
-	margin-left: 5%;
+	margin-left: 10px;
 	border-radius: 5px;
 }
 .group-title .toggle-more .toggle-icon {

@@ -1495,10 +1495,10 @@ html,body {
 	border: 1px solid #ddd;
 	border-radius: 10px;
 	text-align: center;
-  background: #fff;
-  overflow: hidden;
-  margin-top: 30px;
-	font-size: 28px;
+    background: #fff;
+    overflow: hidden;
+    margin-top: 30px;
+	font-size: 26px;
 	color: #101010;
 	position: relative;
 }
@@ -1515,7 +1515,7 @@ html,body {
 }
 .home-main .flex-container .flex-item .item-box {
 	width: 100px;
-	height: 140px;
+	height: 104px;
 	position: absolute;
 	top: 0;
 	bottom: 0;
@@ -1534,5 +1534,5 @@ html,body {
 }
 .flex-item-img img {
 	display: inline-block;
-	margin-bottom: 10px;
+	margin-bottom: 20px;
 }
