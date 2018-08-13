@@ -4,6 +4,7 @@ table.mws-table
 	margin:0;
 	border:0;
 	border-collapse:collapse;
+	table-layout:fixed;
 }
 
 .mws-table thead tr
