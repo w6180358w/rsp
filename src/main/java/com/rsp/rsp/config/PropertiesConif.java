@@ -18,11 +18,25 @@ public class PropertiesConif {
     @Value("${upload.picturePath}")
     private String localPath;
 
+    @Value("${login.username}")
+    private String username;
+
+    @Value("${login.password}")
+    private String password;
+
     public String getPro() {
         return pro;
     }
 
     public String getLocalPath() {
         return localPath;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
     }
 }
