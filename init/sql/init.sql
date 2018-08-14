@@ -14,7 +14,7 @@ create table t_formula
 	id bigint auto_increment
 		primary key,
 	org_id bigint not null,
-	sub_category_id bigint not null,
+	sub_category_key varchar(255) not null,
 	formula varchar(255) not null,
 	constraint t_formula_id_uindex
 		unique (id)

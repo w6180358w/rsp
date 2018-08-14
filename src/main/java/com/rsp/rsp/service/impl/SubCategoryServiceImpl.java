@@ -1,5 +1,6 @@
 package com.rsp.rsp.service.impl;
 
+import com.rsp.rsp.dao.FormulaRepository;
 import com.rsp.rsp.dao.SubCategoryRepository;
 import com.rsp.rsp.domain.SubCategory;
 import com.rsp.rsp.domain.query.SubCategoryQuery;
@@ -24,6 +25,8 @@ public class SubCategoryServiceImpl implements SubCategoryService {
 
     @Autowired
     private SubCategoryRepository subCategoryRepository;
+    @Autowired
+    private FormulaRepository formulaRepository;
 
     /**
      * 查询全部
@@ -67,8 +70,8 @@ public class SubCategoryServiceImpl implements SubCategoryService {
     }
 
     @Override
-    public void save(SubCategory subCategory) {
-        subCategoryRepository.save(subCategory);
+    public SubCategory save(SubCategory subCategory) {
+        return subCategoryRepository.save(subCategory);
     }
 
     @Override
@@ -80,8 +83,17 @@ public class SubCategoryServiceImpl implements SubCategoryService {
         subCategoryRepository.save(subCategory);
     }
 
+    /**
+     * 删除小类时同时删除对应的公式
+     * @param id
+     */
     @Override
     public void delete(Long id) {
+        //查询小类
+        SubCategory subCategory = subCategoryRepository.findById(id);
+        //根据key删除公式
+        formulaRepository.deleteBySubCategoryKey(subCategory.getParamKey());
+        //删除小类
         subCategoryRepository.deleteById(id);
     }
 

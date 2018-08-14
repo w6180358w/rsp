@@ -36,7 +36,7 @@ import fr.expression4j.factory.NumberFactory;
 import net.sf.json.JSONObject;
 
 /**
- * 大类
+ * 公式
  * @author sjb
  */
 @Service

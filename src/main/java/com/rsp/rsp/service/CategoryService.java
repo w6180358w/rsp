@@ -43,7 +43,7 @@ public interface CategoryService {
     /**
      * @param category
      */
-    void save(Category category);
+    Category save(Category category);
 
     /**
      * @param category
@@ -51,6 +51,7 @@ public interface CategoryService {
     void update(Category category);
 
     /**
+     * 删除大类时删除小类和小类对应的公式
      * @param id
      */
     void delete(Long id);

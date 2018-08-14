@@ -4,6 +4,8 @@ import com.rsp.rsp.domain.SubCategory;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
+import java.util.List;
+
 /**
  * 小类
  * @author sjb
@@ -21,4 +23,8 @@ public interface SubCategoryRepository extends JpaRepository<SubCategory,String>
      * @param id
      */
     void deleteById(Long id);
+
+    List<SubCategory> findByCategoryId(Long id);
+
+    void deleteByIdIn(List<Long> collect);
 }

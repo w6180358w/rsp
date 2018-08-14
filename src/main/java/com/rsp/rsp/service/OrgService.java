@@ -43,7 +43,7 @@ public interface OrgService {
     /**
      * @param org
      */
-    void save(Org org);
+    Org save(Org org);
 
     /**
      * @param org
@@ -51,6 +51,7 @@ public interface OrgService {
     void update(Org org);
 
     /**
+     * 删除机构同步删除机构对应的公式
      * @param id
      */
     void delete(Long id);

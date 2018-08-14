@@ -3,9 +3,13 @@ package com.rsp.rsp.service.impl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.persistence.criteria.Predicate;
 
+import com.rsp.rsp.dao.FormulaRepository;
+import com.rsp.rsp.dao.SubCategoryRepository;
+import com.rsp.rsp.domain.SubCategory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -28,6 +32,11 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Autowired
     private CategoryRepository categoryRepository;
+    @Autowired
+    private SubCategoryRepository subCategoryRepository;
+    @Autowired
+    private FormulaRepository formulaRepository;
+
     @Override
     public List<Category> findAll() {
         return categoryRepository.findAll();
@@ -52,8 +61,8 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public void save(Category category) {
-        categoryRepository.save(category);
+    public Category save(Category category) {
+        return categoryRepository.save(category);
     }
 
     @Override
@@ -64,8 +73,19 @@ public class CategoryServiceImpl implements CategoryService {
         categoryRepository.save(category);
     }
 
+    /**
+     * 删除大类时删除小类和小类对应的公式
+     * @param id
+     */
     @Override
     public void delete(Long id) {
+        //根据大类查询小类
+        List<SubCategory> subCategories = subCategoryRepository.findByCategoryId(id);
+        //删除小类对应的公式
+        formulaRepository.deleteBySubCategoryKeyIn(subCategories.stream().map(SubCategory::getParamKey).collect(Collectors.toList()));
+        //删除小类
+        subCategoryRepository.deleteByIdIn(subCategories.stream().map(SubCategory::getId).collect(Collectors.toList()));
+        //删除大类
         categoryRepository.deleteById(id);
     }
 

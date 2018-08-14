@@ -1,6 +1,9 @@
 package com.rsp.rsp.service;
 
 import com.rsp.rsp.domain.Category;
+import com.rsp.rsp.domain.Formula;
+import com.rsp.rsp.domain.Org;
+import com.rsp.rsp.domain.SubCategory;
 import com.rsp.rsp.domain.query.CategoryQuery;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,12 +18,8 @@ import java.util.Map;
 /**
  * 测试大类service
  */
-@RunWith(SpringRunner.class)
-@SpringBootTest
-public class CategoryServiceTest {
+public class CategoryServiceTest extends BaseTest {
 
-    @Autowired
-    private CategoryService categoryService;
 
     @Test
     public void testFindAll(){
@@ -51,7 +50,8 @@ public class CategoryServiceTest {
 
     @Test
     public void testDelete(){
-        categoryService.delete(2L);
+        Map<String,Long> idMap = addTest();
+        categoryService.delete(idMap.get("categoryId"));
     }
 
     @Test

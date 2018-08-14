@@ -4,6 +4,8 @@ import com.rsp.rsp.domain.Formula;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
+import java.util.List;
+
 /**
  * 公式
  * @author sjb
@@ -21,4 +23,10 @@ public interface FormulaRepository extends JpaRepository<Formula,String>,JpaSpec
      * @param id
      */
     void deleteById(Long id);
+
+    void deleteBySubCategoryKeyIn(List<String> keys);
+
+    void deleteByOrgId(Long id);
+
+    void deleteBySubCategoryKey(String paramKey);
 }

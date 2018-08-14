@@ -43,7 +43,7 @@ public interface SubCategoryService {
     /**
      * @param subCategory
      */
-    void save(SubCategory subCategory);
+    SubCategory save(SubCategory subCategory);
 
     /**
      * @param subCategory
@@ -51,6 +51,7 @@ public interface SubCategoryService {
     void update(SubCategory subCategory);
 
     /**
+     * 删除小类时同时删除对应的公式
      * @param id
      */
     void delete(Long id);

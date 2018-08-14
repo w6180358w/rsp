@@ -1,5 +1,6 @@
 package com.rsp.rsp.service.impl;
 
+import com.rsp.rsp.dao.FormulaRepository;
 import com.rsp.rsp.dao.OrgRepository;
 import com.rsp.rsp.domain.query.OrgQuery;
 import com.rsp.rsp.domain.Org;
@@ -24,6 +25,8 @@ public class OrgServiceImpl implements OrgService {
 
     @Autowired
     private OrgRepository orgRepository;
+    @Autowired
+    private FormulaRepository formulaRepository;
 
     /**
      * 查询全部
@@ -66,8 +69,8 @@ public class OrgServiceImpl implements OrgService {
     }
 
     @Override
-    public void save(Org org) {
-        orgRepository.save(org);
+    public Org save(Org org) {
+        return orgRepository.save(org);
     }
 
     @Override
@@ -89,8 +92,15 @@ public class OrgServiceImpl implements OrgService {
         orgRepository.save(org);
     }
 
+    /**
+     * 删除机构同步删除机构对应的公式
+     * @param id
+     */
     @Override
     public void delete(Long id) {
+        //根据机构id删除公式
+        formulaRepository.deleteByOrgId(id);
+        //删除机构
         orgRepository.deleteById(id);
     }
 
