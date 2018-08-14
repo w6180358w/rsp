@@ -36,9 +36,9 @@ public class PhoneController {
         return new ModelAndView("phone.html");
     }
     
-    @RequestMapping("/fallin-information/{type}")
+    @RequestMapping("/form/{type}")
     public ModelAndView information(@PathVariable(name="type") String type,Model model){
-        return new ModelAndView("fallin-information.html");
+        return new ModelAndView("form.html");
     }
     
     @RequestMapping(value="/list", method=RequestMethod.POST)
@@ -65,7 +65,7 @@ public class PhoneController {
 			e.printStackTrace();
 			model.addAttribute("type",bean.getType());
 			model.addAttribute("error",e.getMessage());
-			return new ModelAndView("fallin-information.html");
+			return new ModelAndView("form.html");
 		}
         return new ModelAndView("list.html");
     }

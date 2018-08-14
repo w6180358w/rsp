@@ -91,7 +91,7 @@ $(function(){
     var type = [[${type}]];
     
     if(type!=null && type!=""){
-    	$.get("filter/columns/"+type,function(data){
+    	$.get([[@{/}]]+"filter/columns/"+type,function(data){
 			if(data.success){
 				var catas = data.data;
 				var content = $("#content");

@@ -68,9 +68,11 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
         notLoginPaths.add("/images");
         notLoginPaths.add("/plugins");
         notLoginPaths.add("/phone");
-        notLoginPaths.add("/fallin-information");
+        notLoginPaths.add("/form");
+        notLoginPaths.add("/filter/columns");
         notLoginPaths.add("/list");
         notLoginPaths.add("/details");
+        notLoginPaths.add("/error");
         if(notLoginPaths.contains(path)) {
             return false;
         }
