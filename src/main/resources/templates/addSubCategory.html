@@ -4,24 +4,24 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 	<!-- Required Stylesheets -->
-	<link rel="stylesheet" type="text/css" href="../css/reset.css" media="screen" />
-	<link rel="stylesheet" type="text/css" href="../css/text.css" media="screen" />
-	<link rel="stylesheet" type="text/css" href="../css/fonts/ptsans/stylesheet.css" media="screen" />
-	<link rel="stylesheet" type="text/css" href="../css/fluid.css" media="screen" />
+	<link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}" media="screen" />
+	<link rel="stylesheet" type="text/css" th:href="@{/css/text.css}" media="screen" />
+	<link rel="stylesheet" type="text/css" th:href="@{/css/fonts/ptsans/stylesheet.css}" media="screen" />
+	<link rel="stylesheet" type="text/css" th:href="@{/css/fluid.css}" media="screen" />
 
-	<link rel="stylesheet" type="text/css" href="../css/mws.style.css" media="screen" />
-	<link rel="stylesheet" type="text/css" href="../css/icons/icons.css" media="screen" />
+	<link rel="stylesheet" type="text/css" th:href="@{/css/mws.style.css}" media="screen" />
+	<link rel="stylesheet" type="text/css" th:href="@{/css/icons/icons.css}" media="screen" />
 
 	<!-- JavaScript Plugins -->
 
-	<script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script>
-	<script type="text/javascript" src="../js/jquery-ui.js"></script>
-	<script type="text/javascript" src="../plugins/layer-v3.1.1/layer/layer.js"></script>
-	<script type="text/javascript" src="../plugins/jquery.validate.js"></script>
+	<script type="text/javascript" th:src="@{/js/jquery-1.7.1.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/jquery-ui.js}"></script>
+	<script type="text/javascript" th:src="@{/plugins/layer-v3.1.1/layer/layer.js}"></script>
+	<script type="text/javascript" th:src="@{/plugins/jquery.validate.js}"></script>
 
-	<script type="text/javascript" src="../js/subCategoryEdit.js"></script>
+	<script type="text/javascript" th:src="@{/js/subCategoryEdit.js}"></script>
 
-<title>MWS Admin - Form Layouts</title>
+	<title>融算盘</title>
 
 </head>
 
@@ -59,12 +59,12 @@
 								<div class="mws-form-item large">
 									<input type="text" name="paramKey" class="mws-textinput"
 									th:value="${subCategory.paramKey}"/>
-									<span>注: 申请额度,无抵押还款,信用卡负债等三项参数分别为【x】【y】【z】,参数的值不能为【x】【y】【z】,不区分大小写</span>
+									<span>注: 申请额度,无抵押月还款,信用卡负债等三项参数分别为【x】【y】【z】,参数的值不能为【x】【y】【z】,不区分大小写</span>
 								</div>
 							</div>
 						</div>
 						<div class="mws-button-row">
-							<button type="button" onclick="submitSubCategoryForm()" class="mws-button green">Submit</button>
+							<button type="button" onclick="submitSubCategoryForm()" class="mws-button green">提交</button>
 						</div>
 					</form>
 				</div>

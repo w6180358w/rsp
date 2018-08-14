@@ -53,7 +53,7 @@ function loadSubCategory() {
                 "render": function(data, type, record,index) {
                     return "<span title='"+data+"'>"+data+"</span>";
                 }},
-            { "data": "paramKey","orderable": false,"title":"paramKey","width":"40%",
+            { "data": "paramKey","orderable": false,"title":"参数","width":"40%",
                 "render": function(data, type, record,index) {
                     return "<span title='"+data+"'>"+data+"</span>";
                 }},
@@ -94,7 +94,7 @@ function editSubCategory(id) {
         // title:false,
         maxmin: true,
         shadeClose: false, //点击遮罩关闭层
-        area : ['800px' , '500px'],
+        area : ['800px' , '400px'],
         content: 'subCategory/add?id='+id,
         end: function(){
             //关闭回调
@@ -113,7 +113,7 @@ function addSubCategory() {
         // title:false,
         maxmin: true,
         shadeClose: false, //点击遮罩关闭层
-        area : ['800px' , '600px'],
+        area : ['800px' , '400px'],
         content: 'subCategory/add',
         end: function(){
             //关闭回调

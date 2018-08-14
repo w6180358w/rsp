@@ -103,7 +103,7 @@ function editCategory(id) {
         // title:false,
         maxmin: true,
         shadeClose: false, //点击遮罩关闭层
-        area : ['600px' , '380px'],
+        area : ['800px' , '350px'],
         content: 'category/add?id='+id,
         end: function(){
             //关闭回调
@@ -118,7 +118,7 @@ function addCategory() {
         // title:false,
         maxmin: true,
         shadeClose: false, //点击遮罩关闭层
-        area : ['800px' , '400px'],
+        area : ['800px' , '350px'],
         content: 'category/add',
         end: function(){
             //关闭回调
