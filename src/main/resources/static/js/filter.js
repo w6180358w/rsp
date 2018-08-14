@@ -24,7 +24,7 @@ $(function () {
 	function loadFormula(type) {
 		$.get("filter/columns/"+type,function(data){
 			if(data.success){
-				var columns = [{"data": "name","orderable": false,"width":"100",
+				var columns = [{"data": "name","orderable": false,"width":"100","defaultContent": "",
                     "render": function(data, type, record,index) {
                         return "<span title='"+data+"'>"+data+"</span>";
                     }}];
@@ -63,6 +63,7 @@ $(function () {
 	        "serverSide": true,
 	        "scrollX": true,
 	        "paging": false, // 禁止分页
+	        "sDom" : "t<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
 	        "ajax": {
 	            "url": "filter/tableFilter",
 	            "type": "post",
@@ -78,7 +79,6 @@ $(function () {
 	            	return JSON.stringify(result);
 	            },
 	            "error":function(data){
-	            	console.log(eval(JSON.stringify(data.responseText)));
 	            	var result = JSON.parse(data.responseText);
 	            	layer.confirm(result.message, {
 	                    btn : [ '确定' ]
@@ -101,7 +101,6 @@ $(function () {
 	        		that.html("");
 	    			var input = $("<input width='100%'/>");
 	    			input.on("blur",function(){
-	    				console.log("ajax");
 	    				that.html(old);
 	    				$(this).remove();
 	    			});
@@ -120,7 +119,6 @@ $(function () {
 		result.push({key:"x",value:(x==null || x=="")?0:parseInt(x)});
 		result.push({key:"y",value:(y==null || y=="")?0:parseInt(y)});
 		result.push({key:"z",value:(z==null || z=="")?0:parseInt(z)});
-		console.log(result);
 		var tds = $(".dataTables_scrollHead").find("table>thead>tr:last>td");
 		for(var i=1;i<tds.length;i++){
 			var td = tds[i];

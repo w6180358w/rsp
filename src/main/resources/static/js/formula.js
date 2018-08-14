@@ -1,6 +1,5 @@
 $(function () {
 	$("#type").on("change",function(el){
-		console.log("change")
 		if(table!=null){
 			table.clear(); 
 			table.destroy(); 	   //销毁datatable
@@ -94,7 +93,6 @@ $(function () {
 							contentType:"application/json;charset=utf-8",
 							success:function(result){
 								that.empty();
-								console.log(result);
 								if(result.success){
 									that.attr("data-id",result.data[0].id);
 									that.html(newv);
