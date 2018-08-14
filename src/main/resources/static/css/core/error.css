@@ -1,7 +1,7 @@
 div#mws-error-container
 {
-	width:640px;
-	margin:auto;
+	
+	margin:30px auto;
 	padding-top:32px;
 	background:url(../../images/core/mws-error-bg.png) no-repeat center top;
 }
@@ -22,4 +22,6 @@ div#mws-error-container h1#mws-error-code span
 div#mws-error-container p
 {
 	text-align:center;
+	font-size:28px;
 }
+
