@@ -4,6 +4,9 @@ import com.rsp.rsp.domain.R;
 import com.rsp.rsp.domain.query.CategoryQuery;
 import com.rsp.rsp.domain.Category;
 import com.rsp.rsp.service.CategoryService;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.ui.Model;
@@ -73,5 +76,11 @@ public class CategoryController {
         }catch (Exception e){
             return "error";
         }
+    }
+    
+    @RequestMapping("/type/{type}")
+    public R queryAll(@PathVariable(name="type")String type){
+        List<Category> list = categoryService.type(type);
+        return new R(list);
     }
 }

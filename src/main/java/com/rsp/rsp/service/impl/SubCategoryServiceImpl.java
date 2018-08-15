@@ -58,7 +58,7 @@ public class SubCategoryServiceImpl implements SubCategoryService {
      */
     @Override
     public Page<SubCategory> findSubCategoryCriteria(Integer start, Integer size, SubCategoryQuery subCategoryQuery) {
-        Pageable pageable = PageRequest.of(start/size, size, Sort.Direction.ASC, "id");
+        Pageable pageable = PageRequest.of(start/size, size, Sort.Direction.DESC, "id");
         Page<SubCategory> bookPage = subCategoryRepository.findAll((Specification<SubCategory>) (root, query, criteriaBuilder) -> {
             Predicate p1 = criteriaBuilder.like(root.get("name").as(String.class), "%"+subCategoryQuery.getsSearch()+"%");
             Predicate p4 = criteriaBuilder.equal(root.get("categoryId").as(String.class), subCategoryQuery.getsSearch());
@@ -80,6 +80,8 @@ public class SubCategoryServiceImpl implements SubCategoryService {
         subCategory.setCategoryId(newSubCategory.getCategoryId());
         subCategory.setParamKey(newSubCategory.getParamKey());
         subCategory.setName(newSubCategory.getName());
+        subCategory.setCategoryName(newSubCategory.getCategoryName());
+        subCategory.setType(newSubCategory.getType());
         subCategoryRepository.save(subCategory);
     }
 

@@ -67,4 +67,10 @@ public interface CategoryService {
      * @return
      */
     Map<Long,String> findIdAndNameMap();
+    
+    /**
+     * 根据类型擦
+     * @return
+     */
+    List<Category> type(String type);
 }

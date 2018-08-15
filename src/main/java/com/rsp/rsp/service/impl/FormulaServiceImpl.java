@@ -128,7 +128,7 @@ public class FormulaServiceImpl implements FormulaService {
 			}
 			//orgMap中有就数据  如果计算值小于0  新老数据一起删除
 			orgMap.put(formula.getOrgId(), org);
-			if(value<0) {
+			if(value!=null && value<0) {
 				orgMap.remove(formula.getOrgId());
 			}
 			
@@ -200,7 +200,7 @@ public class FormulaServiceImpl implements FormulaService {
 			org.put("orgId", formula.getOrgId());
 			//orgMap中有就数据  如果计算值小于0  新老数据一起删除
 			orgMap.put(formula.getOrgId(), org);
-			if(value==null || value<0) {
+			if(value!=null && value<0) {
 				orgMap.remove(formula.getOrgId());
 			}
 			

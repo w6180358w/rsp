@@ -28,9 +28,11 @@
 <div th:each="org:${orgs}">
 	<!--推广标标题-->
 	<div class="novice_f">
-		<div class="novice_f_in">
+		<div class="novice_f_in" th:switch="${type}">
 	    	<!-- <img src="images/tuigpng.png"/> -->
-	        <h2 th:text="${org.name}"></h2>
+	        <h2 th:case="'bd'">保单</h2>
+	        <h2 th:case="'gjj'">公积金</h2>
+	        <h2 th:case="'ajf'">按揭房</h2>
 	    </div>
 	</div>
 	<!--推广标-->
@@ -39,11 +41,9 @@
 	    <!--left-->
 	        <div class="novice_zs_f_in_l" style="background:url(images/013b1ec6df24.png) no-repeat center; background-size:cover;">
 	        	<!--top-->
-	            <div class="novice_zs_f_in_l_top" th:switch="${type}">
+	            <div class="novice_zs_f_in_l_top">
 					<img src="images/biao5.png"/> 
-	            	<span th:case="'bd'">保单</span>
-	            	<span th:case="'gjj'">公积金</span>
-	            	<span th:case="'ajf'">按揭房</span>
+	            	<span th:text="${org.name}">保单</span>
 	            </div>
 	            <!--bottom-->
 	            <div class="novice_zs_f_in_l_bottom">

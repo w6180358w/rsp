@@ -100,4 +100,14 @@ public class CategoryServiceImpl implements CategoryService {
         categoryRepository.findAll().forEach(x->result.put(x.getId(),x.getName()));
         return result;
     }
+
+	@Override
+	public List<Category> type(String type) {
+		List<Category> list = categoryRepository.findAll((Specification<Category>) (root, query, criteriaBuilder) -> {
+            Predicate p1 = criteriaBuilder.equal(root.get("type").as(String.class), type);
+            query.where(criteriaBuilder.and(p1));
+            return query.getRestriction();
+        });
+		return list;
+	}
 }

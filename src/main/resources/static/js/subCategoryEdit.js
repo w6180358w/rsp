@@ -1,5 +1,36 @@
 $(function () {
     var icon = "<i class='fa fa-times-circle'></i> ";
+    
+    $("#subCategoryForm").find("select[name=type]").on("change",function(){
+    	refreshCategory($(this).val());
+    });
+    
+    $("#subCategoryForm").find("select[name=categoryId]").on("change",function(){
+    	$("#categoryName").val($(this).find("option:selected").text());
+    });
+    
+    refreshCategory($("#subCategoryForm").find("select[name=type]").val())
+    function refreshCategory(type){
+    	if(type==null || type=="")type=-1;
+    	$.get("../category/type/"+type,function(data){
+			if(data.success){
+				var select = $("#subCategoryForm").find("select[name=categoryId]");
+				select.empty();
+				data.data.forEach(function(d){
+					select.append($("<option value='"+d["id"]+"'>"+d["name"]+"</option>"));
+				});
+				var cid = $("#tempCId").val();
+				if(cid==null || cid==""){
+					select.val(data.data.length>0?data.data[0]["id"]:"");
+				}else{
+					select.val(cid);
+				}
+				select.trigger("change");
+			}else{
+				layer.msg("查询失败，请联系管理员!");
+			}
+		});
+    }
     $("#subCategoryForm").validate({
         rules : {
             paramKey : {

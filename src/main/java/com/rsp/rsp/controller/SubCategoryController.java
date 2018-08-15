@@ -24,8 +24,6 @@ import java.util.stream.Collectors;
 public class SubCategoryController {
     @Autowired
     private SubCategoryService subCategoryService;
-    @Autowired
-    private CategoryService categoryService;
 
     @RequestMapping()
     public ModelAndView subCategory(){
@@ -37,10 +35,7 @@ public class SubCategoryController {
                                       @RequestParam(value ="pageSize",defaultValue ="10")Integer size,
                                       SubCategoryQuery subCategoryQuery,Integer draw){
         Page<SubCategory> pageInfo = subCategoryService.findSubCategoryCriteria(start,size,subCategoryQuery);
-        Map<Long,String> categories = categoryService.findIdAndNameMap();
-        List<SubCategory> list = pageInfo.getContent().stream()
-                .peek(x-> x.setCategoryName(categories.get(x.getCategoryId()))).collect(Collectors.toList());
-        return new R(list, (int) pageInfo.getTotalElements(), (int) pageInfo.getTotalElements(),draw,"");
+        return new R(pageInfo.getContent(), (int) pageInfo.getTotalElements(), (int) pageInfo.getTotalElements(),draw,"");
     }
 
     @RequestMapping("add")
@@ -54,8 +49,6 @@ public class SubCategoryController {
             subCategory.setCategoryId(0L);
         }
         model.addAttribute("subCategory",subCategory);
-        //查询大类
-        model.addAttribute("categories",categoryService.findAll());
         return new ModelAndView("addSubCategory.html");
     }
 

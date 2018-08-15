@@ -18,6 +18,10 @@ public class SubCategory {
     private String paramKey;
     /** 列表页显示的大类名 */
     private String categoryName;
+    /**
+     * 类型
+     */
+    private String type;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -59,7 +63,8 @@ public class SubCategory {
 	public void setParamKey(String paramKey) {
 		this.paramKey = paramKey;
 	}
-
+	@Basic
+    @Column(name = "category_name")
     public String getCategoryName() {
         return categoryName;
     }
@@ -67,8 +72,17 @@ public class SubCategory {
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
     }
+    @Basic
+    @Column(name = "type")
+    public String getType() {
+		return type;
+	}
 
-    @Override
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	@Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

@@ -37,6 +37,8 @@
 					<form class="mws-form" id="subCategoryForm">
 						<div class="mws-form-inline">
 							<input type="hidden" name="id" id="id" th:value="${subCategory.id}"/>
+							<input type="hidden" name="categoryName" id="categoryName" th:value="${subCategory.categoryName}"/>
+							<input type="hidden" id="tempCId" th:value="${subCategory.categoryId}"/>
 							<div class="mws-form-row">
 								<label>名称 <span style="color: #b90a0f">*</span></label>
 								<div class="mws-form-item large">
@@ -45,13 +47,20 @@
 								</div>
 							</div>
 							<div class="mws-form-row">
+								<label>类型 <span style="color: #b90a0f">*</span></label>
+								<div class="mws-form-item large">
+									<select name="type" th:field="*{subCategory.type}">
+										<option value="" style="font-color: #b6b6b6">请选择</option>
+										<option value="ajf">按揭房</option>
+										<option value="bd">保单</option>
+										<option value="gjj">公积金</option>
+									</select>
+								</div>
+							</div>
+							<div class="mws-form-row">
 								<label>大类 <span style="color: #b90a0f">*</span></label>
 								<div class="mws-form-item small">
-									<select name="categoryId" th:field="*{subCategory.categoryId}">
-										<option value="0">--</option>
-										<option th:each="category:${categories}" th:value="${category.id}"
-												th:text="${category.name}"></option>
-									</select>
+									<select name="categoryId"></select>
 								</div>
 							</div>
 							<div class="mws-form-row">

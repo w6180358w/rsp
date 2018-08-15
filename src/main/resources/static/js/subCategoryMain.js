@@ -49,9 +49,10 @@ function loadSubCategory() {
                 "render": function(data, type, record,index) {
                     return "<span title='"+data+"'>"+data+"</span>";
                 }},
-            { "data": "categoryName","orderable": false,"title":"大类名","width":"40%",
+            { "data": "categoryName","orderable": false,"title":"大类","width":"40%",
                 "render": function(data, type, record,index) {
-                    return "<span title='"+data+"'>"+data+"</span>";
+                	var result = getTypeName(record.type)+"-"+data;
+                    return "<span title='"+result+"'>"+result+"</span>";
                 }},
             { "data": "paramKey","orderable": false,"title":"参数","width":"40%",
                 "render": function(data, type, record,index) {
@@ -66,6 +67,18 @@ function loadSubCategory() {
     });
 }
 
+function getTypeName(type){
+	if("ajf"===type){
+		return "按揭房";
+	}
+	if("gjj"===type){
+		return "公积金";
+	}
+	if("bd"===type){
+		return "保单";
+	}
+	return "未知类型";
+}
 function deleteSubCategory(id) {
     layer.confirm('确定要删除选中的记录？', {
         btn : [ '确定', '取消' ]
