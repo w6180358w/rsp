@@ -206,6 +206,7 @@ html,body {
 .fallin-content {
 	width: 100%;
 	height: calc(100% - 90px);
+	margin-bottom:44px;
 }
 .fallin-group {
 	background: #fff;

@@ -80,7 +80,7 @@ $(function () {
 	            },
 	            "error":function(data){
 	            	var result = JSON.parse(data.responseText);
-	            	layer.confirm(result.message, {
+	            	layer.confirm("查询错误", {
 	                    btn : [ '确定' ]
 	                }, function() {
 	                   window.location.reload();
