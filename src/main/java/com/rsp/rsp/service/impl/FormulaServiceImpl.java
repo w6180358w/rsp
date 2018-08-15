@@ -191,6 +191,10 @@ public class FormulaServiceImpl implements FormulaService {
 					Expression expression = ExpressionFactory.createExpression(expr);
 					value = expression.evaluate(parameters).getRealValue();
 					System.out.println("机构："+orgMap.get(formula.getOrgId()).getString("name")+"公式："+expr+"值："+value);
+					if(Double.isInfinite(value) || Double.isNaN(value)) {
+						System.out.println(value+"为特殊情况，转换为0");
+						value = 0.0;
+					}
 				} catch (Exception e) {
 					e.printStackTrace();
 					throw new Exception("机构【"+orgMap.get(formula.getOrgId()).getString("name")+"】在此类型下的公式【"+formu+"】计算错误，请检查公式中包含参数对应的小类是否存在！");
