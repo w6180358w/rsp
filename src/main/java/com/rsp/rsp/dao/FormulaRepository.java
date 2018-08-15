@@ -24,9 +24,9 @@ public interface FormulaRepository extends JpaRepository<Formula,String>,JpaSpec
      */
     void deleteById(Long id);
 
-    void deleteBySubCategoryKeyIn(List<String> keys);
-
     void deleteByOrgId(Long id);
 
-    void deleteBySubCategoryKey(String paramKey);
+    void deleteBySubCategoryId(Long id);
+    
+    void deleteBySubCategoryIdIn(List<Long> ids);
 }

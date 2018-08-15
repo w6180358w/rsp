@@ -61,9 +61,10 @@ public class SubCategoryServiceImpl implements SubCategoryService {
         Pageable pageable = PageRequest.of(start/size, size, Sort.Direction.DESC, "id");
         Page<SubCategory> bookPage = subCategoryRepository.findAll((Specification<SubCategory>) (root, query, criteriaBuilder) -> {
             Predicate p1 = criteriaBuilder.like(root.get("name").as(String.class), "%"+subCategoryQuery.getsSearch()+"%");
-            Predicate p4 = criteriaBuilder.equal(root.get("categoryId").as(String.class), subCategoryQuery.getsSearch());
+            Predicate p4 = criteriaBuilder.equal(root.get("categoryName").as(String.class), subCategoryQuery.getsSearch());
+            Predicate p2 = criteriaBuilder.equal(root.get("paramKey").as(String.class), subCategoryQuery.getsSearch());
 //            Predicate p2 = criteriaBuilder.equal(root.get("id").as(String.class), subCategoryQuery.getsSearch());
-            query.where(criteriaBuilder.or(p1,p4));
+            query.where(criteriaBuilder.or(p1,p2,p4));
             return query.getRestriction();
         },pageable);
         return bookPage;
@@ -94,7 +95,7 @@ public class SubCategoryServiceImpl implements SubCategoryService {
         //查询小类
         SubCategory subCategory = subCategoryRepository.findById(id);
         //根据key删除公式
-        formulaRepository.deleteBySubCategoryKey(subCategory.getParamKey());
+        formulaRepository.deleteBySubCategoryId(subCategory.getId());
         //删除小类
         subCategoryRepository.deleteById(id);
     }

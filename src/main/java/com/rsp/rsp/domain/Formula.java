@@ -13,7 +13,7 @@ public class Formula {
     /**机构id*/
     private Long orgId;
     /**小类key*/
-    private String subCategoryKey;
+    private Long subCategoryId;
     /**公式*/
     private String formula;
 
@@ -39,14 +39,14 @@ public class Formula {
     }
     
     @Basic
-    @Column(name = "sub_category_key")
-    public void setSubCategoryKey(String subCategoryKey) {
-		this.subCategoryKey = subCategoryKey;
+    @Column(name = "sub_category_id")
+    public Long getSubCategoryId() {
+		return subCategoryId;
 	}
 
-	public void setFormula(String formula) {
-        this.formula = formula;
-    }
+	public void setSubCategoryId(Long subCategoryId) {
+		this.subCategoryId = subCategoryId;
+	}
 	
     @Basic
     @Column(name = "formula")
@@ -54,11 +54,11 @@ public class Formula {
         return formula;
     }
 
-    public String getSubCategoryKey() {
-		return subCategoryKey;
+    public void setFormula(String formula) {
+		this.formula = formula;
 	}
 
-    @Override
+	@Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -67,7 +67,7 @@ public class Formula {
 
         if (id != that.id) return false;
         if (orgId != that.orgId) return false;
-        if (subCategoryKey != that.subCategoryKey) return false;
+        if (subCategoryId != that.subCategoryId) return false;
         if (formula != null ? !formula.equals(that.formula) : that.formula != null) return false;
 
         return true;
@@ -77,7 +77,7 @@ public class Formula {
     public int hashCode() {
         int result = (int) (id ^ (id >>> 32));
         result = 31 * result + (int) (orgId ^ (orgId >>> 32));
-        result = 31 * result + (subCategoryKey != null ? subCategoryKey.hashCode() : 0);
+        result = 31 * result + (int) (subCategoryId ^ (subCategoryId >>> 32));
         result = 31 * result + (formula != null ? formula.hashCode() : 0);
         return result;
     }

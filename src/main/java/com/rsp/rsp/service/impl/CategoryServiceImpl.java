@@ -82,7 +82,7 @@ public class CategoryServiceImpl implements CategoryService {
         //根据大类查询小类
         List<SubCategory> subCategories = subCategoryRepository.findByCategoryId(id);
         //删除小类对应的公式
-        formulaRepository.deleteBySubCategoryKeyIn(subCategories.stream().map(SubCategory::getParamKey).collect(Collectors.toList()));
+        formulaRepository.deleteBySubCategoryIdIn(subCategories.stream().map(SubCategory::getId).collect(Collectors.toList()));
         //删除小类
         subCategoryRepository.deleteByIdIn(subCategories.stream().map(SubCategory::getId).collect(Collectors.toList()));
         //删除大类

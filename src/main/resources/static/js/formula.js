@@ -18,13 +18,13 @@ $(function () {
                     "render": function(data, type, record,index) {
                         return "<span title='"+data+"'>"+data+"</span>";
                     }}];
-				var keys = [];
-				generateTitle(data.data,columns,keys);
-				initTable(columns,keys);
+				var ids = [];
+				generateTitle(data.data,columns,ids);
+				initTable(columns,ids);
 			}
 		});
 	}
-	function generateTitle(data,columns,keys){
+	function generateTitle(data,columns,ids){
 		var thead = $("<thead></thead>");
 		var one = $("<tr><th style='text-align:center'></th></tr>");
 		var two = $("<tr><th style='text-align:center'>名称</th></tr>");
@@ -38,21 +38,21 @@ $(function () {
 				var td = $("<th style='text-align:center'></th>").prop("title","参数："+s.paramKey).html(s.name);
 				two.append(td);
 				columns.push({
-					"data": s.paramKey,"orderable": false,"width":"100",
+					"data": s.id,"orderable": false,"width":"100",
 					"render":function(value){
 						if(value){
-							return "<span key='"+s.paramKey+"' data-id='"+value.id+"'>"+(value==null?"":value.formula)+"</span>";
+							return "<span subId='"+s.id+"' data-id='"+value.id+"'>"+(value==null?"":value.formula)+"</span>";
 						}
-						return "<span key='"+s.paramKey+"'></span>";
+						return "<span subId='"+s.id+"'></span>";
 					}
 				});
-				keys.push(s.paramKey);
+				ids.push(s.id);
 			});
 		});
 		thead.append(one).append(two);
 		$("#listTable").append(thead);
 	}
-	function initTable(columns,keys){
+	function initTable(columns,ids){
 		table = $("#listTable").DataTable({
 	        "serverSide": true,
 	        "scrollX": true,
@@ -65,7 +65,7 @@ $(function () {
 	            "contentType":"application/json;charset=utf-8",//data.data.unshift(firstCol)
 	            data:function(data){
 	            	var result = {
-	                		"keys":keys
+	                		"ids":ids
 	                	};
 	            	return JSON.stringify(result);
 	            }
@@ -85,7 +85,7 @@ $(function () {
 				input.on("blur",function(){
 					var newv = input.val();
 					if(newv!=old){
-						var formula = {id:that.attr("data-id"),orgId:data.orgId,subCategoryKey:that.attr("key"),formula:newv};
+						var formula = {id:that.attr("data-id"),orgId:data.orgId,subCategoryId:that.attr("subId"),formula:newv};
 						$.ajax({
 							type: "POST",
 							url:"formula/merge",
