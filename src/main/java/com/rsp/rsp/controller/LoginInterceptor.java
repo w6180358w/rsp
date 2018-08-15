@@ -45,7 +45,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
                 session.setAttribute("user",user);
                 return true;
             }else {
-                response.sendRedirect(request.getContextPath()+"index");
+                response.sendRedirect(request.getContextPath()+"/index");
                 return false;
             }
         }
