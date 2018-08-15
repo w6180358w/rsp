@@ -50,7 +50,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public Page<Category> findCategoryCriteria(Integer start, Integer size, CategoryQuery categoryQuery) {
-        Pageable pageable = PageRequest.of(start/size, size, Sort.Direction.ASC, "id");
+        Pageable pageable = PageRequest.of(start/size, size, Sort.Direction.DESC, "id");
         Page<Category> bookPage = categoryRepository.findAll((Specification<Category>) (root, query, criteriaBuilder) -> {
             Predicate p1 = criteriaBuilder.like(root.get("name").as(String.class), "%"+categoryQuery.getsSearch()+"%");
 //            Predicate p2 = criteriaBuilder.equal(root.get("id").as(String.class), categoryQuery.getsSearch());
