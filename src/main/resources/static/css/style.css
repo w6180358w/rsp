@@ -206,7 +206,6 @@ html,body {
 .fallin-content {
 	width: 100%;
 	height: calc(100% - 90px);
-	margin-bottom:44px;
 }
 .fallin-group {
 	background: #fff;
@@ -312,4 +311,7 @@ html,body {
 	line-height: 38px;
 	padding: 0 14px;
 	color: #999;
+}
+.fallin-content .fallin-group:last-child {
+	margin-bottom: 44px;
 }

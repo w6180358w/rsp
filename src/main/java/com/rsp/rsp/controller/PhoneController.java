@@ -64,7 +64,7 @@ public class PhoneController {
 		} catch (Exception e) {
 			e.printStackTrace();
 			model.addAttribute("type",bean.getType());
-			model.addAttribute("error",e.getMessage());
+			model.addAttribute("error","查询错误!");
 			return new ModelAndView("form.html");
 		}
         return new ModelAndView("list.html");
