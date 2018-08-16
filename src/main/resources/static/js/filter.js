@@ -138,7 +138,6 @@ $(function () {
 				key:$(td).attr("key"),
 				value:parseFloat(value)
 			});
-			console.log(value);
 		}
 		return result;
 	}
