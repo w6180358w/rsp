@@ -11,7 +11,6 @@ function loadOrg() {
             "url": "org/queryAll",
             "type": "post",
             "data": function(data){
-                console.log(data);
                 startNum = data.start;
                 return {
                     "start":data.start,

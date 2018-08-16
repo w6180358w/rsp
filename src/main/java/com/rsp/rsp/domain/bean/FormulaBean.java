@@ -1,11 +1,12 @@
 package com.rsp.rsp.domain.bean;
 
 import java.util.List;
-import java.util.Map;
 
 public class FormulaBean{
 
-	private List<String> keys;
+	private List<String> keys;		//手机端页面  参数集合  小类ID_rsp_参数值
+	
+	private List<Long> ids;		//小类ID集合
 	
 	private List<ParamsBean> param;
 	
@@ -21,12 +22,12 @@ public class FormulaBean{
 		this.param = param;
 	}
 
-	public List<String> getKeys() {
-		return keys;
+	public List<Long> getIds() {
+		return ids;
 	}
 
-	public void setKeys(List<String> keys) {
-		this.keys = keys;
+	public void setIds(List<Long> ids) {
+		this.ids = ids;
 	}
 
 	public Integer getDraw() {
@@ -43,5 +44,13 @@ public class FormulaBean{
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public List<String> getKeys() {
+		return keys;
+	}
+
+	public void setKeys(List<String> keys) {
+		this.keys = keys;
 	}
 }

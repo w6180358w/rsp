@@ -32,15 +32,15 @@
 		<div class="group-cont">
 			<div class="cont-form">
 				<label><em class="redColor">*</em>申请额度:</label>
-				<input type="number" name="x" id="sqed" value="">
+				<input type="number" subId=-1 subKey="x" id="sqed" value="">
 			</div>
 			<div class="cont-form">
 				<label><em class="redColor">*</em>无抵押月还款:</label>
-				<input type="number" name="y" id="wdyhk" value="">
+				<input type="number" subId=-2 subKey="y" id="wdyhk" value="">
 			</div>
 			<div class="cont-form">
 				<label><em class="redColor">*</em>信用卡负债:</label>
-				<input type="number" name="z" id="xykfz" value="">
+				<input type="number" subId=-3 subKey="z" id="xykfz" value="">
 			</div>
 		</div>
 	</div>
@@ -78,7 +78,7 @@ $(function(){
 		}
 		
 		var params = getColParams();
-		var keysEl = $("<input name='keys' hidden/>").val(params.keys);
+		var keysEl = $("<input name='keys' hidden/>").val(params.ids);
 		var typeEl = $("<input name='type' hidden/>").val(type);
 		form.append(keysEl);
 		form.append(typeEl);
@@ -109,7 +109,7 @@ $(function(){
 					subList.forEach(function(sub){
 						html += "<div class='cont-form'>"+
 									"<label>"+sub.name+":</label>"+
-									"<input type='number' name='"+sub.paramKey+"' value=''>"+
+									"<input type='number' subId = '"+sub.id+"' subKey= '"+sub.paramKey+"' value=''>"+
 								"</div>";
 					})
 					html += "</div>";	
@@ -136,7 +136,7 @@ $(function(){
     
     function getColParams(){
 		var result = [];
-		var keys = [];
+		var ids = [];
 		var tds = form.find("input[type=number]");
 		for(var i=0;i<tds.length;i++){
 			var td = tds[i];
@@ -145,13 +145,13 @@ $(function(){
 				value = 0;
 			}
 			result.push({
-				key:$(td).prop("name"),
+				key:$(td).attr("subKey"),
 				value:parseInt(value)
 			});
 			
-			keys.push($(td).prop("name")+"_rsp_"+value);
+			ids.push($(td).attr("subId")+"_rsp_"+$(td).attr("subKey")+"_rsp_"+value);
 		}
-		return {param:result,keys:keys};
+		return {param:result,ids:ids};
 	}
 })
 

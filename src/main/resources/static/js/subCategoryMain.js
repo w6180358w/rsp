@@ -126,7 +126,7 @@ function addSubCategory() {
         // title:false,
         maxmin: true,
         shadeClose: false, //点击遮罩关闭层
-        area : ['800px' , '400px'],
+        area : ['800px' , '500px'],
         content: 'subCategory/add',
         end: function(){
             //关闭回调

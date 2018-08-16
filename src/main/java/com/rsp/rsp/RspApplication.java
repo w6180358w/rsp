@@ -14,6 +14,11 @@ public class RspApplication extends SpringBootServletInitializer{
 	}
     
 	public static void main(String[] args) {
-		SpringApplication.run(RspApplication.class, args);
+		try {
+			SpringApplication.run(RspApplication.class, args);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

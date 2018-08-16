@@ -67,7 +67,7 @@ public class FormulaServiceImpl implements FormulaService {
     public Formula update(Formula newFormula) {
         Formula formula = formulaRepository.findById(newFormula.getId());
         formula.setFormula(newFormula.getFormula());
-        formula.setSubCategoryKey(newFormula.getSubCategoryKey());
+        formula.setSubCategoryId(newFormula.getSubCategoryId());
         formula.setOrgId(newFormula.getOrgId());
         return formulaRepository.save(formula);
     }
@@ -83,7 +83,7 @@ public class FormulaServiceImpl implements FormulaService {
 		if(bean.getParam()==null || bean.getParam().isEmpty()) {
 			return result;
 		}
-		if(bean.getKeys()==null || bean.getKeys().isEmpty()) {
+		if(bean.getIds()==null || bean.getIds().isEmpty()) {
 			return result;
 		}
 		//封装参数
@@ -93,19 +93,9 @@ public class FormulaServiceImpl implements FormulaService {
 		List<Org> orgList = this.orgRepository.findAll();
 		
 		Map<Long,Org> orgMap = orgList.stream().collect(Collectors.toMap(Org::getId, Org->Org));
-		//所有公式
-		List<Formula> forList = this.formulaRepository.findAll((Specification<Formula>) (root, query, criteriaBuilder) -> {
-			In<Object> in = criteriaBuilder.in(root.get("subCategoryKey"));
-			List<Predicate> list = new ArrayList<>();
-			in.value("-1");//防止参数为空
-        	for (String key : bean.getKeys()) {
-				in.value(key);
-			}
-        	list.add(in);
-        	Predicate[] p = new Predicate[list.size()];
-        	query.where(criteriaBuilder.and(list.toArray(p)));
-        	return query.getRestriction();
-      	});
+		
+		List<Formula> forList = getBySubIds(bean.getIds());
+		
 		for (Formula formula : forList) {
 			//如果orgMap中机构不存在（数据不全或已经被筛除）  跳过
 			Org org = orgMap.get(formula.getOrgId());
@@ -121,6 +111,10 @@ public class FormulaServiceImpl implements FormulaService {
 					Expression expression = ExpressionFactory.createExpression(expr);
 					value = expression.evaluate(parameters).getRealValue();
 					System.out.println("机构："+orgMap.get(formula.getOrgId()).getName()+"公式："+expr+"值："+value);
+					if(Double.isInfinite(value) || Double.isNaN(value)) {
+						System.out.println(value+"为特殊情况，转换为0");
+						value = 0.0;
+					}
 				} catch (Exception e) {
 					e.printStackTrace();
 					throw new Exception("机构【"+orgMap.get(formula.getOrgId()).getName()+"】在此类型下的公式【"+formu+"】计算错误，请检查公式中包含参数对应的小类是否存在！");
@@ -153,7 +147,7 @@ public class FormulaServiceImpl implements FormulaService {
 		if(bean.getParam()==null || bean.getParam().isEmpty()) {
 			return result;
 		}
-		if(bean.getKeys()==null || bean.getKeys().isEmpty()) {
+		if(bean.getIds()==null || bean.getIds().isEmpty()) {
 			return result;
 		}
 		//封装参数
@@ -164,18 +158,7 @@ public class FormulaServiceImpl implements FormulaService {
 		
 		Map<Long,JSONObject> orgMap = orgList.stream().collect(Collectors.toMap(Org::getId, Org::toJSON));
 		//所有公式
-		List<Formula> forList = this.formulaRepository.findAll((Specification<Formula>) (root, query, criteriaBuilder) -> {
-			In<Object> in = criteriaBuilder.in(root.get("subCategoryKey"));
-			List<Predicate> list = new ArrayList<>();
-			in.value("-1");//防止参数为空
-        	for (String key : bean.getKeys()) {
-				in.value(key);
-			}
-        	list.add(in);
-        	Predicate[] p = new Predicate[list.size()];
-        	query.where(criteriaBuilder.and(list.toArray(p)));
-        	return query.getRestriction();
-      	});
+		List<Formula> forList = getBySubIds(bean.getIds());
 		for (Formula formula : forList) {
 			//如果orgMap中机构不存在（数据不全或已经被筛除）  跳过
 			JSONObject org = orgMap.get(formula.getOrgId());
@@ -191,12 +174,16 @@ public class FormulaServiceImpl implements FormulaService {
 					Expression expression = ExpressionFactory.createExpression(expr);
 					value = expression.evaluate(parameters).getRealValue();
 					System.out.println("机构："+orgMap.get(formula.getOrgId()).getString("name")+"公式："+expr+"值："+value);
+					if(Double.isInfinite(value) || Double.isNaN(value)) {
+						System.out.println(value+"为特殊情况，转换为0");
+						value = 0.0;
+					}
 				} catch (Exception e) {
 					e.printStackTrace();
 					throw new Exception("机构【"+orgMap.get(formula.getOrgId()).getString("name")+"】在此类型下的公式【"+formu+"】计算错误，请检查公式中包含参数对应的小类是否存在！");
 				}
 			}
-			org.put(formula.getSubCategoryKey(), value);
+			org.put(formula.getSubCategoryId(), value);
 			org.put("orgId", formula.getOrgId());
 			//orgMap中有就数据  如果计算值小于0  新老数据一起删除
 			orgMap.put(formula.getOrgId(), org);
@@ -217,6 +204,23 @@ public class FormulaServiceImpl implements FormulaService {
 		}
 		
 		return result;
+	}
+	
+	private List<Formula> getBySubIds(List<Long> ids){
+		//所有公式
+		List<Formula> forList = this.formulaRepository.findAll((Specification<Formula>) (root, query, criteriaBuilder) -> {
+			In<Object> in = criteriaBuilder.in(root.get("subCategoryId"));
+			List<Predicate> list = new ArrayList<>();
+			in.value(-1l);//防止参数为空
+			for (Long key : ids) {
+				in.value(key);
+			}
+			list.add(in);
+			Predicate[] p = new Predicate[list.size()];
+			query.where(criteriaBuilder.and(list.toArray(p)));
+			return query.getRestriction();
+		});
+		return forList;
 	}
 	
 	private String getBaseParamExpr(FormulaBean bean,Parameters parameters) {
@@ -270,18 +274,7 @@ public class FormulaServiceImpl implements FormulaService {
 		List<JSONObject> result = new ArrayList<>();
 		
 		//根据前端传来的id查询公式
-		List<Formula> forList = this.formulaRepository.findAll((Specification<Formula>) (root, query, criteriaBuilder) -> {
-			In<Object> in = criteriaBuilder.in(root.get("subCategoryKey"));
-			List<Predicate> list = new ArrayList<>();
-			in.value("-1");//防止参数为空
-			for (String key : bean.getKeys()) {
-				in.value(key);
-			}
-			list.add(in);
-			Predicate[] p = new Predicate[list.size()];
-			query.where(criteriaBuilder.and(list.toArray(p)));
-			return query.getRestriction();
-		});
+		List<Formula> forList = getBySubIds(bean.getIds());
 		
 		//机构ID 和 公式的映射
 		Map<Long,List<Formula>> forMap = new HashMap<>();
@@ -305,7 +298,7 @@ public class FormulaServiceImpl implements FormulaService {
 					JSONObject j = new JSONObject();
 					j.put("id", formula.getId());
 					j.put("formula", formula.getFormula());
-					json.put(formula.getSubCategoryKey(), j);
+					json.put(formula.getSubCategoryId(), j);
 				}
 			}
 			result.add(json);

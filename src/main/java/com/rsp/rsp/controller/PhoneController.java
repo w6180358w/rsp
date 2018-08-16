@@ -45,18 +45,18 @@ public class PhoneController {
     public ModelAndView list(@ModelAttribute FormulaBean bean, Model model) throws Exception{
     	try {
 			List<String> keys = bean.getKeys();
-			List<String> paramKeys = new ArrayList<String>();
+			List<Long> ids = new ArrayList<Long>();
 			List<ParamsBean> params = new ArrayList<ParamsBean>();
 			for (String key : keys) {
 				String[] p = key.split("_rsp_");
 				ParamsBean param = new ParamsBean();
-				param.setKey(p[0]);
-				param.setValue(Double.parseDouble(p[1]));
+				param.setKey(p[1]);
+				param.setValue(Double.parseDouble(p[2]));
 				
 				params.add(param);
-				paramKeys.add(p[0]);
+				ids.add(Long.parseLong(p[0]));
 			}
-			bean.setKeys(paramKeys);
+			bean.setIds(ids);
 			bean.setParam(params);
 			List<Org> list = this.formulaService.filter(bean);
 			model.addAttribute("orgs",list);

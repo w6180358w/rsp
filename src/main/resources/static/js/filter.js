@@ -28,13 +28,13 @@ $(function () {
                     "render": function(data, type, record,index) {
                         return "<span title='"+data+"'>"+data+"</span>";
                     }}];
-				var keys = [];
-				generateTitle(data.data,columns,keys);
-				initTable(columns,keys);
+				var ids = [];
+				generateTitle(data.data,columns,ids);
+				initTable(columns,ids);
 			}
 		});
 	}
-	function generateTitle(data,columns,keys){
+	function generateTitle(data,columns,ids){
 		var thead = $("<thead></thead>");
 		var one = $("<tr><th style='text-align:center'></th></tr>");
 		var two = $("<tr><th style='text-align:center'>名称</th></tr>");
@@ -50,15 +50,15 @@ $(function () {
 				two.append(td);
 				three.append($("<td key='"+s.paramKey+"'><input type='number' placeholder='请输入' style='width:80px;margin:5px 10px;'/></td>"));
 				columns.push({
-					"data": s.paramKey,"orderable": false,"width":"100","defaultContent": ""
+					"data": s.id,"orderable": false,"width":"100","defaultContent": ""
 				});
-				keys.push(s.paramKey);
+				ids.push(s.id);
 			});
 		});
 		thead.append(one).append(two).append(three);
 		$("#listTable").append(thead);
 	}
-	function initTable(columns,keys){
+	function initTable(columns,ids){
 		table = $("#listTable").DataTable({
 	        "serverSide": true,
 	        "scrollX": true,
@@ -72,7 +72,7 @@ $(function () {
 	            data:function(data){
 	            	var param = getColParams();
 	            	var result = {
-	                		"keys":keys,
+	                		"ids":ids,
 	                		"param":param,
 	                		"draw":data.draw
 	                	};
