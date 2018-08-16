@@ -76,8 +76,8 @@ $(function () {
 	function bindEditor(row,data,displayNum,displayIndex,dataIndex){
 		var api = this.api();
 		$(row).find("td").on("dblclick",function(){
-			var that = $(this).find("span");
-			if(that.index()>=0){
+			if($(this).index()>0){
+				var that = $(this).find("span");
 				var input = $("<input style='width:80px;' placeholder='请输入'/>");
 				var old = that.html();
 				that.html("");
