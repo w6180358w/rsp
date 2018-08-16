@@ -142,11 +142,11 @@ $(function(){
 			var td = tds[i];
 			var value = $(td).val();
 			if(value==null || value==""){
-				value = 0;
+				value = 0.000001;
 			}
 			result.push({
 				key:$(td).attr("subKey"),
-				value:parseInt(value)
+				value:parseFloat(value)
 			});
 			
 			ids.push($(td).attr("subId")+"_rsp_"+$(td).attr("subKey")+"_rsp_"+value);
