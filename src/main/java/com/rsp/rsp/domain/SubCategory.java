@@ -22,6 +22,8 @@ public class SubCategory {
      * 类型
      */
     private String type;
+    //默认值
+    private Long defaultValue;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -80,6 +82,15 @@ public class SubCategory {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+	@Basic
+	@Column(name = "defaultValue")
+	public Long getDefaultValue() {
+		return defaultValue;
+	}
+
+	public void setDefaultValue(Long defaultValue) {
+		this.defaultValue = defaultValue;
 	}
 
 	@Override

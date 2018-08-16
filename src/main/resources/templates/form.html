@@ -109,7 +109,7 @@ $(function(){
 					subList.forEach(function(sub){
 						html += "<div class='cont-form'>"+
 									"<label>"+sub.name+":</label>"+
-									"<input type='number' subId = '"+sub.id+"' subKey= '"+sub.paramKey+"' value=''>"+
+									"<input type='number' subId = '"+sub.id+"' subKey= '"+sub.paramKey+"' defaultValue='"+sub.defaultValue+"' value=''>"+
 								"</div>";
 					})
 					html += "</div>";	
@@ -140,9 +140,17 @@ $(function(){
 		var tds = form.find("input[type=number]");
 		for(var i=0;i<tds.length;i++){
 			var td = tds[i];
+			//获取默认值  如果为空 默认值为0
+			var defaultValue = $(td).attr("defaultValue");
+			if(!!eval(defaultValue)){
+				defaultValue = parseFloat(defaultValue);
+			}else{
+				defaultValue = 0;
+			}
+			//获取用户输入值  如果为空  设置默认值
 			var value = $(td).val();
-			if(value==null || value==""){
-				value = 1;
+			if(!value){
+				value = defaultValue;
 			}
 			result.push({
 				key:$(td).attr("subKey"),

@@ -83,6 +83,7 @@ public class SubCategoryServiceImpl implements SubCategoryService {
         subCategory.setName(newSubCategory.getName());
         subCategory.setCategoryName(newSubCategory.getCategoryName());
         subCategory.setType(newSubCategory.getType());
+        subCategory.setDefaultValue(newSubCategory.getDefaultValue());
         subCategoryRepository.save(subCategory);
     }
 

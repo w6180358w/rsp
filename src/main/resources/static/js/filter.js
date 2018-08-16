@@ -48,7 +48,7 @@ $(function () {
 			sub.forEach(function(s){
 				var td = $("<th style='text-align:center'></th>").prop("title",s.name).html(s.name);
 				two.append(td);
-				three.append($("<td key='"+s.paramKey+"'><input type='number' placeholder='请输入' style='width:80px;margin:5px 10px;'/></td>"));
+				three.append($("<td key='"+s.paramKey+"' defaultValue="+s.defaultValue+"><input type='number' placeholder='请输入' style='width:80px;margin:5px 10px;'/></td>"));
 				columns.push({
 					"data": s.id,"orderable": false,"width":"100","defaultContent": ""
 				});
@@ -122,14 +122,23 @@ $(function () {
 		var tds = $(".dataTables_scrollHead").find("table>thead>tr:last>td");
 		for(var i=1;i<tds.length;i++){
 			var td = tds[i];
+			//获取默认值  如果为空 默认值为0
+			var defaultValue = $(td).attr("defaultValue");
+			if(!!eval(defaultValue)){
+				defaultValue = parseFloat(defaultValue);
+			}else{
+				defaultValue = 0;
+			}
+			//获取用户输入值  如果为空  设置默认值
 			var value = $(td).find("input").val();
-			if(value==null || value==""){
-				value = 1;
+			if(!value){
+				value = defaultValue;
 			}
 			result.push({
 				key:$(td).attr("key"),
 				value:parseFloat(value)
 			});
+			console.log(value);
 		}
 		return result;
 	}

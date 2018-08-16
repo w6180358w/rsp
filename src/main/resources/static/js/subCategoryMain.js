@@ -58,6 +58,11 @@ function loadSubCategory() {
                 "render": function(data, type, record,index) {
                     return "<span title='"+data+"'>"+data+"</span>";
                 }},
+           { "data": "defaultValue","orderable": false,"title":"默认值","width":"40%",
+               "render": function(data, type, record,index) {
+            	   data = data || "";
+                   return "<span title='"+data+"'>"+data+"</span>";
+               }},
             { "data": "id","orderable": false,"title":"操作","width":"20%",
                 "render": function(data, type, record,index) {
                     return "<button onclick='editSubCategory("+data+")'>修改</button>" +
