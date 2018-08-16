@@ -116,15 +116,15 @@ $(function () {
 		var x = form.find("input[name=sqed]").val();
 		var y = form.find("input[name=wdyhk]").val();
 		var z = form.find("input[name=xykfz]").val();
-		result.push({key:"x",value:(x==null || x=="")?0.000001:parseFloat(x)});
-		result.push({key:"y",value:(y==null || y=="")?0.000001:parseFloat(y)});
-		result.push({key:"z",value:(z==null || z=="")?0.000001:parseFloat(z)});
+		result.push({key:"x",value:(x==null || x=="")?0:parseFloat(x)});
+		result.push({key:"y",value:(y==null || y=="")?0:parseFloat(y)});
+		result.push({key:"z",value:(z==null || z=="")?0:parseFloat(z)});
 		var tds = $(".dataTables_scrollHead").find("table>thead>tr:last>td");
 		for(var i=1;i<tds.length;i++){
 			var td = tds[i];
 			var value = $(td).find("input").val();
 			if(value==null || value==""){
-				value = 0.000001;
+				value = 1;
 			}
 			result.push({
 				key:$(td).attr("key"),

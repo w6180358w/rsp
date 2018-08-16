@@ -142,7 +142,7 @@ $(function(){
 			var td = tds[i];
 			var value = $(td).val();
 			if(value==null || value==""){
-				value = 0.000001;
+				value = 1;
 			}
 			result.push({
 				key:$(td).attr("subKey"),
