@@ -23,12 +23,12 @@
 .video_f{ width:100%;height:auto;overflow:hidden; margin-top:12px;}
 .video_f_in{ width:94%;height:36px; margin:0 auto;display:block;background:#3db1fa;line-height:36px; border-radius:6px; text-align:center; font-size:16px;color:#fff;}
 /*新手专区标题*/
-.novice_f{width:100%;height:20px;overflow:hidden;margin-top:15px;}
+.novice_f{width:100%;height:20px;overflow:hidden;margin:15px 0 10px 0;}
 .novice_f_in{width:94%;height:20px;margin:0 auto;overflow:hidden;}
 .novice_f_in img{display:block;width:22px;height:20px;float:left; margin-right:6px;}
 .novice_f_in h2{ font-size:15px; font-weight:100;line-height:19px;height:20px;color:#333;float:left;padding: 0 6px;}
 /*新手专享*/
-.novice_zs_f{ width:100%;overflow:hidden;margin-top:10px;}
+.novice_zs_f{ width:100%;overflow:hidden;margin-top:10px;margin-bottom:15px;}
 .novice_zs_f_in{ width:94%;height:146px;margin:0 auto;overflow:hidden;background:#fff;border-radius:6px;}
 .novice_zs_f_in_l{ width:88%;height:146px;float:left;background:#fff;}
 .novice_zs_f_in_r{ width:12%;height:146px;float:left;}
@@ -106,7 +106,7 @@
 .zslgxzx_f_in ul li{width:50%;float:left;height:50px; line-height:50px; font-size:16px; text-align:center;}
 .zslgxzx_f_in ul li.addys_f3{color:#3DB1FA;}
 /*显示区域2*/
-.xsiqy_f{width:100%;height:auto;overflow:hidden; background:#fff; margin-top:12px; margin-bottom:60px;}
+.xsiqy_f{width:100%;height:auto;overflow:hidden; background:#fff; margin-top:12px; margin-bottom:20px;}
 .xsiqy_f_in{width:90%;height:auto;overflow:hidden;margin:0 auto; margin-top:8px;}
 .xsiqy_f_in_1{width:100%;height:auto;overflow:hidden;}
 .wnzims_f{width:100%;height:auto;overflow:hidden;}
@@ -313,5 +313,5 @@ html,body {
 	color: #999;
 }
 .fallin-content .fallin-group:last-child {
-	margin-bottom: 44px;
+	margin-bottom: 58px;
 }
