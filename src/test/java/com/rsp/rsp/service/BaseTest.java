@@ -48,7 +48,7 @@ public class BaseTest {
         Formula formula = new Formula();
         formula.setFormula("testFormula");
         formula.setOrgId(org.getId());
-        formula.setSubCategoryKey(subCategory.getParamKey());
+        formula.setSubCategoryId(subCategory.getId());
         formula = formulaService.save(formula);
         idMap.put("formulaId",formula.getId());
         return idMap;
