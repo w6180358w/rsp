@@ -1,19 +1,18 @@
 package com.rsp.rsp.controller;
 
-import com.rsp.rsp.domain.R;
-import com.rsp.rsp.domain.SubCategory;
-import com.rsp.rsp.domain.query.SubCategoryQuery;
-import com.rsp.rsp.service.CategoryService;
-import com.rsp.rsp.service.SubCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+import com.rsp.rsp.domain.R;
+import com.rsp.rsp.domain.SubCategory;
+import com.rsp.rsp.domain.query.SubCategoryQuery;
+import com.rsp.rsp.service.SubCategoryService;
 
 /**
  * 小类

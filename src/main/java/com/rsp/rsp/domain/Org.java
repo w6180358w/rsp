@@ -38,6 +38,8 @@ public class Org {
     private String phone;
     /**优势*/
     private String strengths;
+    /**排序*/
+    private Long order;
 
     /**列表显示时额度拼成一个字符串*/
     private String limitString;
@@ -184,8 +186,17 @@ public class Org {
     public void setStrengths(String strengths) {
         this.strengths = strengths;
     }
+    @Basic
+    @Column(name = "order_by")
+    public Long getOrder() {
+		return order;
+	}
 
-    @Transient
+	public void setOrder(Long order) {
+		this.order = order;
+	}
+
+	@Transient
     public String getLimitString() {
         return limitString;
     }

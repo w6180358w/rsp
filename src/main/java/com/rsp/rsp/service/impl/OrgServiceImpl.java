@@ -1,10 +1,9 @@
 package com.rsp.rsp.service.impl;
 
-import com.rsp.rsp.dao.FormulaRepository;
-import com.rsp.rsp.dao.OrgRepository;
-import com.rsp.rsp.domain.query.OrgQuery;
-import com.rsp.rsp.domain.Org;
-import com.rsp.rsp.service.OrgService;
+import java.util.List;
+
+import javax.persistence.criteria.Predicate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -13,8 +12,11 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.criteria.Predicate;
-import java.util.List;
+import com.rsp.rsp.dao.FormulaRepository;
+import com.rsp.rsp.dao.OrgRepository;
+import com.rsp.rsp.domain.Org;
+import com.rsp.rsp.domain.query.OrgQuery;
+import com.rsp.rsp.service.OrgService;
 
 /**
  * 机构
@@ -34,7 +36,8 @@ public class OrgServiceImpl implements OrgService {
      */
     @Override
     public List<Org> findAll() {
-        return orgRepository.findAll();
+    	Sort sort=new Sort(Sort.Direction.ASC,"order");
+        return orgRepository.findAll(sort);
     }
 
     /**
@@ -45,7 +48,7 @@ public class OrgServiceImpl implements OrgService {
      */
     @Override
     public Page<Org> findOrgNoCriteria(Integer start, Integer size) {
-        Pageable pageable = PageRequest.of(start/size, size, Sort.Direction.ASC, "id");
+        Pageable pageable = PageRequest.of(start/size, size, Sort.Direction.ASC, "order");
         return orgRepository.findAll(pageable);
     }
 
@@ -58,7 +61,7 @@ public class OrgServiceImpl implements OrgService {
      */
     @Override
     public Page<Org> findOrgCriteria(Integer start, Integer size, OrgQuery orgQuery) {
-        Pageable pageable = PageRequest.of(start/size, size, Sort.Direction.DESC, "id");
+        Pageable pageable = PageRequest.of(start/size, size, Sort.Direction.ASC, "order");
         Page<Org> bookPage = orgRepository.findAll((Specification<Org>) (root, query, criteriaBuilder) -> {
             Predicate p1 = criteriaBuilder.like(root.get("name").as(String.class), "%"+orgQuery.getsSearch()+"%");
 //            Predicate p2 = criteriaBuilder.equal(root.get("id").as(String.class), orgQuery.getsSearch());
@@ -89,6 +92,7 @@ public class OrgServiceImpl implements OrgService {
         org.setPhone(newOrg.getPhone());
         org.setRequirements(newOrg.getRequirements());
         org.setStrengths(newOrg.getStrengths());
+        org.setOrder(newOrg.getOrder());
         orgRepository.save(org);
     }
 

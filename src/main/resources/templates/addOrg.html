@@ -104,12 +104,6 @@
 								</div>
 							</div>
 							<div class="mws-form-row">
-								<label>描述</label>
-								<div class="mws-form-item large">
-									<textarea cols="auto" rows="auto" name="desc" th:text="${org.desc}"></textarea>
-								</div>
-							</div>
-							<div class="mws-form-row">
 								<label>联系人</label>
 								<div class="mws-form-item large">
 									<input type="text" name="contacts" class="mws-textinput" th:value="${org.contacts}"/>
@@ -122,9 +116,21 @@
 								</div>
 							</div>
 							<div class="mws-form-row">
+								<label>排序</label>
+								<div class="mws-form-item large">
+									<input type="number" name="order" class="mws-textinput" th:value="${org.order}"/>
+								</div>
+							</div>
+							<div class="mws-form-row">
 								<label>优势</label>
 								<div class="mws-form-item large">
 									<textarea cols="auto" rows="auto" name="strengths" th:text="${org.strengths}"></textarea>
+								</div>
+							</div>
+							<div class="mws-form-row">
+								<label>描述</label>
+								<div class="mws-form-item large">
+									<textarea cols="auto" rows="auto" name="desc" th:text="${org.desc}"></textarea>
 								</div>
 							</div>
 						</div>

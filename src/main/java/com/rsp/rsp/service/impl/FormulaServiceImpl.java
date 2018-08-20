@@ -2,10 +2,10 @@ package com.rsp.rsp.service.impl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.stream.Collectors;
 
 import javax.persistence.criteria.CriteriaBuilder.In;
 import javax.persistence.criteria.Predicate;
@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 
 import com.rsp.rsp.dao.CategoryRepository;
 import com.rsp.rsp.dao.FormulaRepository;
-import com.rsp.rsp.dao.OrgRepository;
 import com.rsp.rsp.dao.StatisticsRepository;
 import com.rsp.rsp.dao.SubCategoryRepository;
 import com.rsp.rsp.domain.Category;
@@ -28,6 +27,7 @@ import com.rsp.rsp.domain.bean.CategoryBean;
 import com.rsp.rsp.domain.bean.FormulaBean;
 import com.rsp.rsp.domain.bean.ParamsBean;
 import com.rsp.rsp.service.FormulaService;
+import com.rsp.rsp.service.OrgService;
 
 import fr.expression4j.core.Expression;
 import fr.expression4j.core.Parameters;
@@ -45,7 +45,7 @@ public class FormulaServiceImpl implements FormulaService {
     @Autowired
     private FormulaRepository formulaRepository;
     @Autowired
-    private OrgRepository orgRepository;
+    private OrgService orgService;
     @Autowired
     private CategoryRepository categoryRepository;
     @Autowired
@@ -90,9 +90,9 @@ public class FormulaServiceImpl implements FormulaService {
 		Parameters parameters=ExpressionFactory.createParameters();
 		String base = this.getBaseParamExpr(bean,parameters);
 		
-		List<Org> orgList = this.orgRepository.findAll();
-		
-		Map<Long,Org> orgMap = orgList.stream().collect(Collectors.toMap(Org::getId, Org->Org));
+		List<Org> orgList = this.orgService.findAll();
+		Map<Long,Org> orgMap = new LinkedHashMap<>();
+		orgList.forEach(o->orgMap.put(o.getId(), o));
 		
 		List<Formula> forList = getBySubIds(bean.getIds());
 		
@@ -154,9 +154,11 @@ public class FormulaServiceImpl implements FormulaService {
 		Parameters parameters=ExpressionFactory.createParameters();
 		String base = this.getBaseParamExpr(bean,parameters);
 		
-		List<Org> orgList = this.orgRepository.findAll();
+		List<Org> orgList = this.orgService.findAll();
 		
-		Map<Long,JSONObject> orgMap = orgList.stream().collect(Collectors.toMap(Org::getId, Org::toJSON));
+		Map<Long,JSONObject> orgMap = new LinkedHashMap<>();
+		orgList.forEach(o->orgMap.put(o.getId(), o.toJSON()));
+		
 		//所有公式
 		List<Formula> forList = getBySubIds(bean.getIds());
 		for (Formula formula : forList) {
@@ -285,7 +287,7 @@ public class FormulaServiceImpl implements FormulaService {
 			forMap.put(form.getOrgId(), list);
 		}
 		
-		List<Org> orgList = this.orgRepository.findAll();
+		List<Org> orgList = this.orgService.findAll();
 		
 		for (Org org : orgList) {
 			JSONObject json = new JSONObject();
