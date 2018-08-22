@@ -24,7 +24,12 @@
 <script type="text/javascript" th:src="@{/js/mws.js}" ></script>
 
 <script type="text/javascript" th:src="@{/js/filter.js}"></script>
-
+<style type="text/css">
+.mws-form .mws-form-inline label
+{
+	height: 55px;
+}
+</style>
 <title>融算盘</title>
 </head>
 
@@ -101,7 +106,7 @@
 			                    </div>
 			                    <div class="mws-form-inline" style="width: 30%;display: inline-block;  margin-bottom: 10px;">
 			                		<div class="mws-form-row" style="width: 80%; padding: 5px 20px 0px 20px;">
-			                			<label>无抵押月还款</label>
+			                			<label>无抵押月供(未显示月供的按本金*3.5%计算)</label>
 			                			<div class="mws-form-item large">
 			                				<input type="number" style="margin-top: 6px;"  name="wdyhk" required></input>
 			                			</div>
@@ -109,7 +114,7 @@
 			                    </div>
 			                    <div class="mws-form-inline" style="width: 30%;display: inline-block;  margin-bottom: 10px;">
 			                		<div class="mws-form-row" style="width: 80%;padding: 5px 20px 0px 20px;">
-			                			<label>信用卡负债</label>
+			                			<label>信用卡已用额度/均六个月使用额度(取最大值)</label>
 			                			<div class="mws-form-item large">
 			                				<input type="number" style="margin-top: 6px;" name="xykfz" required></input>
 			                			</div>

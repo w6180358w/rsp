@@ -28,7 +28,7 @@
 .novice_f_in img{display:block;width:22px;height:20px;float:left; margin-right:6px;}
 .novice_f_in h2{ font-size:15px; font-weight:100;line-height:19px;height:20px;color:#333;float:left;padding: 0 6px;}
 /*新手专享*/
-.novice_zs_f{ width:100%;overflow:hidden;margin-top:10px;margin-bottom:15px;}
+.novice_zs_f{ width:100%;overflow:hidden;margin-bottom:15px;}
 .novice_zs_f_in{ width:94%;height:146px;margin:0 auto;overflow:hidden;background:#fff;border-radius:6px;}
 .novice_zs_f_in_l{ width:88%;height:146px;float:left;background:#fff;}
 .novice_zs_f_in_r{ width:12%;height:146px;float:left;}
@@ -234,7 +234,7 @@ html,body {
 	margin-bottom: 0;
 }
 .cont-form label{
-	width: 32%;
+	width: 50%;
 	padding-top: 6px;
 	line-height: 16px;
 	text-align: right;
@@ -246,7 +246,7 @@ html,body {
 	vertical-align: middle;
 }
 .cont-form input{
-	width: 50%;
+	width: 35%;
 	height: 18px;
 	line-height: 18px;
 	padding: 6px 10px;
