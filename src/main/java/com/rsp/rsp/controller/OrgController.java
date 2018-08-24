@@ -107,13 +107,13 @@ public class OrgController {
         if(StringUtils.hasText(fileName)){
             String temp = fileName.substring(fileName.lastIndexOf("."));
             // 设置存放图片文件的路径 +
-            String path = classpath + conif.getLocalPath() +StringUtils.cleanPath(org.getName())+temp;
+            String path = classpath + conif.getLocalPath() +StringUtils.cleanPath(System.currentTimeMillis()+"")+temp;
             File logo = new File(classpath + conif.getLocalPath());
             if(!logo.exists()){
                 logo.mkdirs();
             }
             file.transferTo(new File(path));
-            org.setLogo("../"+path.substring(path.lastIndexOf("logo")));
+            org.setLogo(path.substring(path.lastIndexOf("logo")));
         }
     }
     @PostMapping("/delete")

@@ -97,7 +97,7 @@
 							<div class="mws-form-row">
 								<label>logo</label>
 								<div class="mws-form-item large">
-									<img th:src="${org.logo}" alt="" height="80" width="100"/><br/>
+									<img th:src="@{'/'+${org.logo}}" alt="" height="80" width="100"/><br/>
 									<input type="file" name="file" class="mws-textinput"/>
 									<span>最佳图片大小:100*80</span>
 									<input type="hidden" name="logo" th:value="${org.logo}"/>
