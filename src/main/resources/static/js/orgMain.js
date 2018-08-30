@@ -63,14 +63,6 @@ function loadOrg() {
                 "render": function(data, type, record,index) {
                     return "<span title='"+data+"'>"+data+"</span>";
                 }},
-            { "data": "contacts","orderable": false,"title":"联系人","width":"40px",
-                "render": function(data, type, record,index) {
-                    return "<span title='"+data+"'>"+data+"</span>";
-                }},
-            { "data": "phone","orderable": false,"title":"联系电话","width":"40px",
-                "render": function(data, type, record,index) {
-                    return "<span title='"+data+"'>"+data+"</span>";
-                }},
             { "data": "strengths","orderable": false,"title":"优势","width":"40px",
                 "render": function(data, type, record,index) {
                     return "<span title='"+data+"'>"+data+"</span>";
@@ -116,7 +108,7 @@ function editOrg(id) {
         // title:false,
         maxmin: true,
         shadeClose: false, //点击遮罩关闭层
-        area : ['800px' , '100%'],
+        area : ['800px' , '90%'],
         content: 'org/add?id='+id,
         end: function(){
             //关闭回调
@@ -135,7 +127,7 @@ function addOrg() {
         // title:false,
         maxmin: true,
         shadeClose: false, //点击遮罩关闭层
-        area : ['800px' , '100%'],
+        area : ['800px' , '90%'],
         content: 'org/add',
         end: function(){
             //关闭回调

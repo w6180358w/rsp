@@ -1,14 +1,13 @@
 $(function () {
-    loadCategory();
+    loadContacts();
 });
 
-function loadCategory() {
+function loadContacts() {
     $(".mws-datatable-fn").DataTable({
         "serverSide": true,
         "orderMulti": false,
-        // searching:false,
         "ajax": {
-            "url": "category/queryAll",
+            "url": "contacts/queryAll",
             "type": "post",
             "data": function(data){
                 startNum = data.start;
@@ -46,40 +45,39 @@ function loadCategory() {
             }
         },
         "columns": [
-            { "data": "name","orderable": false,"title":"名称","width":"40%",
+            { "data": "name","orderable": false,"title":"姓名","width":"30%",
                 "render": function(data, type, record,index) {
                     return "<span title='"+data+"'>"+data+"</span>";
                 }},
-            { "data": "type","orderable": false,"title":"类型","width":"40%",
-                "render": function(data, type, record,index) {
-                    var result;
-                    if(data==="ajf"){
-                        result = "按揭房"
-                    }else if(data === "bd"){
-                        result = "保单"
-                    }else if (data === "gjj"){
-                        result = "公积金"
-                    }else {
-                        result = "";
-                    }
-                    return result;
-                }
-            },
+            { "data": "phone","orderable": false,"title":"电话","width":"30%",
+                "render":function(data, type, record,index) {
+                    return "<span title='"+data+"'>"+data+"</span>";
+                }},
+            { "data": "orgId","orderable": false,"title":"机构","width":"20%",
+                "render":function(data, type, record,index) {
+                	var name = record.orgName || "";
+                    return "<span title='"+name+"'>"+name+"</span>";
+                }},
+            { "data": "order","orderable": false,"title":"是否轮播","width":"10%",
+                "render":function(data, type, record,index) {
+                	var status = !!data?"否":"是";
+                    return "<span title='"+status+"'>"+status+"</span>";
+                }},
             { "data": "id","orderable": false,"title":"操作","width":"20%",
                 "render": function(data, type, record,index) {
-                    return "<button onclick='editCategory("+data+")'>修改</button>" +
-                        "<button onclick='deleteCategory("+data+")'>删除</button>";
+                    return "<button onclick='editContacts("+data+")'>修改</button>" +
+                        "<button onclick='deleteContacts("+data+")'>删除</button>";
                 }
             }
         ]
     });
 }
-function deleteCategory(id) {
+function deleteContacts(id) {
     layer.confirm('确定要删除选中的记录？', {
         btn : [ '确定', '取消' ]
     }, function() {
         $.ajax({
-            url : "category/delete",
+            url : "contacts/delete",
             type : "post",
             data : {
                 'id' : id
@@ -95,30 +93,29 @@ function deleteCategory(id) {
         });
     })
 }
-function editCategory(id) {
+function editContacts(id) {
     layer.open({
         type: 2,
-        title: '修改大类',
-        // title:false,
+        title: '修改联系人',
         maxmin: true,
         shadeClose: false, //点击遮罩关闭层
-        area : ['800px' , '350px'],
-        content: 'category/add?id='+id,
+        area : ['800px' , '430px'],
+        content: 'contacts/add?id='+id,
         end: function(){
             //关闭回调
             $(".mws-datatable-fn").DataTable().ajax.reload();
         }
     });
 }
-function addCategory() {
+function addContacts() {
     layer.open({
         type: 2,
-        title: '添加大类',
+        title: '添加联系人',
         // title:false,
         maxmin: true,
         shadeClose: false, //点击遮罩关闭层
-        area : ['800px' , '350px'],
-        content: 'category/add',
+        area : ['800px' , '430px'],
+        content: 'contacts/add',
         end: function(){
             //关闭回调
             $(".mws-datatable-fn").DataTable().ajax.reload();
@@ -126,6 +123,6 @@ function addCategory() {
     });
 }
 
-function refreshCategory() {
+function refreshContacts() {
     $(".mws-datatable-fn").DataTable().ajax.reload();
 }

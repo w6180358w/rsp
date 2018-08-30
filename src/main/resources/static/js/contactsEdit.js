@@ -1,70 +1,45 @@
 $(function () {
     var icon = "<i class='fa fa-times-circle'></i> ";
-    $("#orgForm").validate({
+    $("#contactsForm").validate({
         rules : {
-            term : {
-                required : true,
-                digits:true
+            orgId : {
+                required : true
             },
-            limitMin : {
-                required : true,
-                digits:true
-            },
-            limitMax : {
-                required : true,
-                digits:true
-            },
-            interestRateMin : {
-                number:true
-            },
-            interestRateMax : {
-                number:true
+            phone : {
+            	required : true,
+            	_mobile : true
             },
             name:{
                 required : true
             }
         },
         messages : {
-            term : {
-                required : icon + "请输入期限",
-                digits : icon + "请输入整数"
-            },
-            limitMin : {
-                required : icon + "请输入额度",
-                digits : icon + "请输入整数"
-            },
-            limitMax : {
-                required : icon + "请输入额度",
-                digits : icon + "请输入整数"
-            },
-            interestRateMin : {
-                number : icon + "请输入合法的数字"
-            },
-            interestRateMax : {
-                number : icon + "请输入合法的数字"
+        	orgId : {
+                required : icon + "请选择机构"
             },
             name : {
-                required : icon + "请输入名称"
+                required : icon + "请输入姓名"
+            },
+            phone : {
+            	required : icon + "请输入联系电话",
+                _mobile : icon + "请正确填写联系电话"
             }
-        },
+        }
     });
-    // 手机号码验证
+ // 手机号码验证
     jQuery.validator.addMethod("_mobile",function (value, element) {
         var length = value.length;
         var mobile = /^(13[0-9]{9})|(18[0-9]{9})|(14[0-9]{9})|(17[0-9]{9})|(15[0-9]{9})$/;
         return this.optional(element) || (length == 11 && mobile.test(value));
     }, "请正确填写您的手机号码");
-    if($.fn.filestyle) {
-        $("input[type='file']").filestyle({
-            imagewidth: 78,
-            imageHeight: 28
-        });
-        $("input.file").attr("readonly", true);
-    }
+    
+    $('#contactsForm').find("select[name=orgId]").on("change",function(e){
+    	$("#orgName").val($(e.target).find("option:selected").text());
+    })
 })
 
-function submitOrgForm() {
-    if (! $("#orgForm").valid()) {
+function submitContactsForm() {
+    if (! $("#contactsForm").valid()) {
         return;
     }
     var id = $("#id").val();
@@ -76,12 +51,11 @@ function submitOrgForm() {
         msg = "更新成功";
         errMsg = "更新失败"
     }
-    var formData = new FormData($("#orgForm")[0]);
     $.ajax({
         type: "POST",
+        dataType: "html",
         url: url,
-        processData: false,contentType: false,
-        data: formData,
+        data: $('#contactsForm').serialize(),
         success: function (data) {
             if(data==="success"){
                 var index = parent.layer.getFrameIndex(window.name);

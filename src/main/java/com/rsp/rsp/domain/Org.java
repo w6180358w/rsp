@@ -32,10 +32,6 @@ public class Org {
     private String logo;
     /**描述*/
     private String desc;
-    /**联系人*/
-    private String contacts;
-    /**联系电话*/
-    private String phone;
     /**优势*/
     private String strengths;
     /**排序*/
@@ -158,26 +154,6 @@ public class Org {
     }
 
     @Basic
-    @Column(name = "contacts")
-    public String getContacts() {
-        return contacts;
-    }
-
-    public void setContacts(String contacts) {
-        this.contacts = contacts;
-    }
-
-    @Basic
-    @Column(name = "phone")
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    @Basic
     @Column(name = "strengths")
     public String getStrengths() {
         return strengths;
@@ -232,8 +208,6 @@ public class Org {
         if (material != null ? !material.equals(that.material) : that.material != null) return false;
         if (logo != null ? !logo.equals(that.logo) : that.logo != null) return false;
         if (desc != null ? !desc.equals(that.desc) : that.desc != null) return false;
-        if (contacts != null ? !contacts.equals(that.contacts) : that.contacts != null) return false;
-        if (phone != null ? !phone.equals(that.phone) : that.phone != null) return false;
         if (strengths != null ? !strengths.equals(that.strengths) : that.strengths != null) return false;
 
         return true;
@@ -252,8 +226,6 @@ public class Org {
         result = 31 * result + (material != null ? material.hashCode() : 0);
         result = 31 * result + (logo != null ? logo.hashCode() : 0);
         result = 31 * result + (desc != null ? desc.hashCode() : 0);
-        result = 31 * result + (contacts != null ? contacts.hashCode() : 0);
-        result = 31 * result + (phone != null ? phone.hashCode() : 0);
         result = 31 * result + (strengths != null ? strengths.hashCode() : 0);
         return result;
     }

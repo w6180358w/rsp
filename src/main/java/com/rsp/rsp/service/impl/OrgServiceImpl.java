@@ -12,6 +12,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import com.rsp.rsp.dao.ContactsRepository;
 import com.rsp.rsp.dao.FormulaRepository;
 import com.rsp.rsp.dao.OrgRepository;
 import com.rsp.rsp.domain.Org;
@@ -29,6 +30,9 @@ public class OrgServiceImpl implements OrgService {
     private OrgRepository orgRepository;
     @Autowired
     private FormulaRepository formulaRepository;
+    
+    @Autowired
+    private ContactsRepository contactsRepository;
 
     /**
      * 查询全部
@@ -84,12 +88,10 @@ public class OrgServiceImpl implements OrgService {
         org.setLimitMax(newOrg.getLimitMax());
         org.setTerm(newOrg.getTerm());
         org.setLogo(newOrg.getLogo());
-        org.setContacts(newOrg.getContacts());
         org.setDesc(newOrg.getDesc());
         org.setInterestRateMin(newOrg.getInterestRateMin());
         org.setInterestRateMax(newOrg.getInterestRateMax());
         org.setMaterial(newOrg.getMaterial());
-        org.setPhone(newOrg.getPhone());
         org.setRequirements(newOrg.getRequirements());
         org.setStrengths(newOrg.getStrengths());
         org.setOrder(newOrg.getOrder());
@@ -104,6 +106,7 @@ public class OrgServiceImpl implements OrgService {
     public void delete(Long id) {
         //根据机构id删除公式
         formulaRepository.deleteByOrgId(id);
+        contactsRepository.deleteByOrgId(id);
         //删除机构
         orgRepository.deleteById(id);
     }

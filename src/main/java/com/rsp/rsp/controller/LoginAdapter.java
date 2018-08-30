@@ -22,7 +22,7 @@ public class LoginAdapter implements WebMvcConfigurer {
     /**
      * 不需要登录拦截的url:登录注册和验证码
      */
-    final String[] notLoginInterceptPaths = {"/index","/css/**","/js/**","/images/**","/plugins/**","/phone","/form/**","/list","/details/**","/filter/columns/**","/error"};
+    final String[] notLoginInterceptPaths = {"/index","/css/**","/js/**","/images/**","/plugins/**","/contacts/org/**","/phone","/form/**","/list","/details/**","/filter/columns/**","/error"};
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
