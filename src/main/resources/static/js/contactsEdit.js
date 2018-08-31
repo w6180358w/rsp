@@ -6,8 +6,7 @@ $(function () {
                 required : true
             },
             phone : {
-            	required : true,
-            	_mobile : true
+            	required : true
             },
             name:{
                 required : true
@@ -21,17 +20,10 @@ $(function () {
                 required : icon + "请输入姓名"
             },
             phone : {
-            	required : icon + "请输入联系电话",
-                _mobile : icon + "请正确填写联系电话"
+            	required : icon + "请输入联系电话"
             }
         }
     });
- // 手机号码验证
-    jQuery.validator.addMethod("_mobile",function (value, element) {
-        var length = value.length;
-        var mobile = /^(13[0-9]{9})|(18[0-9]{9})|(14[0-9]{9})|(17[0-9]{9})|(15[0-9]{9})$/;
-        return this.optional(element) || (length == 11 && mobile.test(value));
-    }, "请正确填写您的手机号码");
     
     $('#contactsForm').find("select[name=orgId]").on("change",function(e){
     	$("#orgName").val($(e.target).find("option:selected").text());
