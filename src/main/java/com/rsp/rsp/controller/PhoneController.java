@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.rsp.rsp.domain.Org;
 import com.rsp.rsp.domain.bean.FormulaBean;
 import com.rsp.rsp.domain.bean.ParamsBean;
+import com.rsp.rsp.service.ContactsService;
 import com.rsp.rsp.service.FormulaService;
 import com.rsp.rsp.service.OrgService;
 
@@ -26,6 +27,9 @@ import com.rsp.rsp.service.OrgService;
 @RequestMapping()
 public class PhoneController {
 	
+    @Autowired
+    private ContactsService contactsService;
+    
     @Autowired
     private FormulaService formulaService;
     @Autowired
@@ -74,6 +78,7 @@ public class PhoneController {
     public ModelAndView details(@PathVariable(name="id") Long id,Model model){
     	Org org = this.orgService.findById(id);
     	model.addAttribute("org", org);
+    	model.addAttribute("contacts",contactsService.findByOrg(org.getId()));
         return new ModelAndView("list-details.html");
     }
     

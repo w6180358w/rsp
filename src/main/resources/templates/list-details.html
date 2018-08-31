@@ -87,37 +87,14 @@
 <div class="xsiqy_f">
 	<!-- 固定 -->
 	<div class="sxdymy_f">
-
-		<dl class="dl-slider-con">
+		<dl class="dl-slider-con" th:each="user:${contacts.fixed}">
         	<dt>
         		<span>客户经理：</span>
-        		<span>张三</span>
+        		<span th:text="${user.name}"></span>
         	</dt>
         	<dd>
         		<span>联系电话：</span>
-        		<span>11111111111</span>
-        	</dd>
-        </dl>
-        
-        <dl class="dl-slider-con">
-        	<dt>
-        		<span>客户经理：</span>
-        		<span>李四</span>
-        	</dt>
-        	<dd>
-        		<span>联系电话：</span>
-        		<span>00000000000</span>
-        	</dd>
-        </dl>
-        
-        <dl class="dl-slider-con">
-        	<dt>
-        		<span>客户经理：</span>
-        		<span>李四</span>
-        	</dt>
-        	<dd>
-        		<span>联系电话：</span>
-        		<span>33333333333</span>
+        		<span th:text="${user.phone}"></span>
         	</dd>
         </dl>
 	</div>
@@ -127,39 +104,15 @@
 	
 		<div class="swiper-container">
 		    <div class="swiper-wrapper">
-		        <div class="swiper-slide">
+		        <div class="swiper-slide" th:each="user:${contacts.slider}">
 		        	<dl class="dl-slider-con">
 			        	<dt>
 			        		<span>客户经理：</span>
-			        		<span>张三</span>
+			        		<span th:text="${user.name}"></span>
 			        	</dt>
 			        	<dd>
 			        		<span>联系电话：</span>
-			        		<span>11111111111</span>
-			        	</dd>
-			        </dl>
-		        </div>
-		        <div class="swiper-slide">
-		        	<dl class="dl-slider-con">
-			        	<dt>
-			        		<span>客户经理：</span>
-			        		<span>张三</span>
-			        	</dt>
-			        	<dd>
-			        		<span>联系电话：</span>
-			        		<span>22222222222</span>
-			        	</dd>
-			        </dl>
-		        </div>
-		        <div class="swiper-slide">
-		        	<dl class="dl-slider-con">
-			        	<dt>
-			        		<span>客户经理：</span>
-			        		<span>张三</span>
-			        	</dt>
-			        	<dd>
-			        		<span>联系电话：</span>
-			        		<span>33333333333</span>
+			        		<span th:text="${user.phone}"></span>
 			        	</dd>
 			        </dl>
 		        </div>
@@ -173,7 +126,7 @@
   var mySwiper = new Swiper ('.swiper-container', {
     loop:'true',
     direction : 'vertical',
-    autoplay: 4000,
+    autoplay: 1000,
     speed:1000
   })    
 </script>

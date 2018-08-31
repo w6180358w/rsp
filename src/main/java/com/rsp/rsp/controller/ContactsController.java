@@ -84,10 +84,4 @@ public class ContactsController {
             return "error";
         }
     }
-    
-    @RequestMapping("/org/{orgId}")
-    public R queryAll(@PathVariable(name="orgId")Long orgId){
-        Map<String, List<Contacts>> map = contactsService.findByOrg(orgId);
-        return new R(Arrays.asList(map));
-    }
 }
