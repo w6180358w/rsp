@@ -8,6 +8,8 @@
 <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" th:href="@{/css/common.css}" >
 <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" >
+<link rel="stylesheet" type="text/css" th:href="@{/css/swiper.min.css}" />
+<script type="text/javascript" th:src="@{/js/swiper.min.js}"></script>
 </head>
 
 <body>
@@ -68,32 +70,113 @@
               <dd th:text="${org.material}"></dd>
             </dl>
           </div>
-					<!--图文信息-->
-					<div class="pic-text">
-						<dl class="left-right">
-	            <dt><img th:src="@{'/'+${org.logo}}"></dt>
-	            <dd th:text="${org.desc}"></dd>
-	          </dl>
-					</div>
+          
+			<!--图文信息-->
+			<div class="pic-text">
+				<dl class="left-right">
+		          <dt><img th:src="@{'/'+${org.logo}}"></dt>
+		          <dd th:text="${org.desc}"></dd>
+		        </dl>
+			</div>
+			
         </div>
     </div>
-
-		<div class="sxdymy_f">
-			<div class="sxdymy_f_in">
-					<!-- 这里需要做成轮播
-					<ul>
-							<li>
-									<span>客户经理</span>
-									<i th:text="${org.contacts}"></i>
-							</li>
-							<li>
-									<span>联系电话</span>
-									<i th:text="${org.phone}"></i>
-							</li>
-					</ul> -->
-				</div>
-		</div>
 </div>
+
+
+<div class="xsiqy_f">
+	<!-- 固定 -->
+	<div class="sxdymy_f">
+
+		<dl class="dl-slider-con">
+        	<dt>
+        		<span>客户经理：</span>
+        		<span>张三</span>
+        	</dt>
+        	<dd>
+        		<span>联系电话：</span>
+        		<span>11111111111</span>
+        	</dd>
+        </dl>
+        
+        <dl class="dl-slider-con">
+        	<dt>
+        		<span>客户经理：</span>
+        		<span>李四</span>
+        	</dt>
+        	<dd>
+        		<span>联系电话：</span>
+        		<span>00000000000</span>
+        	</dd>
+        </dl>
+        
+        <dl class="dl-slider-con">
+        	<dt>
+        		<span>客户经理：</span>
+        		<span>李四</span>
+        	</dt>
+        	<dd>
+        		<span>联系电话：</span>
+        		<span>33333333333</span>
+        	</dd>
+        </dl>
+	</div>
+	
+	<!-- 轮播 -->
+	<div class="rsp-detail-swiper">
+	
+		<div class="swiper-container">
+		    <div class="swiper-wrapper">
+		        <div class="swiper-slide">
+		        	<dl class="dl-slider-con">
+			        	<dt>
+			        		<span>客户经理：</span>
+			        		<span>张三</span>
+			        	</dt>
+			        	<dd>
+			        		<span>联系电话：</span>
+			        		<span>11111111111</span>
+			        	</dd>
+			        </dl>
+		        </div>
+		        <div class="swiper-slide">
+		        	<dl class="dl-slider-con">
+			        	<dt>
+			        		<span>客户经理：</span>
+			        		<span>张三</span>
+			        	</dt>
+			        	<dd>
+			        		<span>联系电话：</span>
+			        		<span>22222222222</span>
+			        	</dd>
+			        </dl>
+		        </div>
+		        <div class="swiper-slide">
+		        	<dl class="dl-slider-con">
+			        	<dt>
+			        		<span>客户经理：</span>
+			        		<span>张三</span>
+			        	</dt>
+			        	<dd>
+			        		<span>联系电话：</span>
+			        		<span>33333333333</span>
+			        	</dd>
+			        </dl>
+		        </div>
+		    </div>
+		</div>
+	
+	</div>
+</div>
+	
+<script>        
+  var mySwiper = new Swiper ('.swiper-container', {
+    loop:'true',
+    direction : 'vertical',
+    autoplay: 4000,
+    speed:1000
+  })    
+</script>
 
 </body>
 </html>
