@@ -37,19 +37,17 @@ function submitContactsForm() {
     var id = $("#id").val();
     var url ="save";
     var msg = "添加成功"
-    var errMsg = "添加失败"
     if(id!=="0"){
         url = "update";
         msg = "更新成功";
-        errMsg = "更新失败"
     }
     $.ajax({
         type: "POST",
-        dataType: "html",
+        dataType: "json",
         url: url,
         data: $('#contactsForm').serialize(),
         success: function (data) {
-            if(data==="success"){
+            if(!!data.success){
                 var index = parent.layer.getFrameIndex(window.name);
                 layer.msg(msg,{
                     anim: -1,
@@ -58,7 +56,7 @@ function submitContactsForm() {
                     parent.layer.close(index)
                 });
             }else{
-                layer.msg(errMsg,{
+                layer.msg(data.error,{
                     anim: -1,
                     time: 1500 //1.5秒关闭（如果不配置，默认是3秒）
                 });

@@ -1,7 +1,6 @@
 package com.rsp.rsp.service;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.data.domain.Page;
 import org.springframework.transaction.annotation.Propagation;
@@ -70,5 +69,11 @@ public interface ContactsService {
      * @param orgId
      * @return
      */
-    Map<String, List<Contacts>> findByOrg(Long orgId);
+    List<Contacts> findByOrg(Long orgId);
+    /**
+     * 验证序号是否存在
+     * @param con
+     * @return
+     */
+    Contacts valOrder(Contacts con);
 }

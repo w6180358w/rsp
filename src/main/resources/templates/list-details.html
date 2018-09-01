@@ -87,7 +87,7 @@
 <div class="xsiqy_f">
 	<!-- 固定 -->
 	<div class="sxdymy_f">
-		<dl class="dl-slider-con" th:each="user:${contacts.fixed}">
+		<dl class="dl-slider-con" th:each="user:${contacts}">
         	<dt>
         		<span>客户经理：</span>
         		<span th:text="${user.name}"></span>
@@ -99,7 +99,7 @@
         </dl>
 	</div>
 	
-	<!-- 轮播 -->
+	<!-- 轮播
 	<div class="rsp-detail-swiper">
 	
 		<div class="swiper-container">
@@ -119,16 +119,16 @@
 		    </div>
 		</div>
 	
-	</div>
+	</div> -->
 </div>
 	
 <script>        
-  var mySwiper = new Swiper ('.swiper-container', {
+ /*  var mySwiper = new Swiper ('.swiper-container', {
     loop:'true',
     direction : 'vertical',
     autoplay: 3000,
     speed:1000
-  })    
+  })     */
 </script>
 
 </body>

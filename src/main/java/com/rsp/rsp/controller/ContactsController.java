@@ -1,20 +1,19 @@
 package com.rsp.rsp.controller;
 
-import com.rsp.rsp.domain.R;
-import com.rsp.rsp.domain.query.ContactsQuery;
-import com.rsp.rsp.domain.Contacts;
-import com.rsp.rsp.service.ContactsService;
-import com.rsp.rsp.service.OrgService;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.rsp.rsp.domain.Contacts;
+import com.rsp.rsp.domain.R;
+import com.rsp.rsp.domain.query.ContactsQuery;
+import com.rsp.rsp.service.ContactsService;
+import com.rsp.rsp.service.OrgService;
 
 /**
  * 联系人
@@ -56,23 +55,41 @@ public class ContactsController {
         return new ModelAndView("addContacts.html");
     }
     @PostMapping("/save")
-    public String save(Contacts contacts){
+    public R save(Contacts contacts){
+    	R r = new R(true);
         try {
-        	contactsService.save(contacts);
-            return "success";
+        	Contacts val = contactsService.valOrder(contacts);
+        	if(val!=null) {
+        		 r.setError("添加失败，与["+val.getOrgName()+"--"+val.getName()+"]序号相同!");
+            	r.setSuccess(false);
+	       	}else {
+	       		contactsService.save(contacts);
+	       	}
         }catch (Exception e){
-            return "error";
+        	e.printStackTrace();
+            r.setError("添加失败，请联系管理员!");
+            r.setSuccess(false);
         }
+        return r;
     }
 
     @PostMapping("/update")
-    public String update(Contacts contacts){
+    public R update(Contacts contacts){
+    	R r = new R(true);
         try {
-        	contactsService.update(contacts);
-            return "success";
+        	Contacts val = contactsService.valOrder(contacts);
+        	if(val!=null) {
+        		 r.setError("更新失败，与["+val.getOrgName()+"--"+val.getName()+"]序号相同!");
+                 r.setSuccess(false);
+        	}else {
+        		contactsService.update(contacts);
+        	}
         }catch (Exception e){
-            return "error";
+        	e.printStackTrace();
+            r.setError("更新失败，请联系管理员!");
+            r.setSuccess(false);
         }
+        return r;
     }
 
     @PostMapping("/delete")
