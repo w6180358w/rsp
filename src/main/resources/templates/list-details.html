@@ -8,8 +8,6 @@
 <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" th:href="@{/css/common.css}" >
 <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" >
-<link rel="stylesheet" type="text/css" th:href="@{/css/swiper.min.css}" />
-<script type="text/javascript" th:src="@{/js/swiper.min.js}"></script>
 </head>
 
 <body>
@@ -99,37 +97,7 @@
         </dl>
 	</div>
 	
-	<!-- 轮播
-	<div class="rsp-detail-swiper">
-	
-		<div class="swiper-container">
-		    <div class="swiper-wrapper">
-		        <div class="swiper-slide" th:each="user:${contacts.slider}">
-		        	<dl class="dl-slider-con">
-			        	<dt>
-			        		<span>客户经理：</span>
-			        		<span th:text="${user.name}"></span>
-			        	</dt>
-			        	<dd>
-			        		<span>联系电话：</span>
-			        		<span th:text="${user.phone}"></span>
-			        	</dd>
-			        </dl>
-		        </div>
-		    </div>
-		</div>
-	
-	</div> -->
 </div>
 	
-<script>        
- /*  var mySwiper = new Swiper ('.swiper-container', {
-    loop:'true',
-    direction : 'vertical',
-    autoplay: 3000,
-    speed:1000
-  })     */
-</script>
-
 </body>
 </html>
