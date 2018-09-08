@@ -20,6 +20,8 @@ public class Statistics {
     private Long orgId;
     /**统计时间*/
     private Long countTime;
+    /**类型*/
+    private String type;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -51,8 +53,17 @@ public class Statistics {
     public void setCountTime(Long countTime) {
         this.countTime = countTime;
     }
+    @Basic
+    @Column(name = "type")
+    public String getType() {
+		return type;
+	}
 
-    @Override
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	@Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

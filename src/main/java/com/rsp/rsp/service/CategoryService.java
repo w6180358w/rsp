@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * 大类
@@ -69,8 +70,14 @@ public interface CategoryService {
     Map<Long,String> findIdAndNameMap();
     
     /**
-     * 根据类型擦
+     * 根据类型查
      * @return
      */
     List<Category> type(String type);
+    /**
+     * 根据id集合查
+     * @param idList
+     * @return
+     */
+    List<Category> inId(Set<Long> idList);
 }

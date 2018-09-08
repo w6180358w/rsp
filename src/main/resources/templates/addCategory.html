@@ -24,7 +24,7 @@
 
 <script type="text/javascript" th:src="@{/js/newcitydata.js}"></script>
 <script type="text/javascript" th:src="@{/js/citySelect-1.0.4.js}"></script>
-<script type="text/javascript" th:src="@{/js/categoryEdit.js(path=${contextPath})}"></script>
+<script type="text/javascript" th:src="@{/js/categoryEdit.js}"></script>
 
 	<title>融算盘</title>
 
@@ -43,7 +43,7 @@
 						<div class="mws-form-inline">
 							<input type="hidden" name="id" id="id" th:value="${category.id}"/>
 							<input type="hidden" name="cityName" id="cityName" th:value="${cityName}"/>
-							<input type="hidden" name="typeName" id="typeName" th:value="${typeName}"/>
+							<input type="hidden" name="typeName" id="typeName" th:value="${category.typeName}"/>
 							<div class="mws-form-row">
 								<label>名称 <span style="color: #b90a0f">*</span></label>
 								<div class="mws-form-item large">
@@ -54,22 +54,22 @@
 							<div class="mws-form-row">
 								<label>城市 <span style="color: #b90a0f">*</span></label>
 								<div class="mws-form-item large">
-									<div class="city-select" id="single-select-1"></div>
+									<div class="city-select" id="city" th:attr="val=${cityName}"></div>
 								</div>
 							</div>
 							<div class="mws-form-row">
-								<label>抵押类型 <span style="color: #b90a0f">*</span></label>
+								<label>抵押状态 <span style="color: #b90a0f">*</span></label>
 								<div class="mws-form-item large">
-									<select name="group" id="group" th:field="*{group}">
-										<option value="wdy">无抵押</option>
-										<option value="dy">抵押</option>
+									<select name="group" id="group">
+										<option value="wdy" th:selected="${group eq 'wdy'}">无抵押</option>
+										<option value="dy" th:selected="${group eq 'dy'}">抵押</option>
 									</select>
 								</div>
 							</div>
 							<div class="mws-form-row">
 								<label>类型 <span style="color: #b90a0f">*</span></label>
 								<div class="mws-form-item large">
-									<select name="type" th:field="*{category.type}">
+									<select name="type" th:field="${category.type}">
 										<option value="" th:each="type:${typeList}" th:value="${type.key}" th:text="${type.name}"></option>
 									</select>
 								</div>

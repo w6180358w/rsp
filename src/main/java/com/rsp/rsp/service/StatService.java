@@ -16,12 +16,12 @@ public interface StatService {
 	 * @param end
 	 * @return
 	 */
-	JSONObject statXTime(Long start,Long end);
+	JSONObject statXTime(Long start,Long end,String city,String group);
 	/**
 	 * X轴为机构
 	 * @param start
 	 * @param end
 	 * @return
 	 */
-	JSONObject statXOrg(Long start,Long end);
+	JSONObject statXOrg(Long start,Long end,String city,String group);
 }

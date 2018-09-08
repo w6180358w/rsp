@@ -51,7 +51,18 @@ function loadSubCategory() {
                 }},
             { "data": "categoryName","orderable": false,"title":"大类","width":"40%",
                 "render": function(data, type, record,index) {
-                	var result = getTypeName(record.type)+"-"+data;
+                	var t = record.type;
+                	var city = "未知城市";
+                	var type = "未知类型";
+                	var group ="未知抵押状态";
+                	var name = "未知大类";
+                	if(!!t){
+                		city = t.cityName;
+                		type = t.name;
+                		group = t.group=="wdy"?"无抵押":"抵押";
+                		name = record.categoryName;
+                	}
+                	var result = city+"-"+group+"-"+type+"-"+name;
                     return "<span title='"+result+"'>"+result+"</span>";
                 }},
             { "data": "paramKey","orderable": false,"title":"参数","width":"40%",
@@ -112,8 +123,8 @@ function editSubCategory(id) {
         // title:false,
         maxmin: true,
         shadeClose: false, //点击遮罩关闭层
-        area : ['800px' , '500px'],
-        content: 'subCategory/add?id='+id,
+        area : ['800px' , '650px'],
+        content: rootpath+'subCategory/add?id='+id,
         end: function(){
             //关闭回调
             $(".mws-datatable-fn").DataTable().ajax.reload();
@@ -131,8 +142,8 @@ function addSubCategory() {
         // title:false,
         maxmin: true,
         shadeClose: false, //点击遮罩关闭层
-        area : ['800px' , '500px'],
-        content: 'subCategory/add',
+        area : ['800px' , '650px'],
+        content: rootpath+'subCategory/add',
         end: function(){
             //关闭回调
             $(".mws-datatable-fn").DataTable().ajax.reload();

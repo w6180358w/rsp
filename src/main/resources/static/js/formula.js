@@ -6,10 +6,10 @@ $(function () {
 			$("#listTable").find("thead").remove();
 		}
 		var val = $(el.target).val();
-		if(val && val!=""){
-			loadFormula(val);
-		}	
+		loadFormula(val);
 	})
+	initSelectCity(true);
+	    
 	var table = null;
 	function loadFormula(type) {
 		$.get(rootpath+"filter/columns/"+type,function(data){

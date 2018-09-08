@@ -976,7 +976,11 @@
 
             //存储设置城市的值
             self.values = [];
-            self.multiSelectResult.length > 0 ? self.values.push({ 'name': self.multiSelectResult, 'id': self.multiSelectResultId, 'parentId': self.provinceId }) : '';
+            if(!configure.multiSelect ){
+            	self.multiSelectResult.length > 0 ? self.values.push({ 'name': self.multiSelectResult[0], 'id': self.multiSelectResultId[0], 'parentId': self.provinceId[0] }) : '';
+            }else{
+            	self.multiSelectResult.length > 0 ? self.values.push({ 'name': self.multiSelectResult, 'id': self.multiSelectResultId, 'parentId': self.provinceId }) : '';
+            }
 
             //拼接后的选中name
             mosaicName = self.multiSelectResult.join(configure.mosaic);
@@ -989,6 +993,8 @@
             //有值就去掉此class
             self.values.length > 0 ? self.$selector.find('.city-input').removeClass('not-val') : '';
 
+            //选择之后的回调
+            configure.onCallerAfter.call(self, self.$target, self.values[0]);
         }
     }
 
@@ -1059,3 +1065,75 @@
     };
 
 })(jQuery, window);
+
+function initSelectCity(isval){
+	var singleSelect1 = $('#city').citySelect({
+		dataJson: cityData,     //数据源
+		multiSelect: false,     //单选
+		convert:false,
+		shorthand: false,        //简称
+		search: true,           //搜索
+		onCallerAfter: function (target, values) {  //选择后回调
+			getType();
+		}
+	});
+	!!$('#city').attr("val")?singleSelect1.setCityVal($('#city').attr("val")):"";
+	
+	$("#group").on("change",function(e){
+		getType();
+	});
+	
+	function getType(){
+		var city = !!singleSelect1.getCityVal()?singleSelect1.getCityVal().id:"";
+		var group = $("#group").val();
+		if(!!isval && !validate(city,group)){
+			return;
+		}
+		var type = $("#type");
+		if(type.length>0){
+			$.ajax({
+				type: "post",
+		        dataType: "json",
+		        url: rootpath+"type/city",
+		        data:{city:city,group:group},
+		        success: function (data) {
+		            if(!!data && !!data.success){
+		                type.empty();
+		                data.data.forEach(function(d){
+		                	var option = $("<option value='"+d.key+"'>"+d.name+"</option>");
+		                	type.append(option);
+		                });
+		                type.trigger("change");
+		            }else{
+		                layer.msg("查询类型失败，请联系管理员!",{
+		                    anim: -1,
+		                    time: 1500 //1.5秒关闭（如果不配置，默认是3秒）
+		                });
+		            }
+		        },
+		        error: function(data) {
+		            alert("error:"+data.responseText);
+		        }	
+			})
+		}
+	}
+	
+	function validate(city,group){
+    	if(!city){
+    		layer.msg("请选择城市",{
+                anim: -1,
+                time: 1500 //1.5秒关闭（如果不配置，默认是3秒）
+            });
+    		return false;
+    	}
+    	if(!group){
+    		layer.msg("请选择抵押状态",{
+                anim: -1,
+                time: 1500 //1.5秒关闭（如果不配置，默认是3秒）
+            });
+    		return false;
+    	}
+    	return true;
+	}
+	return singleSelect1;
+}

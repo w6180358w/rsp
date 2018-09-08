@@ -1,5 +1,6 @@
 $(function () {
 	var form = $("#searchForm");
+	var type = "";
 	form.validate();
 	form.find("select[name=type]").on("change",function (el){
 		if(table!=null){
@@ -7,11 +8,12 @@ $(function () {
 			table.destroy(); 	   //销毁datatable
 			$("#listTable").find("thead").remove();
 		}
-		var val = $(el.target).val();
-		if(val && val!=""){
-			loadFormula(val);
-		}
+		type = $(el.target).val();
+		loadFormula(type);
 	});
+	
+	initSelectCity(true);
+	
 	form.find("button[name=search]").on("click",function (){
 		if(form.valid()){
 			if(table!=null){
@@ -74,6 +76,7 @@ $(function () {
 	            	var result = {
 	                		"ids":ids,
 	                		"param":param,
+	                		"type":type,
 	                		"draw":data.draw
 	                	};
 	            	return JSON.stringify(result);

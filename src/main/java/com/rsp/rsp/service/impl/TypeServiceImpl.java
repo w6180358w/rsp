@@ -3,8 +3,10 @@ package com.rsp.rsp.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.criteria.CriteriaBuilder.In;
 import javax.persistence.criteria.Predicate;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -85,9 +87,14 @@ public class TypeServiceImpl implements TypeService {
 	@Override
 	public List<Type> city(String city,String group) {
 		List<Type> list = typeRepository.findAll((Specification<Type>) (root, query, criteriaBuilder) -> {
-            Predicate p1 = criteriaBuilder.equal(root.get("city").as(String.class), city);
-            Predicate p2 = criteriaBuilder.equal(root.get("group").as(String.class), group);
-            query.where(criteriaBuilder.and(p1,p2));
+			List<Predicate> ps= new ArrayList<>();
+			if(StringUtils.isNotEmpty(city)) {
+				ps.add(criteriaBuilder.equal(root.get("city").as(String.class), city));
+			}
+			if(StringUtils.isNotEmpty(group)) {
+				ps.add(criteriaBuilder.equal(root.get("group").as(String.class), group));
+			}
+            query.where(criteriaBuilder.and(ps.toArray(new Predicate[ps.size()])));
             return query.getRestriction();
         });
 		return list;
@@ -100,5 +107,24 @@ public class TypeServiceImpl implements TypeService {
 			return new ArrayList<>();
 		}
 		return this.city(type.getCity(), type.getGroup());
+	}
+
+	@Override
+	public List<Type> inKey(List<String> keyList) {
+		List<Type> result = typeRepository.findAll((Specification<Type>) (root, query, criteriaBuilder) -> {
+			//根据类型key筛选
+	    	In<Object> in = criteriaBuilder.in(root.get("key"));
+			List<Predicate> list = new ArrayList<>();
+			in.value(-1l);//防止参数为空
+			for (String key : keyList) {
+				in.value(key);
+			}
+			list.add(in);
+			Predicate[] p = new Predicate[list.size()];
+			
+            query.where(criteriaBuilder.and(list.toArray(p)));
+            return query.getRestriction();
+        });
+		return result;
 	}
 }

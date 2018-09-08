@@ -52,7 +52,17 @@ function loadCategory() {
                 }},
             { "data": "type","orderable": false,"title":"类型","width":"40%",
                 "render": function(data, type, record,index) {
-                    return record.typeName;
+                	var t = record.typeObj;
+                	var city = "未知城市";
+                	var type = "未知类型";
+                	var group ="未知抵押状态";
+                	if(!!t){
+                		city = t.cityName;
+                		type = t.name;
+                		group = t.group=="wdy"?"无抵押":"抵押";
+                	}
+                	var result = city+"-"+group+"-"+type;
+                    return "<span title='"+result+"'>"+result+"</span>";
                 }
             },
             { "data": "id","orderable": false,"title":"操作","width":"20%",

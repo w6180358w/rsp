@@ -73,4 +73,8 @@ public interface TypeService {
      * @return
      */
     List<Type> key(String key);
+    /**
+     * 根据唯一标识符查询
+     */
+    List<Type> inKey(List<String> keyList);
 }

@@ -54,7 +54,7 @@ function loadType() {
                 "render": function(data, type, record,index) {
                     return "<span title='"+data+"'>"+data+"</span>";
                 }},
-            { "data": "group","orderable": false,"title":"抵押类型","width":"40%",
+            { "data": "group","orderable": false,"title":"抵押状态","width":"40%",
                 "render": function(data, type, record,index) {
                 	data = data=="wdy"?"无抵押":"抵押";
                     return "<span title='"+data+"'>"+data+"</span>";

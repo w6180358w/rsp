@@ -133,6 +133,7 @@ public class FormulaServiceImpl implements FormulaService {
 			Statistics stat = new Statistics();
 			stat.setOrgId(entry.getValue().getId());
 			stat.setCountTime(now);
+			stat.setType(bean.getType());
 			this.statisticsRepository.save(stat);
 			
 			result.add(entry.getValue());
@@ -200,6 +201,7 @@ public class FormulaServiceImpl implements FormulaService {
 			Statistics stat = new Statistics();
 			stat.setOrgId(entry.getValue().getLong("orgId"));
 			stat.setCountTime(now);
+			stat.setType(bean.getType());
 			this.statisticsRepository.save(stat);
 			
 			result.add(entry.getValue());

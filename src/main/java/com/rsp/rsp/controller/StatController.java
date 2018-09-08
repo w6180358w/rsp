@@ -30,10 +30,10 @@ public class StatController {
 
     @RequestMapping("/query")
     public R queryAll(@RequestParam(name ="start",defaultValue ="0")Long start,
-    		@RequestParam(name ="end",defaultValue ="0")Long end){
+    		@RequestParam(name ="end",defaultValue ="0")Long end,@RequestParam(name ="city") String city,@RequestParam(name ="group") String group){
     	JSONObject json = new JSONObject();
-    	json.put("org", this.statService.statXOrg(start, end));
-    	json.put("time", this.statService.statXTime(start, end));
+    	json.put("org", this.statService.statXOrg(start, end, city, group));
+    	json.put("time", this.statService.statXTime(start, end, city, group));
         return new R(Arrays.asList(json));
     }
 

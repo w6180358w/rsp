@@ -1,7 +1,9 @@
 package com.rsp.rsp.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,9 +18,12 @@ import org.springframework.web.servlet.ModelAndView;
 import com.rsp.rsp.domain.Category;
 import com.rsp.rsp.domain.R;
 import com.rsp.rsp.domain.Type;
+import com.rsp.rsp.domain.bean.CategoryBean;
 import com.rsp.rsp.domain.query.CategoryQuery;
 import com.rsp.rsp.service.CategoryService;
 import com.rsp.rsp.service.TypeService;
+
+import net.sf.json.JSONObject;
 
 /**
  * 大类
@@ -42,7 +47,28 @@ public class CategoryController {
                                    @RequestParam(value ="pageSize",defaultValue ="10")Integer size,
                                    CategoryQuery categoryQuery,Integer draw){
         Page<Category> pageInfo = categoryService.findCategoryCriteria(start,size,categoryQuery);
-        return new R(pageInfo.getContent(), (int) pageInfo.getTotalElements(), (int) pageInfo.getTotalElements(),draw,"");
+        List<CategoryBean> result = new ArrayList<>();
+        //根据大类ID集合查询大类
+        List<Category> categoryList = pageInfo.getContent();
+        List<String> keyList = new ArrayList<>();
+        Map<String,Type> typeMap = new HashMap<>();
+        //组装类型唯一标识集合
+        for (Category cate : categoryList) {
+        	keyList.add(cate.getType());
+		}
+        //根据类型唯一标识集合查询类型
+        List<Type> typeList = this.typeSerivce.inKey(keyList);
+        for (Type type : typeList) {
+        	typeMap.put(type.getKey(), type);
+		}
+        //组装返回对象
+        for (Category cate : categoryList) {
+        	CategoryBean bean = (CategoryBean) JSONObject.toBean(JSONObject.fromObject(cate),CategoryBean.class);
+        	bean.setType(typeMap.get(bean.getType()));
+        	result.add(bean);
+		}
+        
+        return new R(result, (int) pageInfo.getTotalElements(), (int) pageInfo.getTotalElements(),draw,"");
     }
 
     @RequestMapping("add")

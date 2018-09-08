@@ -2,6 +2,8 @@ $(function () {
 	var timeChart = echarts.init(document.getElementById('statTime'));
 	var orgChart = echarts.init(document.getElementById('statOrg'));
 	
+	var selectCity = initSelectCity(false);
+	
 	initOrg(null);
 	initTime(null);
 	$("#statForm").validate();
@@ -13,10 +15,9 @@ $(function () {
 			return;
 		}
 		$.ajax({
-			type: "get",
+			type: "post",
 			url:rootpath+"stat/query",
-			data:{start:start.getTime(),end:end.getTime()},
-			contentType:"application/json;charset=utf-8",
+			data:{start:start.getTime(),end:end.getTime(),city:!!selectCity.getCityVal()?selectCity.getCityVal().id:"",group:$("#group").val()},
 			success:function(result){
 				if(result.success){
 					var data = result.data[0];

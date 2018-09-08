@@ -2,6 +2,7 @@ $(function () {
     var icon = "<i class='fa fa-times-circle'></i> ";
     
     $("#subCategoryForm").find("select[name=type]").on("change",function(){
+    	console.log("type")
     	refreshCategory($(this).val());
     });
     
@@ -9,7 +10,8 @@ $(function () {
     	$("#categoryName").val($(this).find("option:selected").text());
     });
     
-    refreshCategory($("#subCategoryForm").find("select[name=type]").val())
+    initSelectCity(true);
+    
     function refreshCategory(type){
     	if(type==null || type=="")type=-1;
     	$.get(rootpath+"category/type/"+type,function(data){

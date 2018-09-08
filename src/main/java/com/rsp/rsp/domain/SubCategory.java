@@ -16,14 +16,10 @@ public class SubCategory {
     private Long categoryId;
     /**小类的公式参数key，唯一*/
     private String paramKey;
-    /** 列表页显示的大类名 */
-    private String categoryName;
-    /**
-     * 类型
-     */
-    private String type;
     //默认值
     private Long defaultValue;
+    /** 列表页显示的大类名 */
+    private String categoryName;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -66,24 +62,6 @@ public class SubCategory {
 		this.paramKey = paramKey;
 	}
 	@Basic
-    @Column(name = "category_name")
-    public String getCategoryName() {
-        return categoryName;
-    }
-
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
-    }
-    @Basic
-    @Column(name = "type")
-    public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-	@Basic
 	@Column(name = "defaultValue")
 	public Long getDefaultValue() {
 		return defaultValue;
@@ -92,7 +70,15 @@ public class SubCategory {
 	public void setDefaultValue(Long defaultValue) {
 		this.defaultValue = defaultValue;
 	}
+	@Basic
+    @Column(name = "category_name")
+    public String getCategoryName() {
+        return categoryName;
+    }
 
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
 	@Override
     public boolean equals(Object o) {
         if (this == o) return true;

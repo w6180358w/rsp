@@ -2,8 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
 	<!-- Required Stylesheets -->
+	<link rel="stylesheet" type="text/css" th:href="@{/css/city-select.css}" media="screen" />
 	<link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}" media="screen" />
 	<link rel="stylesheet" type="text/css" th:href="@{/css/text.css}" media="screen" />
 	<link rel="stylesheet" type="text/css" th:href="@{/css/fonts/ptsans/stylesheet.css}" media="screen" />
@@ -20,7 +20,8 @@
 	<script type="text/javascript" th:src="@{/js/jquery-ui.js}"></script>
 	<script type="text/javascript" th:src="@{/plugins/layer-v3.1.1/layer/layer.js}"></script>
 	<script type="text/javascript" th:src="@{/plugins/jquery.validate.js}"></script>
-
+	<script type="text/javascript" th:src="@{/js/newcitydata.js}"></script>
+	<script type="text/javascript" th:src="@{/js/citySelect-1.0.4.js}"></script>
 	<script type="text/javascript" th:src="@{/js/subCategoryEdit.js}"></script>
 
 	<title>融算盘</title>
@@ -39,8 +40,8 @@
 					<form class="mws-form" id="subCategoryForm">
 						<div class="mws-form-inline">
 							<input type="hidden" name="id" id="id" th:value="${subCategory.id}"/>
-							<input type="hidden" name="categoryName" id="categoryName" th:value="${subCategory.categoryName}"/>
 							<input type="hidden" id="tempCId" th:value="${subCategory.categoryId}"/>
+							<input type="hidden" name="categoryName" id="categoryName" th:value="${subCategory.categoryName}"/>
 							<div class="mws-form-row">
 								<label>名称 <span style="color: #b90a0f">*</span></label>
 								<div class="mws-form-item large">
@@ -49,13 +50,25 @@
 								</div>
 							</div>
 							<div class="mws-form-row">
+								<label>城市 <span style="color: #b90a0f">*</span></label>
+								<div class="mws-form-item large">
+									<div class="city-select" id="city" th:attr="val=${cityName}"></div>
+								</div>
+							</div>
+							<div class="mws-form-row">
+								<label>抵押状态 <span style="color: #b90a0f">*</span></label>
+								<div class="mws-form-item large">
+									<select name="group" id="group">
+										<option value="wdy" th:selected="${group eq 'wdy'}">无抵押</option>
+										<option value="dy" th:selected="${group eq 'dy'}">抵押</option>
+									</select>
+								</div>
+							</div>
+							<div class="mws-form-row">
 								<label>类型 <span style="color: #b90a0f">*</span></label>
 								<div class="mws-form-item large">
-									<select name="type" th:field="*{subCategory.type}">
-										<option value="" style="font-color: #b6b6b6">请选择</option>
-										<option value="ajf">按揭房</option>
-										<option value="bd">保单</option>
-										<option value="gjj">公积金</option>
+									<select name="type" id="type">
+										<option value="" th:each="t:${typeList}" th:selected="${type eq t.key}" th:value="${t.key}" th:text="${t.name}"></option>
 									</select>
 								</div>
 							</div>

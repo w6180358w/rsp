@@ -61,10 +61,9 @@ public class SubCategoryServiceImpl implements SubCategoryService {
         Pageable pageable = PageRequest.of(start/size, size, Sort.Direction.DESC, "id");
         Page<SubCategory> bookPage = subCategoryRepository.findAll((Specification<SubCategory>) (root, query, criteriaBuilder) -> {
             Predicate p1 = criteriaBuilder.like(root.get("name").as(String.class), "%"+subCategoryQuery.getsSearch()+"%");
-            Predicate p4 = criteriaBuilder.equal(root.get("categoryName").as(String.class), subCategoryQuery.getsSearch());
             Predicate p2 = criteriaBuilder.equal(root.get("paramKey").as(String.class), subCategoryQuery.getsSearch());
-//            Predicate p2 = criteriaBuilder.equal(root.get("id").as(String.class), subCategoryQuery.getsSearch());
-            query.where(criteriaBuilder.or(p1,p2,p4));
+            Predicate p3 = criteriaBuilder.like(root.get("categoryName").as(String.class), "%"+subCategoryQuery.getsSearch()+"%");
+            query.where(criteriaBuilder.or(p1,p2,p3));
             return query.getRestriction();
         },pageable);
         return bookPage;
@@ -81,9 +80,8 @@ public class SubCategoryServiceImpl implements SubCategoryService {
         subCategory.setCategoryId(newSubCategory.getCategoryId());
         subCategory.setParamKey(newSubCategory.getParamKey());
         subCategory.setName(newSubCategory.getName());
-        subCategory.setCategoryName(newSubCategory.getCategoryName());
-        subCategory.setType(newSubCategory.getType());
         subCategory.setDefaultValue(newSubCategory.getDefaultValue());
+        subCategory.setCategoryName(newSubCategory.getCategoryName());
         subCategoryRepository.save(subCategory);
     }
 

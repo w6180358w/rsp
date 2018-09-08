@@ -58,9 +58,9 @@
 								</div>
 							</div>
 							<div class="mws-form-row">
-								<label>抵押类型 <span style="color: #b90a0f">*</span></label>
+								<label>抵押状态 <span style="color: #b90a0f">*</span></label>
 								<div class="mws-form-item large">
-									<select name="group" th:field="*{type.group}">
+									<select name="group" th:field="${type.group}">
 										<option value="wdy">无抵押</option>
 										<option value="dy">抵押</option>
 									</select>
@@ -75,7 +75,7 @@
 							</div>
 						</div>
 						<div class="mws-button-row">
-							<button type="button" onclick="submitTypeForm()" class="mws-button green">提交</button>
+							<button type="button" class="mws-button green">提交</button>
 						</div>
 					</form>
 				</div>

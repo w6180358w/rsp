@@ -1,15 +1,15 @@
 package com.rsp.rsp.service.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
+import javax.persistence.criteria.CriteriaBuilder.In;
 import javax.persistence.criteria.Predicate;
 
-import com.rsp.rsp.dao.FormulaRepository;
-import com.rsp.rsp.dao.SubCategoryRepository;
-import com.rsp.rsp.domain.SubCategory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -19,7 +19,10 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import com.rsp.rsp.dao.CategoryRepository;
+import com.rsp.rsp.dao.FormulaRepository;
+import com.rsp.rsp.dao.SubCategoryRepository;
 import com.rsp.rsp.domain.Category;
+import com.rsp.rsp.domain.SubCategory;
 import com.rsp.rsp.domain.query.CategoryQuery;
 import com.rsp.rsp.service.CategoryService;
 
@@ -110,5 +113,23 @@ public class CategoryServiceImpl implements CategoryService {
             return query.getRestriction();
         });
 		return list;
+	}
+
+	@Override
+	public List<Category> inId(Set<Long> idList) {
+		List<Category> result = categoryRepository.findAll((Specification<Category>) (root, query, criteriaBuilder) -> {
+			//根据类型ID筛选
+	    	In<Object> in = criteriaBuilder.in(root.get("id"));
+			List<Predicate> list = new ArrayList<>();
+			in.value(-1l);//防止参数为空
+			for (Long id : idList) {
+				in.value(id);
+			}
+			list.add(in);
+			Predicate[] p = new Predicate[list.size()];
+            query.where(criteriaBuilder.and(list.toArray(p)));
+            return query.getRestriction();
+        });
+		return result;
 	}
 }

@@ -4,6 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 <!-- Required Stylesheets -->
+<link rel="stylesheet" type="text/css" th:href="@{/css/city-select.css}" media="screen" />
 <link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}" media="screen" />
 <link rel="stylesheet" type="text/css" th:href="@{/css/text.css}" media="screen" />
 <link rel="stylesheet" type="text/css" th:href="@{/css/fonts/ptsans/stylesheet.css}" media="screen" />
@@ -24,12 +25,13 @@
 <script type="text/javascript" th:src="@{/plugins/layer-v3.1.1/layer/layer.js}"></script>
 <script type="text/javascript" th:src="@{/js/jquery-ui.js}"></script>
 <script type="text/javascript" th:src="@{/js/mws.js}" ></script>
-
+<script type="text/javascript" th:src="@{/js/newcitydata.js}"></script>
+<script type="text/javascript" th:src="@{/js/citySelect-1.0.4.js}"></script>
 <script type="text/javascript" th:src="@{/js/filter.js}"></script>
 <style type="text/css">
 .mws-form .mws-form-inline .label
 {
-	height: 55px;
+	height: 40px;
 }
 </style>
 <title>融算盘</title>
@@ -86,17 +88,33 @@
                     </div>
                     <div class="mws-panel-body">
                         <div class="mws-panel-toolbar top clearfix">
+                        	<form class="mws-form" style="width: 100%; display: flex; margin-bottom: 10px;">
+			                	<div class="mws-form-inline" style="width: 50%;display: inline-block;">
+			                		<div class="mws-form-row" style="width:90%; padding: 5px 20px 0px 20px;">
+			                			<label>城市</label>
+			                			<div class="mws-form-item large">
+			                				<div id="city" class="city-select" ></div>
+			                			</div>
+			                		</div>
+			                    </div>
+			                    <div class="mws-form-inline" style="width: 50%;display: inline-block;">
+			                		<div class="mws-form-row" style="width:72%; padding: 5px 20px 0px 20px;">
+			                			<label>抵押状态</label>
+			                			<div class="mws-form-item large" >
+			                				<select id="group">
+			                					<option value="wdy">无抵押</option>
+												<option value="dy">抵押</option>
+			                				</select>
+			                			</div>
+			                		</div>
+			                    </div>
+			                </form>
                             <form class="mws-form" style="width: 100%;" id="searchForm">
 			                	<div class="mws-form-inline" style="width: 100%;display: inline-block;  margin-bottom: 10px;">
-			                		<div class="mws-form-row" style="width:30%; padding: 5px 20px 0px 20px;">
+			                		<div class="mws-form-row" style="width:36%; padding: 5px 20px 0px 20px;">
 			                			<label class="label">选择类型</label>
 			                			<div class="mws-form-item large">
-			                				<select class="required" name="type" required>
-			                					<option value="" style="font-color: #b6b6b6" disabled selected hidden>请选择</option>
-			                					<option value="ajf">按揭房</option>
-			                					<option value="bd">保单</option>
-			                					<option value="gjj">公积金</option>
-			                				</select>
+			                				<select class="required" name="type" id="type" required></select>
 			                			</div>
 			                		</div>
 			                    </div>
