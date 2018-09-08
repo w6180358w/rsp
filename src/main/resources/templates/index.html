@@ -78,7 +78,7 @@
     	<h1>融算盘管理平台</h1>
         <div class="mws-login-lock"><img th:src="@{/css/icons/24/locked-2.png}" alt="" /></div>
     	<div id="mws-login-form">
-        	<form class="mws-form" action="org" method="post">
+        	<form class="mws-form" th:action="@{/type}" method="post">
                 <div class="mws-form-row">
                 	<div class="mws-form-item large">
                     	<input type="text" class="mws-login-username mws-textinput" placeholder="账号" name="username"/>
