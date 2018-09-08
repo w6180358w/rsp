@@ -59,7 +59,7 @@ public interface FormulaService {
      * @return
      * @throws Exception
      */
-    List<CategoryBean> columns(String type) throws Exception;
+    List<CategoryBean> columns(Long typeId) throws Exception;
     
     List<JSONObject> findAll(FormulaBean bean) throws Exception;
     

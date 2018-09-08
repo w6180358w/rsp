@@ -72,7 +72,7 @@ public class CategoryServiceImpl implements CategoryService {
     public void update(Category newCategory) {
         Category category = categoryRepository.findById(newCategory.getId());
         category.setName(newCategory.getName());
-        category.setType(newCategory.getType());
+        category.setTypeId(newCategory.getTypeId());
         category.setTypeName(newCategory.getTypeName());
         categoryRepository.save(category);
     }
@@ -106,9 +106,9 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
 	@Override
-	public List<Category> type(String type) {
+	public List<Category> type(Long typeId) {
 		List<Category> list = categoryRepository.findAll((Specification<Category>) (root, query, criteriaBuilder) -> {
-            Predicate p1 = criteriaBuilder.equal(root.get("type").as(String.class), type);
+            Predicate p1 = criteriaBuilder.equal(root.get("typeId").as(String.class), typeId);
             query.where(criteriaBuilder.and(p1));
             return query.getRestriction();
         });

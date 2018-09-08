@@ -1,14 +1,14 @@
 $(function () {
 	var form = $("#searchForm");
-	var type = "";
+	var type = -1;
 	form.validate();
-	form.find("select[name=type]").on("change",function (el){
+	form.find("select[name=typeId]").on("change",function (el){
 		if(table!=null){
 			table.clear(); 
 			table.destroy(); 	   //销毁datatable
 			$("#listTable").find("thead").remove();
 		}
-		type = $(el.target).val();
+		type = parseInt($(el.target).val());
 		loadFormula(type);
 	});
 	
@@ -67,7 +67,7 @@ $(function () {
 	        "paging": false, // 禁止分页
 	        "sDom" : "t<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
 	        "ajax": {
-	            "url": "filter/tableFilter",
+	            "url": rootpath+"filter/tableFilter",
 	            "type": "post",
 	            "dataType":"json",
 	            "contentType":"application/json;charset=utf-8",//data.data.unshift(firstCol)
@@ -76,7 +76,7 @@ $(function () {
 	            	var result = {
 	                		"ids":ids,
 	                		"param":param,
-	                		"type":type,
+	                		"typeId":type,
 	                		"draw":data.draw
 	                	};
 	            	return JSON.stringify(result);

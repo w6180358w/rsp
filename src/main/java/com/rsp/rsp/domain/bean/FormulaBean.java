@@ -12,7 +12,7 @@ public class FormulaBean{
 	
 	private Integer draw;
 	
-	private String type;
+	private Long typeId;
 	
 	public List<ParamsBean> getParam() {
 		return param;
@@ -38,12 +38,12 @@ public class FormulaBean{
 		this.draw = draw;
 	}
 
-	public String getType() {
-		return type;
+	public Long getTypeId() {
+		return typeId;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	public void setTypeId(Long typeId) {
+		this.typeId = typeId;
 	}
 
 	public List<String> getKeys() {

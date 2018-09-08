@@ -47,8 +47,7 @@ public class TypeServiceImpl implements TypeService {
         Page<Type> bookPage = typeRepository.findAll((Specification<Type>) (root, query, criteriaBuilder) -> {
             Predicate p1 = criteriaBuilder.like(root.get("name").as(String.class), "%"+typeQuery.getsSearch()+"%");
             Predicate p2 = criteriaBuilder.like(root.get("cityName").as(String.class), "%"+typeQuery.getsSearch()+"%");
-            Predicate p3 = criteriaBuilder.like(root.get("key").as(String.class), "%"+typeQuery.getsSearch()+"%");
-            query.where(criteriaBuilder.or(p1,p2,p3));
+            query.where(criteriaBuilder.or(p1,p2));
             return query.getRestriction();
         },pageable);
         return bookPage;
@@ -63,7 +62,6 @@ public class TypeServiceImpl implements TypeService {
     public void update(Type newType) {
         Type type = typeRepository.findById(newType.getId());
         type.setName(newType.getName());
-        type.setKey(newType.getKey());
         type.setGroup(newType.getGroup());
         type.setCity(newType.getCity());
         type.setCityName(newType.getCityName());
@@ -101,23 +99,14 @@ public class TypeServiceImpl implements TypeService {
 	}
 
 	@Override
-	public List<Type> key(String key) {
-		Type type = typeRepository.findByKey(key);
-		if(type==null) {
-			return new ArrayList<>();
-		}
-		return this.city(type.getCity(), type.getGroup());
-	}
-
-	@Override
-	public List<Type> inKey(List<String> keyList) {
+	public List<Type> inId(List<Long> idList) {
 		List<Type> result = typeRepository.findAll((Specification<Type>) (root, query, criteriaBuilder) -> {
 			//根据类型key筛选
-	    	In<Object> in = criteriaBuilder.in(root.get("key"));
+	    	In<Object> in = criteriaBuilder.in(root.get("id"));
 			List<Predicate> list = new ArrayList<>();
 			in.value(-1l);//防止参数为空
-			for (String key : keyList) {
-				in.value(key);
+			for (Long id : idList) {
+				in.value(id);
 			}
 			list.add(in);
 			Predicate[] p = new Predicate[list.size()];

@@ -67,14 +67,12 @@
 							<div class="mws-form-row">
 								<label>类型 <span style="color: #b90a0f">*</span></label>
 								<div class="mws-form-item large">
-									<select name="type" id="type">
-										<option value="" th:each="t:${typeList}" th:selected="${type eq t.key}" th:value="${t.key}" th:text="${t.name}"></option>
-									</select>
+									<select name="type" id="typeId" th:attr="val=${typeId}"></select>
 								</div>
 							</div>
 							<div class="mws-form-row">
 								<label>大类 <span style="color: #b90a0f">*</span></label>
-								<div class="mws-form-item small">
+								<div class="mws-form-item large">
 									<select name="categoryId"></select>
 								</div>
 							</div>

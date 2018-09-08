@@ -73,7 +73,7 @@ public interface CategoryService {
      * 根据类型查
      * @return
      */
-    List<Category> type(String type);
+    List<Category> type(Long typeId);
     /**
      * 根据id集合查
      * @param idList

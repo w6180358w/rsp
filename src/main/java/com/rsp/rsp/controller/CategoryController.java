@@ -50,21 +50,21 @@ public class CategoryController {
         List<CategoryBean> result = new ArrayList<>();
         //根据大类ID集合查询大类
         List<Category> categoryList = pageInfo.getContent();
-        List<String> keyList = new ArrayList<>();
-        Map<String,Type> typeMap = new HashMap<>();
+        List<Long> keyList = new ArrayList<>();
+        Map<Long,Type> typeMap = new HashMap<>();
         //组装类型唯一标识集合
         for (Category cate : categoryList) {
-        	keyList.add(cate.getType());
+        	keyList.add(cate.getTypeId());
 		}
         //根据类型唯一标识集合查询类型
-        List<Type> typeList = this.typeSerivce.inKey(keyList);
+        List<Type> typeList = this.typeSerivce.inId(keyList);
         for (Type type : typeList) {
-        	typeMap.put(type.getKey(), type);
+        	typeMap.put(type.getId(), type);
 		}
         //组装返回对象
         for (Category cate : categoryList) {
         	CategoryBean bean = (CategoryBean) JSONObject.toBean(JSONObject.fromObject(cate),CategoryBean.class);
-        	bean.setType(typeMap.get(bean.getType()));
+        	bean.setType(typeMap.get(bean.getTypeId()));
         	result.add(bean);
 		}
         
@@ -74,27 +74,23 @@ public class CategoryController {
     @RequestMapping("add")
     public ModelAndView add(Long id, Model model){
         Category category;
-        List<Type> typeList;
         String group = "wdy",city = "北京市";
         if(null!=id){
             category = categoryService.findById(id);
-            typeList = this.typeSerivce.key(category.getType());
-            if(typeList!=null && !typeList.isEmpty()) {
-            	group = typeList.get(0).getGroup();
-            	city = typeList.get(0).getCityName();
+            Type t = this.typeSerivce.findById(category.getTypeId());
+            if(t!=null) {
+            	group = t.getGroup();
+            	city = t.getCityName();
             }else {
             	city = "";
             }
         }else{
             category = new Category();
             category.setId(0L);
-            typeList = new ArrayList<>();
         }
         model.addAttribute("group",group);
         model.addAttribute("cityName",city);
         model.addAttribute("category",category);
-        model.addAttribute("typeList",typeList);
-        model.addAttribute("contextPath","/");
         return new ModelAndView("addCategory.html");
     }
     @PostMapping("/save")
@@ -127,9 +123,9 @@ public class CategoryController {
         }
     }
     
-    @RequestMapping("/type/{type}")
-    public R queryAll(@PathVariable(name="type")String type){
-        List<Category> list = categoryService.type(type);
+    @RequestMapping("/type/{typeId}")
+    public R queryAll(@PathVariable(name="typeId")Long typeId){
+        List<Category> list = categoryService.type(typeId);
         return new R(list);
     }
 }

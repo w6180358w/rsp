@@ -57,11 +57,11 @@ public class StatServiceImpl implements StatService {
 	    	Predicate p2 = criteriaBuilder.gt(root.get("countTime").as(Long.class), start);
 	    	Predicate p3 = criteriaBuilder.lt(root.get("countTime").as(Long.class), end);
 	    	//根据类型key筛选
-	    	In<Object> in = criteriaBuilder.in(root.get("type"));
+	    	In<Object> in = criteriaBuilder.in(root.get("typeId"));
 			List<Predicate> list = new ArrayList<>();
 			in.value(-1l);//防止参数为空
 			for (Type type : typeList) {
-				in.value(type.getKey());
+				in.value(type.getId());
 			}
 			list.add(in);
 			Predicate[] p = new Predicate[list.size()];
@@ -125,11 +125,11 @@ public class StatServiceImpl implements StatService {
 	    	Predicate p3 = criteriaBuilder.lt(root.get("countTime").as(Long.class), end);
 	    	
 	    	//根据类型key筛选
-	    	In<Object> in = criteriaBuilder.in(root.get("type"));
+	    	In<Object> in = criteriaBuilder.in(root.get("typeId"));
 			List<Predicate> list = new ArrayList<>();
 			in.value(-1l);//防止参数为空
 			for (Type type : typeList) {
-				in.value(type.getKey());
+				in.value(type.getId());
 			}
 			list.add(in);
 			Predicate[] p = new Predicate[list.size()];
@@ -143,7 +143,7 @@ public class StatServiceImpl implements StatService {
 			Long key = stat.getOrgId();
 			Integer num = map.get(key);
 			if(num==null) {
-				num=0;
+				num=1;
 			}else {
 				num++;
 			}

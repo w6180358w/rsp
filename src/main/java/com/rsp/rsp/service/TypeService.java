@@ -69,12 +69,7 @@ public interface TypeService {
      */
     List<Type> city(String city,String group);
     /**
-     * 根据唯一标识符获取同一城市下同一分组下的所有类型
-     * @return
-     */
-    List<Type> key(String key);
-    /**
      * 根据唯一标识符查询
      */
-    List<Type> inKey(List<String> keyList);
+    List<Type> inId(List<Long> idList);
 }

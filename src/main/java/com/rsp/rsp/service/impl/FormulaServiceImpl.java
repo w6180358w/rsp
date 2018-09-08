@@ -133,7 +133,7 @@ public class FormulaServiceImpl implements FormulaService {
 			Statistics stat = new Statistics();
 			stat.setOrgId(entry.getValue().getId());
 			stat.setCountTime(now);
-			stat.setType(bean.getType());
+			stat.setTypeId(bean.getTypeId());
 			this.statisticsRepository.save(stat);
 			
 			result.add(entry.getValue());
@@ -201,7 +201,7 @@ public class FormulaServiceImpl implements FormulaService {
 			Statistics stat = new Statistics();
 			stat.setOrgId(entry.getValue().getLong("orgId"));
 			stat.setCountTime(now);
-			stat.setType(bean.getType());
+			stat.setTypeId(bean.getTypeId());
 			this.statisticsRepository.save(stat);
 			
 			result.add(entry.getValue());
@@ -244,7 +244,7 @@ public class FormulaServiceImpl implements FormulaService {
 	}
 
 	@Override
-	public List<CategoryBean> columns(String type) throws Exception {
+	public List<CategoryBean> columns(Long typeId) throws Exception {
 		List<CategoryBean> result = new ArrayList<>();
 		List<SubCategory> subList = this.subCategoryRepository.findAll();
 		//组装大类ID和小类的映射
@@ -257,7 +257,7 @@ public class FormulaServiceImpl implements FormulaService {
 		}
 		//组装对象
 		List<Category> cateList = this.categoryRepository.findAll((Specification<Category>) (root, query, criteriaBuilder) -> {
-            	Predicate p1 = criteriaBuilder.equal(root.get("type").as(String.class), type);
+            	Predicate p1 = criteriaBuilder.equal(root.get("typeId").as(String.class), typeId);
             	query.where(criteriaBuilder.and(p1));
             	return query.getRestriction();
 	      	});

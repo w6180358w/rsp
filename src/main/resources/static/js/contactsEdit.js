@@ -51,14 +51,14 @@ function submitContactsForm() {
                 var index = parent.layer.getFrameIndex(window.name);
                 layer.msg(msg,{
                     anim: -1,
-                    time: 1500 //1.5秒关闭（如果不配置，默认是3秒）
+                    time: 4000 //1.5秒关闭（如果不配置，默认是3秒）
                 }, function(){
                     parent.layer.close(index)
                 });
             }else{
                 layer.msg(data.error,{
                     anim: -1,
-                    time: 1500 //1.5秒关闭（如果不配置，默认是3秒）
+                    time: 4000 //1.5秒关闭（如果不配置，默认是3秒）
                 });
             }
         },

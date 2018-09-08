@@ -59,11 +59,6 @@ function loadType() {
                 	data = data=="wdy"?"无抵押":"抵押";
                     return "<span title='"+data+"'>"+data+"</span>";
                 }},
-            { "data": "key","orderable": false,"title":"唯一编码","width":"40%",
-                "render": function(data, type, record,index) {
-                	return "<span title='"+data+"'>"+data+"</span>";
-                }
-            },
             { "data": "id","orderable": false,"title":"操作","width":"20%",
                 "render": function(data, type, record,index) {
                     return "<button onclick='editType("+data+")'>修改</button>" +
@@ -101,7 +96,7 @@ function editType(id) {
         // title:false,
         maxmin: true,
         shadeClose: false, //点击遮罩关闭层
-        area : ['800px' , '425px'],
+        area : ['800px' , '366px'],
         content: rootpath+'type/add?id='+id,
         end: function(){
             //关闭回调
@@ -115,7 +110,7 @@ function addType() {
         title: '添加类型',
         maxmin: true,
         shadeClose: false, //点击遮罩关闭层
-        area : ['800px' , '425px'],
+        area : ['800px' , '366px'],
         content: rootpath+'type/add',
         end: function(){
             //关闭回调

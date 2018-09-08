@@ -57,9 +57,9 @@ public class SubCategoryController {
         //大类ID集合
         Set<Long> cateIdSet = new HashSet<>();
         //类型唯一标识集合
-        List<String> keyList = new ArrayList<>();
+        List<Long> keyList = new ArrayList<>();
         Map<Long,Category> cateMap = new HashMap<>();
-        Map<String,Type> cateTypeMap = new HashMap<>();
+        Map<Long,Type> cateTypeMap = new HashMap<>();
         //组装大类ID
         for (SubCategory sub : subList) {
         	cateIdSet.add(sub.getCategoryId());
@@ -68,13 +68,13 @@ public class SubCategoryController {
         List<Category> categoryList = this.categoryService.inId(cateIdSet);
         //组装类型唯一标识集合
         for (Category cate : categoryList) {
-        	keyList.add(cate.getType());
+        	keyList.add(cate.getTypeId());
         	cateMap.put(cate.getId(), cate);
 		}
         //根据类型唯一标识集合查询类型
-        List<Type> typeList = this.typeSerivce.inKey(keyList);
+        List<Type> typeList = this.typeSerivce.inId(keyList);
         for (Type type : typeList) {
-        	cateTypeMap.put(type.getKey(), type);
+        	cateTypeMap.put(type.getId(), type);
 		}
         
         //组装返回对象
@@ -83,7 +83,7 @@ public class SubCategoryController {
         	Category cate = cateMap.get(sub.getCategoryId());
         	if(cate!=null) {
         		bean.setCategoryName(cate.getName());
-        		Type type = cateTypeMap.get(cate.getType());
+        		Type type = cateTypeMap.get(cate.getTypeId());
         		bean.setType(type);
         	}
         	result.add(bean);
@@ -94,16 +94,16 @@ public class SubCategoryController {
     @RequestMapping("add")
     public ModelAndView addSubCategory(Long id, Model model){
         SubCategory subCategory;
-        List<Type> typeList;
-        String group = "wdy",city = "北京市",type = "";
+        String group = "wdy",city = "北京市";
+        Long typeId = null;
         if(null!=id){
             subCategory = subCategoryService.findById(id);
             Category cate = this.categoryService.findById(subCategory.getCategoryId());
-            type = cate.getType();
-            typeList = this.typeSerivce.key(type);
-            if(typeList!=null && !typeList.isEmpty()) {
-            	group = typeList.get(0).getGroup();
-            	city = typeList.get(0).getCityName();
+            Type t = this.typeSerivce.findById(cate.getTypeId());
+            if(t!=null) {
+            	typeId = t.getId();
+            	group = t.getGroup();
+            	city = t.getCityName();
             }else {
             	city = "";
             }
@@ -111,12 +111,10 @@ public class SubCategoryController {
             subCategory = new SubCategory();
             subCategory.setId(0L);
             subCategory.setCategoryId(0L);
-            typeList = new ArrayList<>();
         }
         model.addAttribute("group",group);
-        model.addAttribute("type",type);
+        model.addAttribute("typeId",typeId);
         model.addAttribute("cityName",city);
-        model.addAttribute("typeList",typeList);
         model.addAttribute("subCategory",subCategory);
         return new ModelAndView("addSubCategory.html");
     }

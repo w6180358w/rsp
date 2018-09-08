@@ -1089,7 +1089,7 @@ function initSelectCity(isval){
 		if(!!isval && !validate(city,group)){
 			return;
 		}
-		var type = $("#type");
+		var type = $("#typeId");
 		if(type.length>0){
 			$.ajax({
 				type: "post",
@@ -1100,9 +1100,10 @@ function initSelectCity(isval){
 		            if(!!data && !!data.success){
 		                type.empty();
 		                data.data.forEach(function(d){
-		                	var option = $("<option value='"+d.key+"'>"+d.name+"</option>");
+		                	var option = $("<option value='"+d.id+"'>"+d.name+"</option>");
 		                	type.append(option);
 		                });
+		                !!type.attr("val")?type.val(type.attr("val")):"";
 		                type.trigger("change");
 		            }else{
 		                layer.msg("查询类型失败，请联系管理员!",{

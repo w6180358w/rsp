@@ -21,7 +21,7 @@ public class Statistics {
     /**统计时间*/
     private Long countTime;
     /**类型*/
-    private String type;
+    private Long typeId;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -54,13 +54,13 @@ public class Statistics {
         this.countTime = countTime;
     }
     @Basic
-    @Column(name = "type")
-    public String getType() {
-		return type;
+    @Column(name = "type_id")
+    public Long getTypeId() {
+		return typeId;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	public void setTypeId(Long typeId) {
+		this.typeId = typeId;
 	}
 
 	@Override
@@ -77,7 +77,7 @@ public class Statistics {
         return true;
     }
 
-    @Override
+	@Override
     public int hashCode() {
         int result = (int) (id ^ (id >>> 32));
         result = 31 * result + (int) (orgId ^ (orgId >>> 32));

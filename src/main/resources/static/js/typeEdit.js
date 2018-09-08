@@ -2,9 +2,6 @@ $(function () {
     var icon = "<i class='fa fa-times-circle'></i> ";
     $("#typeForm").validate({
         rules : {
-            type : {
-                required : true
-            },
             name:{
                 required : true
             },
@@ -13,9 +10,6 @@ $(function () {
             }
         },
         messages : {
-            key : {
-                required : icon + "请输入唯一标识"
-            },
             name : {
                 required : icon + "请输入名称"
             },

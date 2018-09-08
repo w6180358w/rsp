@@ -2,7 +2,6 @@ $(function () {
     var icon = "<i class='fa fa-times-circle'></i> ";
     
     $("#subCategoryForm").find("select[name=type]").on("change",function(){
-    	console.log("type")
     	refreshCategory($(this).val());
     });
     

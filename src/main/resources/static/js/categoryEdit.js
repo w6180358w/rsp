@@ -19,8 +19,8 @@ $(function () {
         },
     });
     
-    $("#type").on("change",function(e){
-    	$("#typeName").val($("#type option:selected").text());
+    $("#typeId").on("change",function(e){
+    	$("#typeName").val($("#typeId option:selected").text());
     });
     
     initSelectCity(true);

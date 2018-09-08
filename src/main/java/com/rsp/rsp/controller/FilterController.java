@@ -61,9 +61,9 @@ public class FilterController {
      * @return
      * @throws Exception
      */
-    @GetMapping("/columns/{type}")
-    public R columns(@PathVariable("type")String type) throws Exception{
-    	List<CategoryBean> list = this.formulaService.columns(type);
+    @GetMapping("/columns/{typeId}")
+    public R columns(@PathVariable("typeId")Long typeId) throws Exception{
+    	List<CategoryBean> list = this.formulaService.columns(typeId);
         return new R(list);
     }
 }

@@ -22,10 +22,6 @@ public class Type {
      * 城市
      */
     private String cityName;
-    /**
-     * 唯一标识
-     */
-    private String key;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -66,14 +62,6 @@ public class Type {
 	public void setCity(String city) {
 		this.city = city;
 	}
-	@Basic
-	@Column(name = "type_key")
-	public String getKey() {
-		return key;
-	}
-	public void setKey(String key) {
-		this.key = key;
-	}
 
 	@Basic
 	@Column(name = "city_name")
@@ -96,7 +84,6 @@ public class Type {
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
         if (group != null ? !group.equals(that.group) : that.group != null) return false;
         if (city != null ? !city.equals(that.city) : that.city != null) return false;
-        if (key != null ? !key.equals(that.key) : that.key != null) return false;
         if (cityName != null ? !cityName.equals(that.cityName) : that.cityName != null) return false;
 
         return true;
@@ -108,7 +95,6 @@ public class Type {
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (group != null ? group.hashCode() : 0);
         result = 31 * result + (city != null ? city.hashCode() : 0);
-        result = 31 * result + (key != null ? key.hashCode() : 0);
         result = 31 * result + (cityName != null ? cityName.hashCode() : 0);
         return result;
     }

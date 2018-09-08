@@ -1,5 +1,5 @@
 $(function () {
-	$("#type").on("change",function(el){
+	$("#typeId").on("change",function(el){
 		if(table!=null){
 			table.clear(); 
 			table.destroy(); 	   //销毁datatable

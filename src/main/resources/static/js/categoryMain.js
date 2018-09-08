@@ -50,7 +50,7 @@ function loadCategory() {
                 "render": function(data, type, record,index) {
                     return "<span title='"+data+"'>"+data+"</span>";
                 }},
-            { "data": "type","orderable": false,"title":"类型","width":"40%",
+            { "data": "typeId","orderable": false,"title":"类型","width":"40%",
                 "render": function(data, type, record,index) {
                 	var t = record.typeObj;
                 	var city = "未知城市";

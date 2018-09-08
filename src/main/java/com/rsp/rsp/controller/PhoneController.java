@@ -37,11 +37,13 @@ public class PhoneController {
 	
     @RequestMapping("/phone")
     public ModelAndView phone(){
+    	
+    	
         return new ModelAndView("phone.html");
     }
     
-    @RequestMapping("/form/{type}")
-    public ModelAndView information(@PathVariable(name="type") String type,Model model){
+    @RequestMapping("/form/{typeId}")
+    public ModelAndView information(@PathVariable(name="typeId") Long typeId,Model model){
         return new ModelAndView("form.html");
     }
     
@@ -64,10 +66,10 @@ public class PhoneController {
 			bean.setParam(params);
 			List<Org> list = this.formulaService.filter(bean);
 			model.addAttribute("orgs",list);
-			model.addAttribute("type",bean.getType());
+			model.addAttribute("type",bean.getTypeId());
 		} catch (Exception e) {
 			e.printStackTrace();
-			model.addAttribute("type",bean.getType());
+			model.addAttribute("type",bean.getTypeId());
 			model.addAttribute("error","查询错误!");
 			return new ModelAndView("form.html");
 		}

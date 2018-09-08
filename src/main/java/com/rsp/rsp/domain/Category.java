@@ -13,7 +13,7 @@ public class Category {
     /**大类名称*/
     private String name;
     /**类型*/
-    private String type;
+    private Long typeId;
     /**类型名称*/
     private String typeName;
 
@@ -39,14 +39,14 @@ public class Category {
     }
 
     @Basic
-    @Column(name = "type")
-    public String getType() {
-        return type;
-    }
+    @Column(name = "type_id")
+    public Long getTypeId() {
+		return typeId;
+	}
 
-    public void setType(String type) {
-        this.type = type;
-    }
+	public void setTypeId(Long typeId) {
+		this.typeId = typeId;
+	}
     @Basic
     @Column(name = "type_name")
     public String getTypeName() {
@@ -66,7 +66,7 @@ public class Category {
 
         if (id != that.id) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
-        if (type != null ? !type.equals(that.type) : that.type != null) return false;
+        if (typeId != null ? !typeId.equals(that.typeId) : that.typeId != null) return false;
         if (typeName != null ? !typeName.equals(that.typeName) : that.typeName != null) return false;
 
         return true;
@@ -76,7 +76,7 @@ public class Category {
     public int hashCode() {
         int result = (int) (id ^ (id >>> 32));
         result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (type != null ? type.hashCode() : 0); 
+        result = 31 * result + (typeId != null ? typeId.hashCode() : 0); 
         result = 31 * result + (typeName != null ? typeName.hashCode() : 0); 
         return result;
     }
