@@ -109,7 +109,7 @@ function editOrg(id) {
         maxmin: true,
         shadeClose: false, //点击遮罩关闭层
         area : ['800px' , '90%'],
-        content: 'org/add?id='+id,
+        content: rootpath+'org/add?id='+id,
         end: function(){
             //关闭回调
             $(".mws-datatable-fn").DataTable().ajax.reload();
@@ -128,7 +128,7 @@ function addOrg() {
         maxmin: true,
         shadeClose: false, //点击遮罩关闭层
         area : ['800px' , '90%'],
-        content: 'org/add',
+        content: rootpath+'org/add',
         end: function(){
             //关闭回调
             $(".mws-datatable-fn").DataTable().ajax.reload();

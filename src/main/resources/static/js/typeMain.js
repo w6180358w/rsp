@@ -101,8 +101,8 @@ function editType(id) {
         // title:false,
         maxmin: true,
         shadeClose: false, //点击遮罩关闭层
-        area : ['800px' , '430px'],
-        content: 'type/add?id='+id,
+        area : ['800px' , '425px'],
+        content: rootpath+'type/add?id='+id,
         end: function(){
             //关闭回调
             $(".mws-datatable-fn").DataTable().ajax.reload();
@@ -113,11 +113,10 @@ function addType() {
     layer.open({
         type: 2,
         title: '添加类型',
-        // title:false,
         maxmin: true,
         shadeClose: false, //点击遮罩关闭层
-        area : ['800px' , '430px'],
-        content: 'type/add',
+        area : ['800px' , '425px'],
+        content: rootpath+'type/add',
         end: function(){
             //关闭回调
             $(".mws-datatable-fn").DataTable().ajax.reload();

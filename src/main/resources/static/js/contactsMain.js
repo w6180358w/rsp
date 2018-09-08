@@ -100,7 +100,7 @@ function editContacts(id) {
         maxmin: true,
         shadeClose: false, //点击遮罩关闭层
         area : ['800px' , '430px'],
-        content: 'contacts/add?id='+id,
+        content: rootpath+'contacts/add?id='+id,
         end: function(){
             //关闭回调
             $(".mws-datatable-fn").DataTable().ajax.reload();
@@ -115,7 +115,7 @@ function addContacts() {
         maxmin: true,
         shadeClose: false, //点击遮罩关闭层
         area : ['800px' , '430px'],
-        content: 'contacts/add',
+        content: rootpath+'contacts/add',
         end: function(){
             //关闭回调
             $(".mws-datatable-fn").DataTable().ajax.reload();

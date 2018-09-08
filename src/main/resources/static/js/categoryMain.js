@@ -102,8 +102,8 @@ function editCategory(id) {
         // title:false,
         maxmin: true,
         shadeClose: false, //点击遮罩关闭层
-        area : ['800px' , '350px'],
-        content: 'category/add?id='+id,
+        area : ['800px' , '425px'],
+        content: rootpath+'category/add?id='+id,
         end: function(){
             //关闭回调
             $(".mws-datatable-fn").DataTable().ajax.reload();
@@ -117,8 +117,8 @@ function addCategory() {
         // title:false,
         maxmin: true,
         shadeClose: false, //点击遮罩关闭层
-        area : ['800px' , '350px'],
-        content: 'category/add',
+        area : ['800px' , '425px'],
+        content: rootpath+'category/add',
         end: function(){
             //关闭回调
             $(".mws-datatable-fn").DataTable().ajax.reload();
