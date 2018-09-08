@@ -25,7 +25,7 @@
 
 <script type="text/javascript" th:src="@{/js/filter.js}"></script>
 <style type="text/css">
-.mws-form .mws-form-inline label
+.mws-form .mws-form-inline .label
 {
 	height: 55px;
 }
@@ -58,13 +58,14 @@
             <!-- Main Navigation -->
             <div id="mws-navigation">
             	<ul>
-					<li><a href="org" class="mws-i-24 i-home">机构管理</a></li>
-					<li><a href="contacts" class="mws-i-24 i-user">联系人管理</a></li>
-					<li><a href="category" class="mws-i-24 i-chart">大类管理</a></li>
-					<li><a href="subCategory" class="mws-i-24 i-table-1">小类管理</a></li>
-					<li><a href="formula" class="mws-i-24 i-polaroids">公式管理</a></li>
-					<li class="active"><a href="filter" class="mws-i-24 i-myspace">机构查询</a></li>
-					<li><a href="stat" class="mws-i-24 i-graph-2">统计</a></li>
+					<li><a href="type" class="mws-i-24 i-home">类型管理</a></li>
+            		<li><a href="category" class="mws-i-24 i-chart">大类管理</a></li>
+                    <li><a href="subCategory" class="mws-i-24 i-table-1">小类管理</a></li>
+                    <li><a href="org" class="mws-i-24 i-home">机构管理</a></li>
+                    <li><a href="contacts" class="mws-i-24 i-user">联系人管理</a></li>
+                    <li><a href="formula" class="mws-i-24 i-polaroids">公式管理</a></li>
+                    <li class="active"><a href="filter" class="mws-i-24 i-myspace">机构查询</a></li>
+                    <li><a href="stat" class="mws-i-24 i-graph-2">统计</a></li>
                 </ul>
             </div>
             <!-- End Navigation -->
@@ -86,7 +87,7 @@
                             <form class="mws-form" style="width: 100%;" id="searchForm">
 			                	<div class="mws-form-inline" style="width: 100%;display: inline-block;  margin-bottom: 10px;">
 			                		<div class="mws-form-row" style="width:30%; padding: 5px 20px 0px 20px;">
-			                			<label>选择类型</label>
+			                			<label class="label">选择类型</label>
 			                			<div class="mws-form-item large">
 			                				<select class="required" name="type" required>
 			                					<option value="" style="font-color: #b6b6b6" disabled selected hidden>请选择</option>
@@ -99,7 +100,7 @@
 			                    </div>
 			                    <div class="mws-form-inline" style="width: 30%;display: inline-block;  margin-bottom: 10px;">
 			                		<div class="mws-form-row" style="width: 80%; padding: 5px 20px 0px 20px;">
-			                			<label>申请额度</label>
+			                			<label class="label">申请额度</label>
 			                			<div class="mws-form-item large">
 			                				<input type="number" style="margin-top: 6px;" name="sqed" required></input>
 			                			</div>
@@ -107,7 +108,7 @@
 			                    </div>
 			                    <div class="mws-form-inline" style="width: 30%;display: inline-block;  margin-bottom: 10px;">
 			                		<div class="mws-form-row" style="width: 80%; padding: 5px 20px 0px 20px;">
-			                			<label>无抵押月供(未显示月供的按本金*3.5%计算)</label>
+			                			<label class="label">无抵押月供(未显示月供的按本金*3.5%计算)</label>
 			                			<div class="mws-form-item large">
 			                				<input type="number" style="margin-top: 6px;"  name="wdyhk" required></input>
 			                			</div>
@@ -115,7 +116,7 @@
 			                    </div>
 			                    <div class="mws-form-inline" style="width: 30%;display: inline-block;  margin-bottom: 10px;">
 			                		<div class="mws-form-row" style="width: 80%;padding: 5px 20px 0px 20px;">
-			                			<label>信用卡已用额度/均六个月使用额度(取最大值)</label>
+			                			<label class="label">信用卡已用额度/均六个月使用额度(取最大值)</label>
 			                			<div class="mws-form-item large">
 			                				<input type="number" style="margin-top: 6px;" name="xykfz" required></input>
 			                			</div>

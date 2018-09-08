@@ -17,7 +17,7 @@
 <script type="text/javascript" th:src="@{/js/jquery-ui.js}"></script>
 <script type="text/javascript" th:src="@{/js/mws.js}"></script>
 
-<script type="text/javascript" th:src="@{/js/categoryMain.js}"></script>
+<script type="text/javascript" th:src="@{/js/typeMain.js}"></script>
 
     <title>融算盘</title>
 
@@ -48,8 +48,8 @@
             <!-- Main Navigation -->
             <div id="mws-navigation">
             	<ul>
-                    <li><a href="type" class="mws-i-24 i-home">类型管理</a></li>
-            		<li class="active"><a href="category" class="mws-i-24 i-chart">大类管理</a></li>
+            		<li class="active"><a href="type" class="mws-i-24 i-home">类型管理</a></li>
+            		<li><a href="category" class="mws-i-24 i-chart">大类管理</a></li>
                     <li><a href="subCategory" class="mws-i-24 i-table-1">小类管理</a></li>
                     <li><a href="org" class="mws-i-24 i-home">机构管理</a></li>
                     <li><a href="contacts" class="mws-i-24 i-user">联系人管理</a></li>
@@ -70,16 +70,13 @@
             <div class="container">
                 <div class="mws-panel grid_8">
                     <div class="mws-panel-header">
-                        <span class="mws-i-24 i-chart">大类管理</span>
+                        <span class="mws-i-24 i-chart">类型管理</span>
                     </div>
                     <div class="mws-panel-body">
                         <div class="mws-panel-toolbar top clearfix">
                             <ul>
-                                <li><a href="javascript:void(0);" onclick="addCategory();" class="mws-ic-16 ic-add">添加</a></li>
-                                <!--<li><a href="javascript:void(0);" class="mws-ic-16 ic-cross">删除</a></li>-->
-                                <!--<li><a href="#" class="mws-ic-16 ic-printer">Print</a></li>-->
-                                <li><a href="javascript:void(0);" onclick="refreshCategory()" class="mws-ic-16 ic-arrow-refresh">刷新</a></li>
-                                <!--<li><a href="#" class="mws-ic-16 ic-edit">Update</a></li>-->
+                                <li><a href="javascript:void(0);" onclick="addType();" class="mws-ic-16 ic-add">添加</a></li>
+                                <li><a href="javascript:void(0);" onclick="refreshType()" class="mws-ic-16 ic-arrow-refresh">刷新</a></li>
                             </ul>
                         </div>
                         <table class="mws-datatable-fn mws-table" style="width:100%"></table>
@@ -87,11 +84,8 @@
                 </div>
             </div>
         </div>
-        <!-- End Container Wrapper -->
         
     </div>
-    <!-- End Main Wrapper -->
-
 
 </body>
 </html>
