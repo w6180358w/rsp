@@ -8,7 +8,7 @@ function loadType() {
         "orderMulti": false,
         // searching:false,
         "ajax": {
-            "url": "type/queryAll",
+            "url": rootpath+"type/queryAll",
             "type": "post",
             "data": function(data){
                 startNum = data.start;
@@ -54,7 +54,7 @@ function loadType() {
                 "render": function(data, type, record,index) {
                     return "<span title='"+data+"'>"+data+"</span>";
                 }},
-            { "data": "type","orderable": false,"title":"抵押状态","width":"40%",
+            { "data": "group","orderable": false,"title":"抵押类型","width":"40%",
                 "render": function(data, type, record,index) {
                 	data = data=="wdy"?"无抵押":"抵押";
                     return "<span title='"+data+"'>"+data+"</span>";
@@ -78,7 +78,7 @@ function deleteType(id) {
         btn : [ '确定', '取消' ]
     }, function() {
         $.ajax({
-            url : "type/delete",
+            url : rootpath+"type/delete",
             type : "post",
             data : {
                 'id' : id

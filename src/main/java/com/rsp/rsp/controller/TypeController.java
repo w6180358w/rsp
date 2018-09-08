@@ -78,8 +78,8 @@ public class TypeController {
         }
     }
     
-    @RequestMapping("/city/{city}/{group}")
-    public R queryByCity(@PathVariable(name="city")String type,String group){
+    @RequestMapping("/city")
+    public R queryByCity(@RequestParam(name="city")String type,@RequestParam(name="group")String group){
         List<Type> list = typeService.city(type,group);
         return new R(list);
     }

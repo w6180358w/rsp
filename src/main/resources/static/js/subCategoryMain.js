@@ -7,7 +7,7 @@ function loadSubCategory() {
         "serverSide": true,
         // searching:false,
         "ajax": {
-            "url": "subCategory/queryAll",
+            "url": rootpath+"subCategory/queryAll",
             "type": "post",
             "data": function(data){
                 startNum = data.start;
@@ -89,7 +89,7 @@ function deleteSubCategory(id) {
         btn : [ '确定', '取消' ]
     }, function() {
         $.ajax({
-            url : "subCategory/delete",
+            url : rootpath+"subCategory/delete",
             type : "post",
             data : {
                 'id' : id

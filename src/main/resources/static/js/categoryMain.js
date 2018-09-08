@@ -8,7 +8,7 @@ function loadCategory() {
         "orderMulti": false,
         // searching:false,
         "ajax": {
-            "url": "category/queryAll",
+            "url": rootpath+"category/queryAll",
             "type": "post",
             "data": function(data){
                 startNum = data.start;
@@ -52,17 +52,7 @@ function loadCategory() {
                 }},
             { "data": "type","orderable": false,"title":"类型","width":"40%",
                 "render": function(data, type, record,index) {
-                    var result;
-                    if(data==="ajf"){
-                        result = "按揭房"
-                    }else if(data === "bd"){
-                        result = "保单"
-                    }else if (data === "gjj"){
-                        result = "公积金"
-                    }else {
-                        result = "";
-                    }
-                    return result;
+                    return record.typeName;
                 }
             },
             { "data": "id","orderable": false,"title":"操作","width":"20%",
@@ -79,7 +69,7 @@ function deleteCategory(id) {
         btn : [ '确定', '取消' ]
     }, function() {
         $.ajax({
-            url : "category/delete",
+            url : rootpath+"category/delete",
             type : "post",
             data : {
                 'id' : id

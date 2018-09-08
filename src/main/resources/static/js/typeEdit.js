@@ -47,18 +47,18 @@ function submitTypeForm() {
         return;
     }
     var id = $("#id").val();
-    var url ="save";
+    var url ="type/save";
     var msg = "添加成功"
     var errMsg = "添加失败"
     if(id!=="0"){
-        url = "update";
+        url = "type/update";
         msg = "更新成功";
         errMsg = "更新失败"
     }
     $.ajax({
         type: "POST",
         dataType: "html",
-        url: url,
+        url: rootpath+url,
         data: $('#typeForm').serialize(),
         success: function (data) {
             if(data==="success"){

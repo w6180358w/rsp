@@ -70,6 +70,7 @@ public class CategoryServiceImpl implements CategoryService {
         Category category = categoryRepository.findById(newCategory.getId());
         category.setName(newCategory.getName());
         category.setType(newCategory.getType());
+        category.setTypeName(newCategory.getTypeName());
         categoryRepository.save(category);
     }
 

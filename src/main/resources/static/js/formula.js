@@ -12,7 +12,7 @@ $(function () {
 	})
 	var table = null;
 	function loadFormula(type) {
-		$.get("filter/columns/"+type,function(data){
+		$.get(rootpath+"filter/columns/"+type,function(data){
 			if(data.success){
 				var columns = [{"data": "name","orderable": false,"width":"100",
                     "render": function(data, type, record,index) {
@@ -60,7 +60,7 @@ $(function () {
 	        "rowCallback":bindEditor,
 			"sDom" : "t<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
 	        "ajax": {
-	            "url": "formula/queryAll",
+	            "url": rootpath+"formula/queryAll",
 	            "type": "post",
 	            "contentType":"application/json;charset=utf-8",//data.data.unshift(firstCol)
 	            data:function(data){
@@ -88,7 +88,7 @@ $(function () {
 						var formula = {id:that.attr("data-id"),orgId:data.orgId,subCategoryId:that.attr("subId"),formula:newv};
 						$.ajax({
 							type: "POST",
-							url:"formula/merge",
+							url:rootpath+"formula/merge",
 							data:JSON.stringify(formula),
 							contentType:"application/json;charset=utf-8",
 							success:function(result){

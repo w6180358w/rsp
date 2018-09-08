@@ -1,5 +1,6 @@
 package com.rsp.rsp.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.criteria.Predicate;
@@ -90,5 +91,14 @@ public class TypeServiceImpl implements TypeService {
             return query.getRestriction();
         });
 		return list;
+	}
+
+	@Override
+	public List<Type> key(String key) {
+		Type type = typeRepository.findByKey(key);
+		if(type==null) {
+			return new ArrayList<>();
+		}
+		return this.city(type.getCity(), type.getGroup());
 	}
 }

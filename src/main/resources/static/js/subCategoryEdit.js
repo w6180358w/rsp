@@ -12,7 +12,7 @@ $(function () {
     refreshCategory($("#subCategoryForm").find("select[name=type]").val())
     function refreshCategory(type){
     	if(type==null || type=="")type=-1;
-    	$.get("../category/type/"+type,function(data){
+    	$.get(rootpath+"category/type/"+type,function(data){
 			if(data.success){
 				var select = $("#subCategoryForm").find("select[name=categoryId]");
 				select.empty();
@@ -79,18 +79,18 @@ function submitSubCategoryForm() {
         return;
     }
     var id = $("#id").val();
-    var url ="save";
+    var url ="subCategory/save";
     var msg = "添加成功"
     var errMsg = "添加失败"
     if(id!=="0"){
-        url = "update";
+        url = "subCategory/update";
         msg = "更新成功";
         errMsg = "更新失败"
     }
     $.ajax({
         type: "POST",
         dataType: "html",
-        url: url,
+        url: rootpath+url,
         data: $('#subCategoryForm').serialize(),
         success: function (data) {
             if(data==="success"){

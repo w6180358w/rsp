@@ -14,7 +14,9 @@
 
 <link rel="stylesheet" type="text/css" th:href="@{/css/jui/jquery.ui.css}" media="screen" />
 <link rel="stylesheet" type="text/css" th:href="@{/css/mws.theme.css}" media="screen" />
-
+<script th:inline="javascript">     
+	var rootpath = [[@{/}]];      
+</script>
 <script type="text/javascript" th:src="@{/js/jquery-1.7.1.min.js}" ></script>
 
 <script type="text/javascript" th:src="@{/plugins/jquery.dataTables.js}"></script>

@@ -8,7 +8,7 @@ function loadOrg() {
         bAutoWidth:false,
         // searching:false,
         "ajax": {
-            "url": "org/queryAll",
+            "url": rootpath+"org/queryAll",
             "type": "post",
             "data": function(data){
                 startNum = data.start;
@@ -85,7 +85,7 @@ function deleteOrg(id) {
         btn : [ '确定', '取消' ]
     }, function() {
         $.ajax({
-            url : "org/delete",
+            url : rootpath+"org/delete",
             type : "post",
             data : {
                 'id' : id

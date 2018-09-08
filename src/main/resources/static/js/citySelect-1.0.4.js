@@ -320,7 +320,7 @@
     }
 
     functionality.template = [
-        '<div class="city-pavilion hide">',
+        '<div class="city-pavilion" hidden>',
             '<div class="city-tabs">',
                 '<a href="javascript:;" class="tab-a active" data-letter="HOT">热门城市</a>',
                 '<a href="javascript:;" class="tab-a" data-letter="AB">AB</a>',
@@ -351,8 +351,8 @@
                 '<input type="text" class="input-search" value="" placeholder="{placeholder}" />',
             '</div>',
         '</div>',
-        '<ul class="city-list hide"></ul>',
-        '<div class="city-tips hide">最多只能选择<span>{tipnum}</span>项</div>'
+        '<ul class="city-list" hidden></ul>',
+        '<div class="city-tips" hidden>最多只能选择<span>{tipnum}</span>项</div>'
     ];
 
     functionality.split = function (str) {
@@ -397,7 +397,7 @@
         $target.addClass('active').siblings().removeClass('active');
 
         //显示对应索引的城市列表
-        this.$selector.find('dl').addClass('hide').siblings('.city-'+ letter).removeClass('hide');
+        this.$selector.find('dl').hide().siblings('.city-'+ letter).show();
 
         //切换列表回调
         configure.onTabsAfter.call(this, $target);
@@ -428,11 +428,11 @@
         functionality.singleResize.call(this);
 
         //隐藏弹窗
-        this.$selector.removeClass('down').find('.city-pavilion, .city-list').addClass('hide');
+        this.$selector.removeClass('down').find('.city-pavilion, .city-list').hide();
 
         //没有开启搜索且数组是不为空
         if (!this.options.search && this.values.length > 0) {
-            this.$selector.find('.city-input').addClass('hide');
+            this.$selector.find('.city-input').hide();
         }
 
         //选择之后的回调
@@ -455,10 +455,10 @@
         if (!hasActive) {
             //选中的是否大于限制的
             if (self.selectIndex >= configure.multiMaximum) {
-                $selector.find('.city-tips').removeClass('hide');
+                $selector.find('.city-tips').show();
 
                 setTimeout(function() {
-                    $selector.find('.city-tips').addClass('hide');
+                    $selector.find('.city-tips').hide();
                 }, 1000);
 
                 return false;
@@ -570,9 +570,9 @@
     }, 300);
 
     functionality.searchShow = function (event) {
-        this.$selector.addClass('down').find('.city-pavilion').addClass('hide');
+        this.$selector.addClass('down').find('.city-pavilion').hide();
         this.$selector.find('.city-input').addClass('search-show');
-        this.$selector.find('.city-list').removeClass('hide');
+        this.$selector.find('.city-list').show();
     }
 
     functionality.defSelected = function (event) {
@@ -768,10 +768,10 @@
             letterStr = groupArray !== 'HOT' ? functionality.split(groupArray) : '';
 
             //添加隐藏class
-            hide = i > 0 ? ' hide' : '';
+            hide = i > 0 ? ' hidden' : '';
 
             //创建对应的dl
-            domtel += '<dl class="city-'+ groupArray + hide +'" data-letter="'+ groupArray +'">{dl}</dl>';
+            domtel += '<dl class="city-'+ groupArray + '" '+hide +' data-letter="'+ groupArray +'">{dl}</dl>';
 
             if (letterStr && letterStr.length > 1) {
 
@@ -868,7 +868,7 @@
 
         self.isfocus = true;
     
-        self.$selector.addClass('down').find('.city-pavilion').removeClass('hide').siblings('.city-list').addClass('hide');
+        self.$selector.addClass('down').find('.city-pavilion').show().siblings('.city-list').hide();
 
         $target.find('.input-search').focus();
 
@@ -879,7 +879,7 @@
     Cityselect.prototype.hideDrop = function () {
         var $selector = this.$selector;
 
-        $selector.removeClass('down').find('.city-pavilion, .city-list').addClass('hide');
+        $selector.removeClass('down').find('.city-pavilion, .city-list').hide();
         $selector.find('.city-input').removeClass('search-show').find('.input-search').val('').blur();
     }
 
@@ -1027,7 +1027,7 @@
         this.$selector.find('.city-info').find('span').remove();
 
         if (this.values.length < 1) {
-            this.$selector.find('.city-input').removeClass('hide').addClass('not-val');
+            this.$selector.find('.city-input').show().addClass('not-val');
         }
     }
 
@@ -1049,7 +1049,7 @@
         var $citySelect = $('.city-select');
 
         if ($citySelect.find(event.target).length < 1) {
-            $citySelect.removeClass('down').find('.city-pavilion, .city-list').addClass('hide');
+            $citySelect.removeClass('down').find('.city-pavilion, .city-list').hide();
             $citySelect.find('.city-input').removeClass('search-show').find('.input-search').val('').blur();
         }
     });

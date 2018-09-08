@@ -14,7 +14,7 @@ $(function () {
 		}
 		$.ajax({
 			type: "get",
-			url:"stat/query",
+			url:rootpath+"stat/query",
 			data:{start:start.getTime(),end:end.getTime()},
 			contentType:"application/json;charset=utf-8",
 			success:function(result){

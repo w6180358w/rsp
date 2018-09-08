@@ -68,18 +68,18 @@ function submitOrgForm() {
         return;
     }
     var id = $("#id").val();
-    var url ="save";
+    var url ="org/save";
     var msg = "添加成功"
     var errMsg = "添加失败"
     if(id!=="0"){
-        url = "update";
+        url = "org/update";
         msg = "更新成功";
         errMsg = "更新失败"
     }
     var formData = new FormData($("#orgForm")[0]);
     $.ajax({
         type: "POST",
-        url: url,
+        url: rootpath+url,
         processData: false,contentType: false,
         data: formData,
         success: function (data) {

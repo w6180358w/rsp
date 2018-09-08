@@ -35,16 +35,16 @@ function submitContactsForm() {
         return;
     }
     var id = $("#id").val();
-    var url ="save";
+    var url ="contacts/save";
     var msg = "添加成功"
     if(id!=="0"){
-        url = "update";
+        url = "contacts/update";
         msg = "更新成功";
     }
     $.ajax({
         type: "POST",
         dataType: "json",
-        url: url,
+        url: rootpath+url,
         data: $('#contactsForm').serialize(),
         success: function (data) {
             if(!!data.success){

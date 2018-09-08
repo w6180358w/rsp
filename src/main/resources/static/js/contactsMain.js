@@ -7,7 +7,7 @@ function loadContacts() {
         "serverSide": true,
         "orderMulti": false,
         "ajax": {
-            "url": "contacts/queryAll",
+            "url": rootpath+"contacts/queryAll",
             "type": "post",
             "data": function(data){
                 startNum = data.start;
@@ -77,7 +77,7 @@ function deleteContacts(id) {
         btn : [ '确定', '取消' ]
     }, function() {
         $.ajax({
-            url : "contacts/delete",
+            url : rootpath+"contacts/delete",
             type : "post",
             data : {
                 'id' : id

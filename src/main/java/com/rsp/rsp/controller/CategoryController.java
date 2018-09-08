@@ -1,17 +1,24 @@
 package com.rsp.rsp.controller;
 
-import com.rsp.rsp.domain.R;
-import com.rsp.rsp.domain.query.CategoryQuery;
-import com.rsp.rsp.domain.Category;
-import com.rsp.rsp.service.CategoryService;
-
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.rsp.rsp.domain.Category;
+import com.rsp.rsp.domain.R;
+import com.rsp.rsp.domain.Type;
+import com.rsp.rsp.domain.query.CategoryQuery;
+import com.rsp.rsp.service.CategoryService;
+import com.rsp.rsp.service.TypeService;
 
 /**
  * 大类
@@ -22,6 +29,8 @@ import org.springframework.web.servlet.ModelAndView;
 public class CategoryController {
     @Autowired
     private CategoryService categoryService;
+    @Autowired
+    private TypeService typeSerivce;
 
     @RequestMapping()
     public ModelAndView category(){
@@ -39,13 +48,27 @@ public class CategoryController {
     @RequestMapping("add")
     public ModelAndView add(Long id, Model model){
         Category category;
+        List<Type> typeList;
+        String group = "wdy",city = "北京市";
         if(null!=id){
             category = categoryService.findById(id);
+            typeList = this.typeSerivce.key(category.getType());
+            if(typeList!=null && !typeList.isEmpty()) {
+            	group = typeList.get(0).getGroup();
+            	city = typeList.get(0).getCityName();
+            }else {
+            	city = "";
+            }
         }else{
             category = new Category();
             category.setId(0L);
+            typeList = new ArrayList<>();
         }
+        model.addAttribute("group",group);
+        model.addAttribute("cityName",city);
         model.addAttribute("category",category);
+        model.addAttribute("typeList",typeList);
+        model.addAttribute("contextPath","/");
         return new ModelAndView("addCategory.html");
     }
     @PostMapping("/save")

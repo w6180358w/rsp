@@ -21,4 +21,6 @@ public interface TypeRepository extends JpaRepository<Type,String>,JpaSpecificat
      * @param id
      */
     void deleteById(Long id);
+    
+    Type findByKey(String key);
 }
