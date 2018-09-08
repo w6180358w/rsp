@@ -101,7 +101,7 @@ function editType(id) {
         // title:false,
         maxmin: true,
         shadeClose: false, //点击遮罩关闭层
-        area : ['800px' , '550px'],
+        area : ['800px' , '430px'],
         content: 'type/add?id='+id,
         end: function(){
             //关闭回调
@@ -116,7 +116,7 @@ function addType() {
         // title:false,
         maxmin: true,
         shadeClose: false, //点击遮罩关闭层
-        area : ['800px' , '550px'],
+        area : ['800px' , '430px'],
         content: 'type/add',
         end: function(){
             //关闭回调
