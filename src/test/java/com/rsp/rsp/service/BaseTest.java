@@ -29,7 +29,6 @@ public class BaseTest {
         Map<String,Long> idMap = new HashMap<>();
         Category category = new Category();
         category.setName("testDelete");
-        category.setType("testDeleteType");
         category = categoryService.save(category);
         idMap.put("categoryId",category.getId());
         SubCategory subCategory = new SubCategory();
