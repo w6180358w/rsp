@@ -104,7 +104,7 @@ public class TypeServiceImpl implements TypeService {
 			//根据类型key筛选
 	    	In<Object> in = criteriaBuilder.in(root.get("id"));
 			List<Predicate> list = new ArrayList<>();
-			in.value(-1l);//防止参数为空
+			in.value(-1L);//防止参数为空
 			for (Long id : idList) {
 				in.value(id);
 			}

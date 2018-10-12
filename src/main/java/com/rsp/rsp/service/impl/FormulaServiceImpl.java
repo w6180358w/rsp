@@ -215,7 +215,7 @@ public class FormulaServiceImpl implements FormulaService {
 		List<Formula> forList = this.formulaRepository.findAll((Specification<Formula>) (root, query, criteriaBuilder) -> {
 			In<Object> in = criteriaBuilder.in(root.get("subCategoryId"));
 			List<Predicate> list = new ArrayList<>();
-			in.value(-1l);//防止参数为空
+			in.value(-1L);//防止参数为空
 			for (Long key : ids) {
 				in.value(key);
 			}
